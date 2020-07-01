@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SurveyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SurveyRepository::class)
@@ -19,11 +20,18 @@ class Survey
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 255
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      min = 10
+     * )
      */
     private $description;
 

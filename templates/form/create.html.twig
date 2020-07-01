@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formSurvey 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+	<h1 class="display-4">
+		{% if editMode %}
+			Modification
+		{% else %}
+			Création
+		{% endif %}
+		d'une enquête
+	</h1>
+
+	{{ form_start (formSurvey) }}
+
+		{{ form_row ( formSurvey.title, {'attr' : {'placeholder': "Titre de l'enquête"}} ) }}
+
+		{{ form_row ( formSurvey.description, {'attr' : {'placeholder': "Description de l'enquête"}} ) }}
+
+		<button type="submit" class="btn btn-success">
+			{% if editMode %}
+				Modifier
+			{% else %}
+				Ajouter
+			{% endif %}
+		</button>
+
+	{{ form_end (formSurvey) }}
+
+{% endblock %}

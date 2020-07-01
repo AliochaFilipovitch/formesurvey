@@ -3,6 +3,7 @@
 {% block title %}Enquêtes{% endblock %}
 
 {% block body %}
+	<h1 class="display-4">Toutes les enquêtes</h1>
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
@@ -11,6 +12,7 @@
 	      <th scope="col">Description</th>
 	      <th scope="col">Date</th>
 	      <th scope="col">Participation</th>
+	      <th scope="col">Modification</th>
 	      <th scope="col">Résultat</th>
 	    </tr>
 	  </thead>
@@ -22,6 +24,7 @@
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">ouvert</a></td>
+		      <td><a href="{{ path('form_edit', {'id': survey.id}) }}">modifier</a></td>
 		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
 		    </tr>
 	    {% endfor %}
