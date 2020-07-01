@@ -1,36 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FormController!{% endblock %}
+{% block title %}Enquêtes{% endblock %}
 
 {% block body %}
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
-	      <th scope="col">First</th>
-	      <th scope="col">Last</th>
-	      <th scope="col">Résultats</th>
+	      <th scope="col">Enquête</th>
+	      <th scope="col">Description</th>
+	      <th scope="col">Date</th>
+	      <th scope="col">Participation</th>
+	      <th scope="col">Résultat</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Mark</td>
-	      <td>Otto</td>
-	      <td><a href="{{ path('form_result') }}">résultat</a></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Jacob</td>
-	      <td>Thornton</td>
-	      <td><a href="{{ path('form_result') }}">résultat</a></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>Larry</td>
-	      <td>the Bird</td>
-	      <td><a href="{{ path('form_result') }}">résultat</a></td>
-	    </tr>
+	  	{% for survey in surveys  %}
+		    <tr>
+		      <th scope="row">{{ survey.id }}</th>
+		      <td>{{ survey.title }}</td>
+		      <td>{{ survey.description }}</td>
+		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
+		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">ouvert</a></td>
+		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
+		    </tr>
+	    {% endfor %}
 	  </tbody>
 	</table>
 {% endblock %}
