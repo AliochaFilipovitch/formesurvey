@@ -10,6 +10,7 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Enquête</th>
 	      <th scope="col">Description</th>
+	      <th scope="col">Auteur</th>
 	      <th scope="col">Date</th>
 	      <th scope="col">Participation</th>
 	      <th scope="col">Modification</th>
@@ -22,8 +23,15 @@
 		      <th scope="row">{{ survey.id }}</th>
 		      <td>{{ survey.title }}</td>
 		      <td>{{ survey.description }}</td>
+		      <td>{{ survey.author }}</td>
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
-		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">ouvert</a></td>
+		      <td>
+		      	<a href="{{ path('form_survey', {'id': survey.id}) }}">ouvert</a>
+		      	<div class="custom-control custom-switch">
+				  <input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}">
+				  <label class="custom-control-label" for="customSwitch{{ survey.id }}">On/Off</label>
+				</div>
+		      </td>
 		      <td><a href="{{ path('form_edit', {'id': survey.id}) }}">modifier</a></td>
 		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
 		    </tr>
