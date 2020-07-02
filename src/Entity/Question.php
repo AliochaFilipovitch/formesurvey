@@ -38,6 +38,12 @@ class Question
      */
     private $survey;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CategoryQuestion::class, inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categoryQuestion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +93,18 @@ class Question
     public function setSurvey(?Survey $survey): self
     {
         $this->survey = $survey;
+
+        return $this;
+    }
+
+    public function getCategoryQuestion(): ?CategoryQuestion
+    {
+        return $this->categoryQuestion;
+    }
+
+    public function setCategoryQuestion(?CategoryQuestion $categoryQuestion): self
+    {
+        $this->categoryQuestion = $categoryQuestion;
 
         return $this;
     }

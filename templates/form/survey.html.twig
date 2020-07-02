@@ -17,6 +17,7 @@
 	{% for question in survey.questions %}
 		<p>{{ question.question }}</p>
 		<p>{{ question.numQuestion }}</p>
+		<p>{{ question.categoryQuestion.title }}</p>
 		<p>{{ question.createdAt | date('d/m/Y') }}</p>
 	{% endfor %}
 
@@ -24,6 +25,7 @@
 
 		{{ form_row ( questionForm.question, {'label' : 'Nouvelle question','attr' : {'placeholder': "Nouvelle question"}} ) }}
 		{{ form_row ( questionForm.numQuestion, {'label' : 'Type de la question','attr' : {'placeholder': "Type de la question"}} ) }}
+		{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question'} ) }}
 
 		<button type="submit" class="btn btn-success">
 			Ajouter
