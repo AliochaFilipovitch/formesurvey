@@ -7,9 +7,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\Survey;
 use App\Repository\SurveyRepository;
+use App\Entity\Survey;
+use App\Entity\Question;
 use App\Form\SurveyType;
+use App\Form\QuestionType;
 
 
 class FormController extends AbstractController
@@ -74,10 +76,28 @@ class FormController extends AbstractController
      * @Route("/form/{id}", name="form_survey")
      */
 
-    public function survey(Survey $survey)
+    public function survey(Survey $survey, Request $request, EntityManagerInterface $manager)
     {
+    	$question = new Question();
+    	
+    	$form = $this->createForm(QuestionType::class, $question);
+
+    	$form->handleRequest($request); 
+
+    	if ($form->isSubmitted() && $form->isValid()) {
+    		$question->setCreatedAt(new \DateTime())
+    				 ->setSurvey($survey);
+
+    		$manager->persist($question);
+    		$manager->flush();
+
+    		return $this->redirectToRoute('form_survey', ['id'=>$survey->getId()]);
+
+    	}
+
     	return $this->render('form/survey.html.twig', [
-    		'survey' => $survey
+    		'survey' => $survey,
+    		'questionForm' => $form->createView()
     	]);
     }
 

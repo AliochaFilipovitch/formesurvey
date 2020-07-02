@@ -1,8 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Participer à l'enquête{% endblock %}
+{% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Participer{% endblock %}
 
 {% block body %}
-	<h1 class="display-1">{{ survey.title }}</h1>
-	<p>Participer à l'enquête</p>
+	<h1 class="display-4">{{ survey.title }}</h1>
+	<p>Participer de l'enquête</p>
+	<p>{{ survey.description }}</p>
+	<p>{{ survey.author }}</p>
+	<p>{{ survey.createdAt | date('d/m/Y') }}</p>
+
+
+
+	<h1>{{ survey.questions | length }} questions :</h1>
+	{% for question in survey.questions %}
+		<p>{{ question.question }}</p>
+		<p>{{ question.numQuestion }}</p>
+		<p>{{ question.createdAt | date('d/m/Y') }}</p>
+	{% endfor %}
+
+	{{ form_start (questionForm) }}
+
+		{{ form_row ( questionForm.question, {'label' : 'Nouvelle question','attr' : {'placeholder': "Nouvelle question"}} ) }}
+		{{ form_row ( questionForm.numQuestion, {'label' : 'Type de la question','attr' : {'placeholder': "Type de la question"}} ) }}
+
+		<button type="submit" class="btn btn-success">
+			Ajouter
+		</button>
+
+	{{ form_end (questionForm) }}
+
+
 {% endblock %}

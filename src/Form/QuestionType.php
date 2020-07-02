@@ -2,26 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Survey;
+use App\Entity\Question;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SurveyType extends AbstractType
+class QuestionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('author')
-            ->add('title')
-            ->add('description')
+            ->add('question')
+            ->add('numQuestion')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Survey::class,
+            'data_class' => Question::class,
         ]);
     }
 }
