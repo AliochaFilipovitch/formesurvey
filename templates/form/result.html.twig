@@ -3,6 +3,19 @@
 {% block title %}Résultat{% endblock %}
 
 {% block body %}
-	<h1 class="display-1">{{ survey.title }}</h1>
+	<h1 class="display-4">{{ survey.title }}</h1>
 	<p>Résultat de l'enquête</p>
+	<p>{{ survey.description }}</p>
+	<p>{{ survey.author }}</p>
+	<p>{{ survey.createdAt | date('d/m/Y') }}</p>
+
+
+
+	<h1>Questions :</h1>
+	{% for question in survey.questions %}
+		<p>{{ question.question }}</p>
+		<p>{{ question.numQuestion }}</p>
+		<p>{{ question.createdAt | date('d/m/Y') }}</p>
+	{% endfor %}
+
 {% endblock %}

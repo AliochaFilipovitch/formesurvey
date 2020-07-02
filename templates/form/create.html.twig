@@ -14,8 +14,8 @@
 
 	{{ form_start (formSurvey) }}
 
+		{{ form_row ( formSurvey.author, {'attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
 		{{ form_row ( formSurvey.title, {'attr' : {'placeholder': "Titre de l'enquête"}} ) }}
-
 		{{ form_row ( formSurvey.description, {'attr' : {'placeholder': "Description de l'enquête"}} ) }}
 
 		<button type="submit" class="btn btn-success">
