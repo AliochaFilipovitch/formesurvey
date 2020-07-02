@@ -20,7 +20,6 @@ class QuestionType extends AbstractType
                 'class' => CategoryQuestion::class,
                 'choice_label' => 'title'
             ])
-            ->add('numQuestion')
         ;
     }
 

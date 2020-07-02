@@ -37,7 +37,6 @@ class SurveyFixtures extends Fixture
 			for($k = 1; $k <= 5; $k++){
 				$question = new Question();
 				$question->setQuestion($faker->sentence().' ?')
-						 ->setNumQuestion($faker->word)
 						 ->setCreatedAt($survey->getCreatedAt())
 						 ->setCategoryQuestion($categoryQuestion)
 						 ->setSurvey($survey);

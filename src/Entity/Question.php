@@ -23,11 +23,6 @@ class Question
     private $question;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $numQuestion;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -57,18 +52,6 @@ class Question
     public function setQuestion(string $question): self
     {
         $this->question = $question;
-
-        return $this;
-    }
-
-    public function getNumQuestion(): ?string
-    {
-        return $this->numQuestion;
-    }
-
-    public function setNumQuestion(string $numQuestion): self
-    {
-        $this->numQuestion = $numQuestion;
 
         return $this;
     }

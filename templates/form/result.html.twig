@@ -14,7 +14,7 @@
 	<h1>Questions :</h1>
 	{% for question in survey.questions %}
 		<p>{{ question.question }}</p>
-		<p>{{ question.numQuestion }}</p>
+		<p>{{ question.categoryQuestion.title }}</p>
 		<p>{{ question.createdAt | date('d/m/Y') }}</p>
 	{% endfor %}
 
