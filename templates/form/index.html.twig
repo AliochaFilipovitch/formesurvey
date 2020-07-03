@@ -12,8 +12,7 @@
 	      <th scope="col">Description</th>
 	      <th scope="col">Auteur</th>
 	      <th scope="col">Date</th>
-	      <th scope="col">Etat</th>
-	      <th scope="col">Participer</th>
+	      <th scope="col">Status</th>
 	      <th scope="col">Modifier</th>
 	      <th scope="col">Résultat</th>
 	    </tr>
@@ -21,7 +20,7 @@
 	  <tbody>
 	  	{% for survey in surveys  %}
 		    <tr>
-		      <th scope="row">{{ survey.id }}</th>
+		      <th scope="row"><a href="{{ path('survey', {'id': survey.id}) }}">{{ survey.id }}</a></th>
 		      <td>{{ survey.title }}</td>
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.author }}</td>
@@ -32,8 +31,7 @@
 				  <label class="custom-control-label" for="customSwitch{{ survey.id }}">On/Off</label>
 				</div>
 		      </td>
-		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">ouvert</a></td>
-		      <td><a href="{{ path('form_edit', {'id': survey.id}) }}">modifier</a></td>
+		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">modifier</a></td>
 		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
 		    </tr>
 	    {% endfor %}

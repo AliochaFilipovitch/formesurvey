@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,6 +40,16 @@ class Question
      * @ORM\JoinColumn(nullable=false)
      */
     private $categoryQuestion;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question", orphanRemoval=true)
+     */
+    private $answers;
+
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,6 +100,37 @@ class Question
     public function setCategoryQuestion(?CategoryQuestion $categoryQuestion): self
     {
         $this->categoryQuestion = $categoryQuestion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->contains($answer)) {
+            $this->answers->removeElement($answer);
+            // set the owning side to null (unless already changed)
+            if ($answer->getQuestion() === $this) {
+                $answer->setQuestion(null);
+            }
+        }
 
         return $this;
     }

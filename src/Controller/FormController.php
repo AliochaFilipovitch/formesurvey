@@ -10,8 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SurveyRepository;
 use App\Entity\Survey;
 use App\Entity\Question;
+use App\Entity\Answer;
 use App\Form\SurveyType;
 use App\Form\QuestionType;
+use App\Form\AnswerType;
 
 
 class FormController extends AbstractController
@@ -36,6 +38,33 @@ class FormController extends AbstractController
         return $this->render('form/index.html.twig', [
             'controller_name' => 'FormController',
             'surveys' => $surveys
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="survey")
+     */
+    public function fullSurvey(Survey $survey, Request $request, EntityManagerInterface $manager)
+    {
+        $answer = new Answer();
+        
+        $form = $this->createForm(AnswerType::class, $answer);
+
+        $form->handleRequest($request); 
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $answer->setCreatedAt(new \DateTime());
+
+            $manager->persist($answer);
+            $manager->flush();
+
+            return $this->redirectToRoute('survey', ['id'=>$survey->getId()]);
+
+        }
+
+        return $this->render('survey.html.twig', [
+            'fullSurveyForm' => $form->createView(),
+            'survey' => $survey
         ]);
     }
 
@@ -67,7 +96,7 @@ class FormController extends AbstractController
     	}
 
     	return $this->render('form/create.html.twig', [
-    		'formSurvey' => $form->createView(),
+    		'surveyForm' => $form->createView(),
     		'editMode' => $survey->getId() !== null
     	]);
     }
@@ -96,8 +125,8 @@ class FormController extends AbstractController
     	}
 
     	return $this->render('form/survey.html.twig', [
-    		'survey' => $survey,
-    		'questionForm' => $form->createView()
+    		'questionForm' => $form->createView(),
+    		'survey' => $survey
     	]);
     }
 

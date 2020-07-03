@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme formSurvey 'bootstrap_4_layout.html.twig' %}
+{% form_theme surveyForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 	<h1 class="display-4">
@@ -12,13 +12,13 @@
 		d'une enquête
 	</h1>
 
-	{{ form_start (formSurvey) }}
+	{{ form_start (surveyForm) }}
 
-		{{ form_row ( formSurvey.author, {'label' : 'Auteur de l\'enquête (5 caractères min.)','attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
-		{{ form_row ( formSurvey.title, {'label' : 'Titre de l\'enquête (10 caractères min.)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
-		{{ form_row ( formSurvey.description, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
+		{{ form_row ( surveyForm.author, {'label' : 'Auteur de l\'enquête (5 caractères min.)','attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
+		{{ form_row ( surveyForm.title, {'label' : 'Titre de l\'enquête (10 caractères min.)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
+		{{ form_row ( surveyForm.description, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
 
-		<button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+		<button type="submit" class="btn btn-primary btn-lg btn-block">
 			{% if editMode %}
 				Modifier
 			{% else %}
@@ -26,6 +26,6 @@
 			{% endif %}
 		</button>
 
-	{{ form_end (formSurvey) }}
+	{{ form_end (surveyForm) }}
 
 {% endblock %}
