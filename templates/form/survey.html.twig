@@ -5,31 +5,45 @@
 {% block title %}Participer{% endblock %}
 
 {% block body %}
-	<h1 class="display-4">{{ survey.title }}</h1>
-	<p>Participer de l'enquête</p>
-	<p>{{ survey.description }}</p>
-	<p>{{ survey.author }}</p>
-	<p>{{ survey.createdAt | date('d/m/Y') }}</p>
+	<div class="row">
+	  <div class="col-sm-4">
+		<h1 class="display-4">{{ survey.title }}</h1>
+		<p>{{ survey.description }}</p>
+		<h4>{{ survey.questions | length }} Questions</h4>
+		<p>
+			<small class="text-muted">
+				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
+			</small>
+		</p>
+	  </div>
+	  <div class="col-sm-8">
+		{% for question in survey.questions %}
+			<div class="card mb-1 mt-1">
+			  <div class="card-body">
+			    <h5 class="card-title">{{ question.question }}</h5>
+			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
+			    <a href="#" class="btn btn-outline-danger btn-sm">Supprimer</a>
+			    <p class="card-text"><small class="text-muted">{{ question.createdAt | date('d/m/Y') }}</small></p>
+			  </div>
+			</div>
+		{% endfor %}
 
+		<div class="card border-success mb-1">
+		  <h5 class="card-header">Ajouter une question</h5>
+		  <div class="card-body">
+			{{ form_start (questionForm) }}
 
+				{{ form_row ( questionForm.question, {'label' : 'Question:','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
+				{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question:'} ) }}
 
-	<h1>{{ survey.questions | length }} questions :</h1>
-	{% for question in survey.questions %}
-		<p>{{ question.question }}</p>
-		<p>{{ question.categoryQuestion.title }}</p>
-		<p>{{ question.createdAt | date('d/m/Y') }}</p>
-	{% endfor %}
+				<button type="submit" class="btn btn-outline-success btn-lg btn-block">
+					Ajouter
+				</button>
 
-	{{ form_start (questionForm) }}
-
-		{{ form_row ( questionForm.question, {'label' : 'Nouvelle question','attr' : {'placeholder': "Nouvelle question"}} ) }}
-		{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question'} ) }}
-
-		<button type="submit" class="btn btn-success">
-			Ajouter
-		</button>
-
-	{{ form_end (questionForm) }}
-
+			{{ form_end (questionForm) }}
+		  </div>
+		</div>
+	  </div>
+	</div>
 
 {% endblock %}

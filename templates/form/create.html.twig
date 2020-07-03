@@ -14,11 +14,11 @@
 
 	{{ form_start (formSurvey) }}
 
-		{{ form_row ( formSurvey.author, {'label' : 'Auteur de l\'enquête','attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
-		{{ form_row ( formSurvey.title, {'label' : 'Titre de l\'enquête','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
-		{{ form_row ( formSurvey.description, {'label' : 'Description de l\'enquête','attr' : {'placeholder': "Description de l'enquête"}} ) }}
+		{{ form_row ( formSurvey.author, {'label' : 'Auteur de l\'enquête (5 caractères min.)','attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
+		{{ form_row ( formSurvey.title, {'label' : 'Titre de l\'enquête (10 caractères min.)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
+		{{ form_row ( formSurvey.description, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
 
-		<button type="submit" class="btn btn-success">
+		<button type="submit" class="btn btn-outline-primary btn-lg btn-block">
 			{% if editMode %}
 				Modifier
 			{% else %}
