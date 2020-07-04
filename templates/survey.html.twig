@@ -1,20 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme fullSurveyForm 'bootstrap_4_layout.html.twig' %}
-
 {% block body %}
 
 	<h1 class="display-4">Une enquête</h1>
 
-	{{ form_start (fullSurveyForm) }}
+	<form action="" method="post">
 
-		{{ form_row ( fullSurveyForm.question, {'label' : 'Question:'} ) }}
-		{{ form_row ( fullSurveyForm.answer, {'label' : 'Réponse:','attr' : {'placeholder': "Votre réponse..."}} ) }}
+					<div class="form-group">
+							<label for="exampleInput">Votre réponse :</label>
+							<input type="text" name="answer" class="form-control" id="exampleInput" placeholder="Votre réponse ...">
+					</div>
 
-		<button type="submit" class="btn btn-outline-success btn-lg btn-block">
-			Répondre
-		</button>
-
-	{{ form_end (fullSurveyForm) }}
+	</form>
+	<button type="submit">Enregistrer mes réponses</button>
 
 {% endblock %}

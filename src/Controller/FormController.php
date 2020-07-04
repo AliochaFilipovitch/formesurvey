@@ -44,26 +44,12 @@ class FormController extends AbstractController
     /**
      * @Route("/{id}", name="survey")
      */
-    public function fullSurvey(Survey $survey, Request $request, EntityManagerInterface $manager)
+    public function create(Survey $survey, Request $request)
     {
-        $answer = new Answer();
-        
-        $form = $this->createForm(AnswerType::class, $answer);
-
-        $form->handleRequest($request); 
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $answer->setCreatedAt(new \DateTime());
-
-            $manager->persist($answer);
-            $manager->flush();
-
-            return $this->redirectToRoute('survey', ['id'=>$survey->getId()]);
-
-        }
+        dump($request);
 
         return $this->render('survey.html.twig', [
-            'fullSurveyForm' => $form->createView(),
+            // 'fullSurveyForm' => $form->createView(),
             'survey' => $survey
         ]);
     }

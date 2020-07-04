@@ -9,7 +9,7 @@
 	  <div class="col-sm-4">
 		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
-		<p><a href="{{ path('form_edit', {'id': survey.id}) }}">Modifier</a></p>
+		<p><a href="{{ path('form_edit', {'id': survey.id}) }}">modifier</a></p>
 		<h4>{{ survey.questions | length }} Questions</h4>
 		<p>
 			<small class="text-muted">
@@ -38,7 +38,7 @@
 			  <div class="card-body">
 			    <h5 class="card-title">{{ question.question }}</h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-			    <p class="card-text"><a href="#">Supprimer</a></p>
+			    <p class="card-text"><a href="#">supprimer</a></p>
 				<p class="card-text"><small class="text-muted">{{ question.createdAt | date('d/m/Y') }}</small></p>
 			  </div>
 			</div>
