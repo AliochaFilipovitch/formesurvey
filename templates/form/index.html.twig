@@ -20,7 +20,7 @@
 	  <tbody>
 	  	{% for survey in surveys  %}
 		    <tr>
-		      <th scope="row"><a href="{{ path('survey', {'id': survey.id}) }}">{{ survey.id }}</a></th>
+		      <th scope="row"><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.id }}</a></th>
 		      <td>{{ survey.title }}</td>
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.author }}</td>

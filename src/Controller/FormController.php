@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Repository\SurveyRepository;
+use App\Repository\QuestionRepository;
 use App\Entity\Survey;
 use App\Entity\Question;
 use App\Entity\Answer;
@@ -42,14 +43,46 @@ class FormController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="survey")
+     * @Route("/{id}", name="answer")
      */
-    public function create(Survey $survey, Request $request)
+    public function answer(QuestionRepository $question, Survey $survey, Request $request, EntityManagerInterface $manager)
     {
-        dump($request);
 
-        return $this->render('survey.html.twig', [
-            // 'fullSurveyForm' => $form->createView(),
+        dump($request);
+        //echo $request->request->count();
+        //echo $survey->getId();
+        $questions = $question->findBy(
+            ['survey' => $survey->getId()]
+        );
+        dump($questions);
+        echo count($questions);
+
+
+ 
+
+        if ($request->request->count() > 0) {
+
+            $i=-1;
+
+            foreach ($questions as $question) {
+                # code...
+                    $i++;
+
+                    //echo $i;
+
+                    $answer = new Answer();
+                    $answer->setAnswer($request->request->get("answer$i"))
+                           ->setQuestion($question)
+                           ->setCreatedAt(new \DateTime());
+
+                    $manager->persist($answer);
+                    $manager->flush();
+
+
+            }
+        }
+
+        return $this->render('form/answer.html.twig', [
             'survey' => $survey
         ]);
     }
