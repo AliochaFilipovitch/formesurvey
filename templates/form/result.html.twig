@@ -4,15 +4,28 @@
 
 {% block body %}
 	<div class="row">
-	  <div class="col-sm-4">
+	  <div class="col-sm-4" style="background-color:
+		{% if survey.status %}
+			honeydew
+		{% else %}
+			mistyrose
+		{% endif %}
+		;">
 		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
-		<h4>{{ survey.questions | length }} Questions</h4>
+		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
 		<p>
 			<small class="text-muted">
 				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
 			</small>
 		</p>
+		<p><STRONG>
+			{% if survey.status %}
+				OUVERT
+			{% else %}
+				FERMÉ
+			{% endif %}
+		</STRONG></p>
 	  </div>
 	  <div class="col-sm-8">
 		{% set num = 0 %}
@@ -28,6 +41,7 @@
 			  </div>
 			</div>
 		{% endfor %}
+		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>
 

@@ -68,6 +68,7 @@ class FormController extends AbstractController
         return $this->json(['code' => 200, 'message' => 'good'], 200);
     }
 
+
     /**
      * @Route("/{id}", name="answer")
      */
@@ -187,5 +188,24 @@ class FormController extends AbstractController
     	return $this->render('form/result.html.twig', [
     		'survey' => $survey
     	]);
+    }
+    /**
+     * @Route("/form/delete/{id}", name="delete")
+     */
+    public function deleteQuestion(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager) : Response
+    {   
+
+        if (!$question) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
+        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+
+        $manager->remove($question);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'question supprimée'], 200);
     }
 }

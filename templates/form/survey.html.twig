@@ -2,49 +2,104 @@
 
 {% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}FormeSurvey{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block body %}
 	<div class="row">
-	  <div class="col-sm-4">
-		<h1 class="display-4">{{ survey.title }}</h1>
+	  <div class="col-sm-4" style="background-color:
+		{% if survey.status %}
+			honeydew
+		{% else %}
+			mistyrose
+		{% endif %}
+		;">
+		<h1 class="display-4">{{ survey.title }}<br>
+			<small>
+				<a href="{{ path('form_edit', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i></a>
+				&#8226;
+				<a href="{{ path('answer', {'id': survey.id}) }}"><i class="fas fa-eye"></i></a>
+			</small>
+		</h1>
 		<p>{{ survey.description }}</p>
-		<p><a href="{{ path('form_edit', {'id': survey.id}) }}">modifier</a></p>
-		<h4>{{ survey.questions | length }} Questions</h4>
+		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
 		<p>
 			<small class="text-muted">
 				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
 			</small>
 		</p>
+		<p><STRONG>
+			{% if survey.status %}
+				OUVERT
+			{% else %}
+				FERMÉ
+			{% endif %}
+		</STRONG></p>
 	  </div>
 	  <div class="col-sm-8">
 		<div class="card border-success mb-1 mt-1">
 		  <h5 class="card-header">Ajouter une question</h5>
 		  <div class="card-body">
 			{{ form_start (questionForm) }}
-
-				{{ form_row ( questionForm.question, {'label' : 'Question:','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
-				{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question:'} ) }}
+				<div class="shadow-sm p-3 mb-5 bg-white rounded">
+					{{ form_row ( questionForm.question, {'label' : 'Question:','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
+				</div>
+				<div class="shadow-sm p-3 mb-5 bg-white rounded">
+					{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question:'} ) }}
+				</div>
 
 				<button type="submit" class="btn btn-success btn-lg btn-block">
-					Ajouter
+					<i class="fas fa-plus-square"></i> Ajouter
 				</button>
 
 			{{ form_end (questionForm) }}
 		  </div>
 		</div>
 		{% for question in survey.questions | reverse %}
+		<p class="text-center text-danger"><STRONG><span class="deleteMessage"></span></STRONG></p>
+		<span class="cardContent">
 			<div class="card mb-1 mt-1">
 			  <div class="card-body">
-			    <h5 class="card-title">{{ question.question }}</h5>
+				<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete">
+					<button type="button" class="close" aria-label="Close">
+						<span style="font-size: 2rem; color: Tomato;">
+							<i class="far fa-times-circle"></i>
+						</span>
+					</button>
+				</a>
+			    <h5 class="card-title">
+			    	{{ question.question }}
+			    </h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-			    <p class="card-text"><a href="#">supprimer</a></p>
-				<p class="card-text"><small class="text-muted">{{ question.createdAt | date('d/m/Y') }}</small></p>
+				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d/m/Y') }}</small></p>
 			  </div>
 			</div>
+		</span>
 		{% endfor %}
-
+		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>
+{% endblock %}
 
+{% block javascripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+
+		function onClickAherfDelete(event){
+			event.preventDefault();
+
+			const url = this.href;
+			const cardContent = document.querySelector('span.cardContent');
+			const deleteMessage = document.querySelector('span.deleteMessage');
+
+			axios.get(url).then(function(response) {
+				cardContent.textContent = null;
+				deleteMessage.textContent = response.data.message;
+			});
+		}
+
+		document.querySelectorAll('a.js-delete').forEach(function(link){
+			link.addEventListener('click', onClickAherfDelete);
+		});
+
+	</script>
 {% endblock %}

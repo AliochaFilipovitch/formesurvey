@@ -28,11 +28,11 @@
 		      <td>
 		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
 					{% if survey.status != false %}
-						<span style="font-size: 1rem; color: Green;">
+						<span style="font-size: 1rem;">
 							<i class="fas fa-toggle-on"></i>
 						</span>
 					{% else %}
-						<span style="font-size: 1rem; color: Tomato;">
+						<span style="font-size: 1rem;">
 							<i class="fas fa-toggle-off"></i>
 						</span>
 					{% endif %}
