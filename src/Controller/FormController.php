@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Repository\SurveyRepository;
@@ -14,7 +15,7 @@ use App\Entity\Question;
 use App\Entity\Answer;
 use App\Form\SurveyType;
 use App\Form\QuestionType;
-use App\Form\AnswerType;
+// use App\Form\AnswerType;
 
 
 class FormController extends AbstractController
@@ -22,7 +23,6 @@ class FormController extends AbstractController
 	/**
      * @Route("/", name="home")
      */
-
     public function home()
     {
     	return $this->render('form/home.html.twig', [
@@ -43,6 +43,18 @@ class FormController extends AbstractController
     }
 
     /**
+     * @Route("/form/{id}/status", name="status")
+     */
+    public function status(Survey $survey = null, EntityManagerInterface $manager) : Response
+    {   
+        if (!$survey) {
+            return $this->json(['code' => 404, 'message' => 'error'], 404);
+        }
+
+        return $this->json(['code' => 200, 'message' => 'salut'], 200);
+    }
+
+    /**
      * @Route("/{id}", name="answer")
      */
     public function answer(QuestionRepository $question, Survey $survey, Request $request, EntityManagerInterface $manager)
@@ -57,15 +69,15 @@ class FormController extends AbstractController
             $i=0;
 
             foreach ($questions as $question) {
+                
+                $i++;
+                $answer = new Answer();
+                $answer->setQuestion($question)
+                       ->setAnswer($request->request->get("answer$i"))
+                       ->setCreatedAt(new \DateTime());
 
-                    $i++;
-                    $answer = new Answer();
-                    $answer->setAnswer($request->request->get("answer$i"))
-                           ->setQuestion($question)
-                           ->setCreatedAt(new \DateTime());
-
-                    $manager->persist($answer);
-                    $manager->flush();
+                $manager->persist($answer);
+                $manager->flush();
             }
         }
 
@@ -78,7 +90,6 @@ class FormController extends AbstractController
      * @Route("/form/new", name="form_create")
      * @Route("/form/{id}/edit", name="form_edit")
      */
-
     public function form(Survey $survey = null , Request $request, EntityManagerInterface $manager)
     {	
     	if (!$survey) {
@@ -110,7 +121,6 @@ class FormController extends AbstractController
     /**
      * @Route("/form/{id}", name="form_survey")
      */
-
     public function survey(Survey $survey, Request $request, EntityManagerInterface $manager)
     {
     	$question = new Question();
@@ -139,7 +149,6 @@ class FormController extends AbstractController
     /**
      * @Route("/result/{id}", name="form_result")
      */
-
     public function result(Survey $survey)
     {
     	return $this->render('form/result.html.twig', [

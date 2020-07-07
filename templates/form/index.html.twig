@@ -27,8 +27,20 @@
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td>
 		      	<div class="custom-control custom-switch">
-				  <input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}">
-				  <label class="custom-control-label" for="customSwitch{{ survey.id }}">On/Off</label>
+		      		{% if survey.status != false %}
+						<input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}" checked>
+					{% else %}
+				  		<input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}">
+				  	{% endif %}
+					<label class="custom-control-label" for="customSwitch{{ survey.id }}">
+					  	<span class="js-status">
+					  		{% if survey.status != false %}
+					  			On
+					  		{% else %}
+					  			Off
+					  		{% endif %}
+					  	</span>
+				  </label>
 				</div>
 		      </td>
 		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">modifier</a></td>
