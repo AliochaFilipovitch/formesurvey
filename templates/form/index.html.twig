@@ -27,7 +27,7 @@
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td>
 		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
-		      		<span style="font-size: 30px; color: Dodgerblue;">
+					<span style="font-size: 2rem;">
 						{% if survey.status != false %}
 							<i class="fas fa-toggle-on"></i>
 						{% else %}

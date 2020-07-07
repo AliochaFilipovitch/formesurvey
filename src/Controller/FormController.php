@@ -49,7 +49,7 @@ class FormController extends AbstractController
     {   
 
         if (!$survey) {
-            return $this->json(['code' => 404, 'message' => 'error'], 404);
+            return $this->json(['code' => 500, 'message' => 'error'], 500);
         }
 
         $survey = $repo->findOneBy(['id' => $survey->getId()]);
@@ -69,8 +69,12 @@ class FormController extends AbstractController
     /**
      * @Route("/{id}", name="answer")
      */
-    public function answer(QuestionRepository $question, Survey $survey, Request $request, EntityManagerInterface $manager)
+    public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)
     {
+        
+        if (!$survey) {
+            return $this->json(['code' => 500, 'message' => 'error'], 500);
+        }
 
         $questions = $question->findBy(
             ['survey' => $survey->getId()]
@@ -133,8 +137,13 @@ class FormController extends AbstractController
     /**
      * @Route("/form/{id}", name="form_survey")
      */
-    public function survey(Survey $survey, Request $request, EntityManagerInterface $manager)
+    public function survey(Survey $survey = null, Request $request, EntityManagerInterface $manager)
     {
+
+        if (!$survey) {
+            return $this->json(['code' => 500, 'message' => 'error'], 500);
+        }
+
     	$question = new Question();
     	
     	$form = $this->createForm(QuestionType::class, $question);
@@ -161,8 +170,12 @@ class FormController extends AbstractController
     /**
      * @Route("/result/{id}", name="form_result")
      */
-    public function result(Survey $survey)
+    public function result(Survey $survey = null)
     {
+        if (!$survey) {
+            return $this->json(['code' => 500, 'message' => 'error'], 500);
+        }
+
     	return $this->render('form/result.html.twig', [
     		'survey' => $survey
     	]);
