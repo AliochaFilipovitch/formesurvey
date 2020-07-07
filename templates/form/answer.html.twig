@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Survey{% endblock %}
+{% block title %}FormeSurvey &#8226; {{ survey.title }}{% endblock %}
 
 {% block body %}
 	<div class="row">
@@ -10,7 +10,12 @@
 		<h4>{{ survey.questions | length }} Questions</h4>
 		<p>
 			<small class="text-muted">
-				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
+				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }},
+				{% if survey.status %}
+					Ouvert
+				{% else %}
+					Fermé
+				{% endif %}
 			</small>
 		</p>
 	  </div>

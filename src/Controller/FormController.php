@@ -49,7 +49,9 @@ class FormController extends AbstractController
     {   
 
         if (!$survey) {
-            return $this->json(['code' => 500, 'message' => 'error'], 500);
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
         }
 
         $survey = $repo->findOneBy(['id' => $survey->getId()]);
@@ -73,7 +75,9 @@ class FormController extends AbstractController
     {
         
         if (!$survey) {
-            return $this->json(['code' => 500, 'message' => 'error'], 500);
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
         }
 
         $questions = $question->findBy(
@@ -141,7 +145,9 @@ class FormController extends AbstractController
     {
 
         if (!$survey) {
-            return $this->json(['code' => 500, 'message' => 'error'], 500);
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
         }
 
     	$question = new Question();
@@ -173,7 +179,9 @@ class FormController extends AbstractController
     public function result(Survey $survey = null)
     {
         if (!$survey) {
-            return $this->json(['code' => 500, 'message' => 'error'], 500);
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
         }
 
     	return $this->render('form/result.html.twig', [

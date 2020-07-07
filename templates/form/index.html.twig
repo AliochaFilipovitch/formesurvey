@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Enquêtes{% endblock %}
+{% block title %}FormeSurvey &#8226; Enquêtes{% endblock %}
 
 {% block body %}
 	<h1 class="display-4">Toutes les enquêtes</h1>
@@ -10,11 +10,11 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Enquête</th>
 	      <th scope="col">Description</th>
-	      <th scope="col">Auteur</th>
-	      <th scope="col">Date</th>
-	      <th scope="col">Status</th>
-	      <th scope="col">Modifier</th>
-	      <th scope="col">Résultat</th>
+	      <th scope="col"><i class="fas fa-user-ninja vanished"></i></th>
+	      <th scope="col"><i class="far fa-clock"></i></th>
+	      <th scope="col"><i class="fas fa-toggle-on"></i></th>
+	      <th scope="col"><i class="fas fa-pen-nib"></i></th>
+	      <th scope="col"><i class="fas fa-poll"></i></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -27,17 +27,19 @@
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td>
 		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
-					<span style="font-size: 2rem;">
-						{% if survey.status != false %}
+					{% if survey.status != false %}
+						<span style="font-size: 1rem; color: Green;">
 							<i class="fas fa-toggle-on"></i>
-						{% else %}
+						</span>
+					{% else %}
+						<span style="font-size: 1rem; color: Tomato;">
 							<i class="fas fa-toggle-off"></i>
-						{% endif %}
-					</span>
+						</span>
+					{% endif %}
 		      	</a>
 		      </td>
-		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">modifier</a></td>
-		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
+		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i></a></td>
+		      <td><a href="{{ path('form_result', {'id': survey.id}) }}"><i class="fas fa-poll"></i></a></td>
 		    </tr>
 	    {% endfor %}
 	  </tbody>
