@@ -45,13 +45,25 @@ class FormController extends AbstractController
     /**
      * @Route("/form/{id}/status", name="status")
      */
-    public function status(Survey $survey = null, EntityManagerInterface $manager) : Response
+    public function status(SurveyRepository $repo, Survey $survey = null, EntityManagerInterface $manager) : Response
     {   
+
         if (!$survey) {
             return $this->json(['code' => 404, 'message' => 'error'], 404);
         }
 
-        return $this->json(['code' => 200, 'message' => 'salut'], 200);
+        $survey = $repo->findOneBy(['id' => $survey->getId()]);
+
+        if ($survey->getStatus(true)) {
+            $survey->setStatus(false);
+        } else {
+            $survey->setStatus(true);
+        }
+
+        $manager->merge($survey);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'good'], 200);
     }
 
     /**

@@ -26,22 +26,15 @@
 		      <td>{{ survey.author }}</td>
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td>
-		      	<div class="custom-control custom-switch">
-		      		{% if survey.status != false %}
-						<input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}" checked>
-					{% else %}
-				  		<input type="checkbox" class="custom-control-input" id="customSwitch{{ survey.id }}">
-				  	{% endif %}
-					<label class="custom-control-label" for="customSwitch{{ survey.id }}">
-					  	<span class="js-status">
-					  		{% if survey.status != false %}
-					  			On
-					  		{% else %}
-					  			Off
-					  		{% endif %}
-					  	</span>
-				  </label>
-				</div>
+		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
+		      		<span style="font-size: 30px; color: Dodgerblue;">
+						{% if survey.status != false %}
+							<i class="fas fa-toggle-on"></i>
+						{% else %}
+							<i class="fas fa-toggle-off"></i>
+						{% endif %}
+					</span>
+		      	</a>
 		      </td>
 		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}">modifier</a></td>
 		      <td><a href="{{ path('form_result', {'id': survey.id}) }}">résultat</a></td>
@@ -49,4 +42,30 @@
 	    {% endfor %}
 	  </tbody>
 	</table>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+
+		function onClickAherfStatus(event){
+			event.preventDefault();
+
+			const url = this.href;
+			const icone = this.querySelector('i');
+
+			axios.get(url).then(function(response) {
+				if(icone.classList.contains('fa-toggle-on')) {
+					icone.classList.replace('fa-toggle-on', 'fa-toggle-off');
+				} else {
+					icone.classList.replace('fa-toggle-off', 'fa-toggle-on');
+				}
+			});
+		}
+
+		document.querySelectorAll('a.js-status').forEach(function(link){
+			link.addEventListener('click', onClickAherfStatus);
+		});
+
+	</script>
 {% endblock %}
