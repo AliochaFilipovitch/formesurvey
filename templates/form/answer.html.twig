@@ -16,21 +16,21 @@
 	  </div>
 	  <div class="col-sm-8">
 	  	<form action="" method="post">
-			{% set num = survey.questions | length %}
-				{% for question in survey.questions | reverse %}
-					{% set num = num - 1 %}
+			{% set num = 0 %}
+				{% for question in survey.questions %}
+					{% set num = num + 1 %}
 					<div class="card mb-1 mt-1">
 					  <div class="card-body">
-					    <h5 class="card-title">{{ question.question }}</h5>
-					    <h5 class="card-title">{{ num }}</h5>
+					    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 					    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-					        <input type="text" name="question{{ num }}" value="{{ question.id }}">
-					    	<input type="text" name="answer{{ num }}" placeholder="Votre réponse...">
-						<p class="card-text"><small class="text-muted">{{ question.createdAt | date('d/m/Y') }}</small></p>
+					    <div class="form-group">
+					    	<label for="answer{{ num }}">Votre réponse:</label>
+					    	<input type="text" class="form-control" id="answer{{ num }}" name="answer{{ num }}" placeholder="Votre réponse...">
+					    </div>
 					  </div>
 					</div>
 				{% endfor %}
-			<button type="submit">Enregistrer</button>
+			<button type="submit" class="btn btn-primary btn-lg btn-block mb-1 mt-1">Enregistrer</button>
 		</form>
 	  </div>
 	</div>

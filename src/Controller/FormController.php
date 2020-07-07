@@ -48,28 +48,17 @@ class FormController extends AbstractController
     public function answer(QuestionRepository $question, Survey $survey, Request $request, EntityManagerInterface $manager)
     {
 
-        dump($request);
-        //echo $request->request->count();
-        //echo $survey->getId();
         $questions = $question->findBy(
             ['survey' => $survey->getId()]
         );
-        dump($questions);
-        echo count($questions);
-
-
- 
 
         if ($request->request->count() > 0) {
 
-            $i=-1;
+            $i=0;
 
             foreach ($questions as $question) {
-                # code...
+
                     $i++;
-
-                    //echo $i;
-
                     $answer = new Answer();
                     $answer->setAnswer($request->request->get("answer$i"))
                            ->setQuestion($question)
@@ -77,8 +66,6 @@ class FormController extends AbstractController
 
                     $manager->persist($answer);
                     $manager->flush();
-
-
             }
         }
 

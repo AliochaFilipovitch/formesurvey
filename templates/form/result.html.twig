@@ -1,19 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Résultat{% endblock %}
+{% block title %}Result{% endblock %}
 
 {% block body %}
-	<h1 class="display-4">{{ survey.title }}</h1>
-	<p>Résultat de l'enquête</p>
-	<p>{{ survey.description }}</p>
-	<p>{{ survey.author }}</p>
-	<p>{{ survey.createdAt | date('d/m/Y') }}</p>
-
-	<h1>Questions :</h1>
-	{% for question in survey.questions %}
-		<p>{{ question.question }}</p>
-		<p>{{ question.categoryQuestion.title }}</p>
-		<p>{{ question.createdAt | date('d/m/Y') }}</p>
-	{% endfor %}
+	<div class="row">
+	  <div class="col-sm-4">
+		<h1 class="display-4">{{ survey.title }}</h1>
+		<p>{{ survey.description }}</p>
+		<h4>{{ survey.questions | length }} Questions</h4>
+		<p>
+			<small class="text-muted">
+				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
+			</small>
+		</p>
+	  </div>
+	  <div class="col-sm-8">
+		{% set num = 0 %}
+		{% for question in survey.questions %}
+			{% set num = num + 1 %}
+			<div class="card mb-1 mt-1">
+			  <div class="card-body">
+			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
+			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
+			    {% for answer in question.answers %}
+			    	<p>{{ answer.answer }}</p>
+			    {% endfor %}
+			  </div>
+			</div>
+		{% endfor %}
+	  </div>
+	</div>
 
 {% endblock %}
