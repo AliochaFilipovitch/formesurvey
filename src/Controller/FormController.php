@@ -81,25 +81,22 @@ class FormController extends AbstractController
             ]);
         }
 
-        $questions = $question->findBy(
-            ['survey' => $survey->getId()]
-        );
-
         if ($request->request->count() > 0) {
 
-            $i=0;
+            $num = $request->request->get("num");
+            $questionNum = $question->find($request->request->get("question$num"));
 
-            foreach ($questions as $question) {
-                
-                $i++;
-                $answer = new Answer();
-                $answer->setQuestion($question)
-                       ->setAnswer($request->request->get("answer$i"))
-                       ->setCreatedAt(new \DateTime());
+            $answer = new Answer();
+            $answer->setQuestion($questionNum)
+                   ->setAnswer($request->request->get("answer$num"))
+                   ->setCreatedAt(new \DateTime());
 
-                $manager->persist($answer);
-                $manager->flush();
-            }
+            $manager->persist($answer);
+            $manager->flush();
+
+            return $this->render('form/answer.html.twig', [
+                'survey' => $survey,
+            ]);
         }
 
         return $this->render('form/answer.html.twig', [
