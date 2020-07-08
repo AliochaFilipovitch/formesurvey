@@ -54,27 +54,38 @@
 			{{ form_end (questionForm) }}
 		  </div>
 		</div>
+		<p class="text-center"><span class="deleteMessage"></span></p>
 		{% for question in survey.questions | reverse %}
-		<p class="text-center text-danger"><STRONG><span class="deleteMessage"></span></STRONG></p>
-		<span class="cardContent">
 			<div class="card mb-1 mt-1">
 			  <div class="card-body">
-				<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete">
-					<button type="button" class="close" aria-label="Close">
-						<span style="font-size: 2rem; color: Tomato;">
-							<i class="far fa-times-circle"></i>
-						</span>
-					</button>
-				</a>
+					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete">
+						<button type="button" class="close" aria-label="Close">
+							<span style="font-size: 2rem; color: Tomato;">
+								<i class="far fa-times-circle"></i>
+							</span>
+						</button>
+					</a>
 			    <h5 class="card-title">
 			    	{{ question.question }}
 			    </h5>
-			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
+			    <span class="badge badge-success">
+				    {% if question.categoryQuestion.title == 'text'%}
+				    	<i class="far fa-comment"></i> Texte
+				    {% elseif question.categoryQuestion.title == 'mood'%}
+				    	<i class="far fa-smile"></i> Humeur
+				    {% elseif question.categoryQuestion.title == 'star'%}
+				    	<i class="far fa-star"></i> Stars
+				    {% elseif question.categoryQuestion.title == 'mark'%}
+				    	<i class="fas fa-marker"></i> Mark
+				    {% else %}
+				    	<i class="fas fa-list-ol"></i> Choice
+				    {% endif %}
+			    </span>
 				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d/m/Y') }}</small></p>
 			  </div>
 			</div>
-		</span>
 		{% endfor %}
+		<hr>
 		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>
@@ -88,11 +99,11 @@
 			event.preventDefault();
 
 			const url = this.href;
-			const cardContent = document.querySelector('span.cardContent');
+			// const buttonClose = document.querySelector('span.buttonClose');
 			const deleteMessage = document.querySelector('span.deleteMessage');
 
 			axios.get(url).then(function(response) {
-				cardContent.textContent = null;
+				// buttonClose.hidden = true;
 				deleteMessage.textContent = response.data.message;
 			});
 		}

@@ -22,29 +22,29 @@
 	  </div>
 	  <div class="col-sm-8">
 			{% set num = 0 %}
-				{% for question in survey.questions %}
-					{% set num = num + 1 %}
-					<div class="card mb-1 mt-1">
-					  <div class="card-body">
-					    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
-					    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-					    <div class="form-group">
-					    	<label for="answer{{ num }}">Votre réponse:</label>
-							<form action="" method="post">
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" id="answer{{ num }}" name="answer{{ num }}" required>
-
-									<div class="input-group-append">
-										<button class="btn btn-outline-secondary" type="submit">Enregistrer</button>
-									</div>
-								</div>
-								<input type="hidden" id="question{{ num }}" name="question{{ num }}" value="{{ question.id }}">
-								<input type="hidden" id="num" name="num"  value="{{ num }}">
-							</form>
-					    </div>
-					  </div>
-					</div>
-				{% endfor %}
+			{% for question in survey.questions %}
+				{% set num = num + 1 %}
+				<div class="card mb-1 mt-1">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
+				    <div class="form-group">
+				    	<label for="answer{{ num }}">Votre réponse:</label>
+							{% if question.categoryQuestion.title == 'text'%}
+								{% include 'blocks/text.html' %}
+							{% elseif question.categoryQuestion.title == 'mood'%}
+								{% include 'blocks/mood.html' %}
+							{% elseif question.categoryQuestion.title == 'star'%}
+								{% include 'blocks/star.html' %}
+							{% elseif question.categoryQuestion.title == 'mark'%}
+								{% include 'blocks/mark.html' %}
+							{% else %}
+								<i class="fas fa-list-ol"></i> Choice
+							{% endif %}
+				    </div>
+				  </div>
+				</div>
+			{% endfor %}
+		<hr>
 		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>

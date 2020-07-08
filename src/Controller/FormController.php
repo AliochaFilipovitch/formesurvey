@@ -88,7 +88,7 @@ class FormController extends AbstractController
 
             $answer = new Answer();
             $answer->setQuestion($questionNum)
-                   ->setAnswer($request->request->get("answer$num"))
+                   ->setAnswer($request->request->get("postAnswer$num"))
                    ->setCreatedAt(new \DateTime());
 
             $manager->persist($answer);
@@ -203,6 +203,6 @@ class FormController extends AbstractController
         $manager->remove($question);
         $manager->flush();
 
-        return $this->json(['code' => 200, 'message' => 'question supprimée'], 200);
+        return $this->json(['code' => 200, 'message' => 'La question a bien été supprimé.'], 200);
     }
 }
