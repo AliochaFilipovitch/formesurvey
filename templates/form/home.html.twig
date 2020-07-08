@@ -1,4 +1,302 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-	<h1 class="display-1">Bienvenue sur FormeSurvey</h1>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/cool.png">
+
+  <title>FormeSurvey</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/new-age.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="https://img.icons8.com/ios-filled/30/000000/cool.png"> FormeSurvey, la forme?</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#download">Solution</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#features">Fonctionnalités</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#why">Pourquoi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">Connexion</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-5 my-auto">
+          <div class="header-content mx-auto">
+            <h2 class="mb-5">Comment encourager les initiatives de qualité de vie au travail et renforcer le relationnel entre les agents de la fonction publique ?</h2>
+            <h2 class="mb-5">La plateforme en ligne CoCoPassion permet de créer des moments de partage entre collègues.</h2>
+            <a href="https://cocopassion.herokuapp.com/groups/new" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Créer un nouveau groupe <i class="fas fa-angle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-7 my-auto">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/bdUGlF4PyGs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>Regardez le Pitch pour en savoir plus</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="download bg-primary text-center" id="download">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <h2 class="section-heading">Ce que les agents proposent (*)</h2><br>
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <h3>"Encourager les initiatives de qualité de vie au travail<br>qui permettent aux agents d'échanger<br>sur les sujets autres que strictement professionnels"</h3>
+                </div>
+                <div class="carousel-item">
+                  <h3>"Renforcer le relationnel en déjeunant tous ensemble à l'extérieur<br>(restaurant, pique-nique...)"<br><br></h3>
+                </div>
+                <div class="carousel-item">
+                  <h3>"Il faudrait avoir plus d'interactions avec les gens du bâtiment<br>avec lesquels je ne travaille pas<br>et qui ne font pas partie de mon service"</h3>
+                </div>
+                <div class="carousel-item">
+                  <h3>"Aménager des moments conviviaux<br>pour renforcer le fameux <em>team building</em>"<br><br></h3>
+                </div>
+                <div class="carousel-item">
+                  <h3>"Réussir à faire plus de transversal et de réflexions stratégiques"<br><br><br></h3>
+                </div>
+                <div class="carousel-item">
+                  <h3>"Des moments plus ludiques seraient bienvenus<br>(faire du sport, ou autre loisir, sur le temps de midi par exemple)"<br><br></h3>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          <p><small>(*) <a href="https://twitter.com/CoCoPassionTwit/status/1011956304758394885" style="color: black;" target="_blank">Sondage</a> réalisé par <em><a href="https://bloomin.digital" style="color: black;" target="_blank">Bloomin</a></em> sur 800 agents (été 2018)</small></p>
+          <br>
+          <h1><strong>Notre solution</strong> : créer des liens entre collègues via une plateforme en ligne permettant de rejoindre un groupe autour d'une passion personnelle, d'une compétence ou d’une connaissance professionnelle !</h1><br>
+          <div class="badges">
+            <a href="https://cocopassion.herokuapp.com" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">CoCoPassion en action <i class="fas fa-angle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-heading text-center">
+
+        <h2>Fonctionnalités infinies, pour un fun infini</h2>
+        <p class="text-muted">Regardez ce qu'il est possible de faire avec CoCoPassion !</p>
+          <div class="device-mockup imac">
+            <div class="device">
+              <div class="screen">
+                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                <img src="img/screenshot.png" class="img-fluid" alt="">
+              </div>
+              <div class="button">
+                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+              </div>
+            </div>
+          </div>
+          <div class="badges">
+            <a href="https://cocopassion.herokuapp.com" class="btn btn-outline btn-xl btn-secondary js-scroll-trigger" target="_blank">
+              CoCoPassion en action <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-lg-12 my-auto">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-screen-smartphone text-primary"></i>
+                  <h3>Responsive</h3>
+                  <p class="text-muted">Notre solution s'adapte à tous les écrans.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-camera text-primary"></i>
+                  <h3>Assos</h3>
+                  <p class="text-muted">Mettez en lumière vos associations du personnel ! <span class="badge badge-success">bientôt</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-present text-primary"></i>
+                  <h3>0 €</h3>
+                  <p class="text-muted">CoCoPassion est entièrement gratuite, avec des mises à jour fréquentes.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-lock text-primary"></i>
+                  <h3>RGPD</h3>
+                  <p class="text-muted">CoCoPassion est conforme au RGPD. Un seul clic suffit à supprimer son compte et ses données personnelles associées.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact bg-primary" id="why">
+    <div class="container">
+      <h2>Pourquoi (re)créer du lien entre les agents ?</h2>
+      <h4>L'isolement des agents est de plus en plus observé dans la fonction publique.<br>L'application CoCoPassion renforce les liens entre collègues et permet de rejoindre un groupe autour d'une passion personnelle, d'une compétence ou connaissance professionnelle.</h4><br>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <span style="color: red; font-size: 5em;"><i class="fas fa-times-circle"></i></span>
+              <h1 class="card-title">Sans CoCoPassion</h1>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="far fa-frown"></i></span><p class="card-text" style="text-align: left;"> Je suis nouvel(-elle) arrivant(-e) dans mon administration. En dehors des collègues de mon service, je ne connais aucun agent d'autres services de mon administration.</p></li>
+                <li><span class="fa-li"><i class="far fa-frown"></i></span><p class="card-text" style="text-align: left;">Mis à part les informations et le traitement relatif des dossiers, nous ne partageons rien avec les collègues de mon service.</p></li>
+                <li><span class="fa-li"><i class="far fa-frown"></i></span><p class="card-text" style="text-align: left;">Durant notre dernière pause déjeuner, nous n'avons pas eu d'autres conversations avec mes collègues que le traitement des dossiers courants.</p></li>
+                <li><span class="fa-li"><i class="far fa-frown"></i></span><p class="card-text" style="text-align: left;">Je ne sais pas me servir d'Excel et ne sais pas vers qui me tourner. Si je savais, peut-être que nous pourrions faire un échange de compétences, moi qui maîtrise PowerPoint et parle couramment anglais.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <span style="color: green; font-size: 5em;"><i class="fas fa-check-circle"></i></span>
+              <h1 class="card-title">Avec CoCoPassion</h1>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="far fa-smile"></i></span><p class="card-text" style="text-align: left;">Cotoyer d'autres agents de mon administration, en les rencontrant lors d'événements internes (déjeuner autour d'une passion commune) ou externes (sorties <em>team bulding</em>).</p></li>
+                <li><span class="fa-li"><i class="far fa-smile"></i></span><p class="card-text" style="text-align: left;">Faciliter la création d'événements conviviaux, en partageant régulièrement des déjeuners ou autres sorties de cohésion.</p></li>
+                <li><span class="fa-li"><i class="far fa-smile"></i></span><p class="card-text" style="text-align: left;">Connaître mes collègues autrement en découvrant leurs activités et passions, en dehors de l'exercice de nos fonctions.</p></li>
+                <li><span class="fa-li"><i class="far fa-smile"></i></span><p class="card-text" style="text-align: left;">Mettre à profit mes diverses connaissances et compétences professionnelles voire personnelles, dans le cadre d'un échange et partage auprès de mes collègues.</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><a href="mailto:hello.cocopassion@gmail.com" class="btn btn-outline btn-xl js-scroll-trigger">Une Question ?</a>       
+    </div>
+</section>
+
+  <section class="cta">
+    <div class="cta-content">
+      <div class="container">
+        <h2>Créée par des agents, pour les agents de la Fonction Publique.</h2>
+        <a href="https://cocopassion.herokuapp.com/groups/new" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Créer un nouveau groupe <i class="fas fa-angle-right"></i></a>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </section>
+
+<!--   <section class="contact bg-primary" id="contact">
+    <div class="container">
+      <h2>En contribuant à CoCoPassion, tu nous permets d'aider plein d'administrations à devenir géniales !</h2>
+      <h4>Choisis un montant pour ta contribution, à partir de... 0€ ;)</h4><br>
+      <a href="https://www.leetchi.com/c/cocopassion" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Contribuer à la cagnotte leetchi <i class="fas fa-angle-right"></i></a>
+      <br><br><br>
+        <div class="card w-50" style="margin: 0 auto; text-align: left; background-color: lightgrey;">
+          <div class="card-body">
+            <h5 class="card-title">Objectif actuel :<br><strong>4 000€</strong></h5>
+            <div class="progress">
+              <div class="progress-bar bg-danger" role="progressbar" style="width: 2%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"></div>
+            </div><br>
+            <p class="card-text">Avec 4 000€, on engage une nouvelle personne dans l’équipe pour accélérer le développement de la plateforme. On a plein d’idées en tête pour améliorer l’expérience CoCoPassion, mais il nous faut de la force de frappe au niveau du code. Et qui sait, cette personne, c’est peut-être toi ;)</p>
+          </div>
+        </div>   
+    </div>
+</section> -->
+<!-- 
+<section class="contact bg-primary" id="contact">
+    <div class="container-fluid">
+      <div class="row mt-3">
+          <div class="col-lg-4 col-md-12 py-5" style="padding: 5%;">
+              <a class="twitter-timeline" data-width="400" data-height="400" data-theme="light" data-link-color="#981CEB" href="https://twitter.com/CoCoPassionTwit?ref_src=twsrc%5Etfw">Tweets by CoCoPassionTwit</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
+          <div class="col-lg-6 col-md-10 py-5 m-auto">
+              <p class="display-4 mb-4 text-secondary">
+                  <i class="fa fa-quote-left"></i>
+              </p>
+              <p class="display-4 mb-4">Ils nous font confiance</p>
+              <a href="http://www.douane.gouv.fr" target="_blank"><img src="img/logo/Douanes---droits-indirects.jpg" alt="..." class="img-thumbnail" height="200" width="200"></a>
+              <a href="https://travail-emploi.gouv.fr" target="_blank"><img src="img/logo/238bab83b842888e1040fa154ac3e3.jpg" alt="..." class="img-thumbnail" height="150" width="150"></a>
+              <a href="https://lafabriquerh.wordpress.com/" target="_blank"><img src="img/logo/Y2pFAuRk_400x400-2.jpg" alt="..." class="img-thumbnail" height="180" width="180"></a>
+              <a href="https://www.ecologique-solidaire.gouv.fr/" target="_blank"><img src="img/logo/Logo_DRIEE_Ile-de-France.png" alt="..." class="img-thumbnail" height="150" width="150"></a>
+              <a href="https://www.ird.fr" target="_blank"><img src="img/logo/01ac2dceab5eb6a3-ff559.jpg" alt="..." class="img-thumbnail" height="150" width="150"></a>
+          </div>
+      </div>
+    </div>
+</section> -->
+
+  <footer>
+    <div class="container">
+      	<p>&copy; FormeSurvey 2020. Tous droits réservés.</p>
+      	<br>
+		<img src="https://img.icons8.com/ios-filled/50/000000/cool.png">
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/new-age.min.js"></script>
+
+
+</body>
+
+</html>
