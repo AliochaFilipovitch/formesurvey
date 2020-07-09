@@ -27,6 +27,7 @@
 				<div class="card mb-1 mt-1">
 				  <div class="card-body">
 				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
+				    <h5 class="card-title">{{ question.id }}</h5>
 				    <div class="form-group">
 				    	<label for="answer{{ num }}">Votre réponse:</label>
 							{% if question.categoryQuestion.title == 'text'%}

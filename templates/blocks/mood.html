@@ -1,7 +1,8 @@
 <div class="m-5">
   <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio1{{ question.id }}" value="5">
-    <label class="form-check-label" for="inlineRadio1{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png') }}"></label>
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 5}) }}" class="">
+<img src="{{ asset('img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png') }}">
+    </a>
   </div>
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio2{{ question.id }}" value="4">

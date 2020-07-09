@@ -36,7 +36,7 @@
 		</STRONG></p>
 	  </div>
 	  <div class="col-sm-8">
-		<div class="card border-success mb-1 mt-1">
+		<div class="card border-success mb-3 mt-1">
 		  <h5 class="card-header">Ajouter une question</h5>
 		  <div class="card-body">
 			{{ form_start (questionForm) }}
@@ -54,9 +54,13 @@
 			{{ form_end (questionForm) }}
 		  </div>
 		</div>
-		<p class="text-center"><span class="deleteMessage"></span></p>
+		<div class="alert alert-danger" role="alert">
+			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}" style="color:red;"><i class="fas fa-sync-alt"></i></a>
+		</div>
+		{% set num = survey.questions | length + 1 %}
 		{% for question in survey.questions | reverse %}
-			<div class="card mb-1 mt-1">
+			{% set num = num - 1 %}
+			<div class="card mt-1">
 			  <div class="card-body">
 					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete">
 						<button type="button" class="close" aria-label="Close">
@@ -66,7 +70,7 @@
 						</button>
 					</a>
 			    <h5 class="card-title">
-			    	{{ question.question }}
+			    	{{ num }}. {{ question.question }}
 			    </h5>
 			    <span class="badge badge-success">
 				    {% if question.categoryQuestion.title == 'text'%}
@@ -86,7 +90,7 @@
 			</div>
 		{% endfor %}
 		<hr>
-		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
+		<p class="text-center"><small class="text-muted">début du formulaire</small></p>
 	  </div>
 	</div>
 {% endblock %}
@@ -95,15 +99,17 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 
+		const divAlert = document.querySelector('div.alert');
+		divAlert.hidden = true;
+
 		function onClickAherfDelete(event){
 			event.preventDefault();
 
 			const url = this.href;
-			// const buttonClose = document.querySelector('span.buttonClose');
 			const deleteMessage = document.querySelector('span.deleteMessage');
 
 			axios.get(url).then(function(response) {
-				// buttonClose.hidden = true;
+				divAlert.hidden = false;
 				deleteMessage.textContent = response.data.message;
 			});
 		}

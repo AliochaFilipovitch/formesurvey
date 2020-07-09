@@ -205,4 +205,29 @@ class FormController extends AbstractController
 
         return $this->json(['code' => 200, 'message' => 'La question a bien été supprimé.'], 200);
     }
+
+    /**
+     * @Route("/form/post/{id}/{value}", name="postAnswer")
+     */
+    public function postAnswer(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager, $value) : Response
+    {   
+
+        if (!$question) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
+        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+
+        $answer = new Answer();
+        $answer->setQuestion($question)
+               ->setAnswer($value)
+               ->setCreatedAt(new \DateTime());
+
+        $manager->persist($answer);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'La réponse a bien été ajouté.'], 200);
+    }
 }
