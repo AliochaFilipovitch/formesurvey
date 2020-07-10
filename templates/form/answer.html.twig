@@ -19,6 +19,7 @@
 				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
 			</small>
 		</p>
+<a class="btn btn-primary" href="#" role="button" data-micron="bounce">Link</a>
 	  </div>
 	  <div class="col-sm-8">
 			{% set num = 0 %}
@@ -30,17 +31,17 @@
 				    <h5 class="card-title">{{ question.id }}</h5>
 				    <div class="form-group">
 				    	<label for="answer{{ num }}">Votre réponse:</label>
-							{% if question.categoryQuestion.title == 'text'%}
-								{% include 'blocks/text.html' %}
-							{% elseif question.categoryQuestion.title == 'mood'%}
-								{% include 'blocks/mood.html' %}
-							{% elseif question.categoryQuestion.title == 'star'%}
-								{% include 'blocks/star.html' %}
-							{% elseif question.categoryQuestion.title == 'mark'%}
-								{% include 'blocks/mark.html' %}
-							{% else %}
-								<i class="fas fa-list-ol"></i> Choice
-							{% endif %}
+						{% if question.categoryQuestion.title == 'text'%}
+							{% include 'blocks/text.html' %}
+						{% elseif question.categoryQuestion.title == 'mood'%}
+							{% include 'blocks/mood.html' %}
+						{% elseif question.categoryQuestion.title == 'star'%}
+							{% include 'blocks/star.html' %}
+						{% elseif question.categoryQuestion.title == 'mark'%}
+							{% include 'blocks/mark.html' %}
+						{% else %}
+							<i class="fas fa-list-ol"></i> Choice
+						{% endif %}
 				    </div>
 				  </div>
 				</div>
@@ -49,5 +50,47 @@
 		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<script>
+
+		function onClickMood(event){
+			event.preventDefault();
+
+			const url = this.href;
+			const selectId = this.id;
+			console.log(selectId);
+
+			document.querySelectorAll('.contentImg').forEach(function(content){
+				if (content.classList.contains(selectId)) {
+					content.classList.replace('backgroundcolorrose','backgroundcolorwhite');
+				} 
+			});
+
+			const contentImg = this.querySelector('.contentImg');
+			// const spanAnswer = this.querySelector('span.answer');
+
+
+			axios.get(url).then(function(response) {
+
+				if (contentImg.classList.contains(response.data.answer)) {
+					contentImg.classList.replace('backgroundcolorwhite','backgroundcolorrose');
+
+				} 
+
+				console.log(response.data.answer);
+				// spanAnswer.textContent = response.data.answer;
+			});
+		}
+
+		document.querySelectorAll('a.js-mood').forEach(function(link){
+			link.addEventListener('click', onClickMood);
+		});
+
+	</script>
 
 {% endblock %}

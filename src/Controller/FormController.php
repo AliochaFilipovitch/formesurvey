@@ -219,6 +219,21 @@ class FormController extends AbstractController
         }
 
         $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+        $answers = $question->getAnswers();
+
+        if ($answers->count() > 0) {
+
+            foreach ($answers as $answer) {
+                $manager->remove($answer);
+                $manager->flush();
+            }
+
+            // return $this->json([
+            //     'code' => 200, 
+            //     'message' => 'la réponse est supprimé',
+            //     'answer' => 'deleted'
+            // ], 200);
+        }
 
         $answer = new Answer();
         $answer->setQuestion($question)
@@ -228,6 +243,10 @@ class FormController extends AbstractController
         $manager->persist($answer);
         $manager->flush();
 
-        return $this->json(['code' => 200, 'message' => 'La réponse a bien été ajouté.'], 200);
+        return $this->json([
+            'code' => 200, 
+            'message' => 'la réponse est enregistré', 
+            'answer' => $value
+        ], 200);
     }
 }

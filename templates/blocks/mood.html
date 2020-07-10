@@ -1,27 +1,44 @@
-<div class="m-5">
-  <div class="form-check form-check-inline">
-    <a href="{{ path('postAnswer', {'id': question.id, 'value': 5}) }}" class="">
-<img src="{{ asset('img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png') }}">
+<ul class="list-inline">
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 5}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite 5">
+        <img src="img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png" data-micron="tada">
+      </div>
     </a>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio2{{ question.id }}" value="4">
-    <label class="form-check-label" for="inlineRadio2{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-grinning-face-96.png') }}"></label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio3{{ question.id }}" value="3">
-    <label class="form-check-label" for="inlineRadio3{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-slightly-smiling-face-96.png') }}"></label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio4{{ question.id }}" value="2">
-    <label class="form-check-label" for="inlineRadio4{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-neutral-face-96.png') }}"></label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio5{{ question.id }}" value="1">
-    <label class="form-check-label" for="inlineRadio5{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-unamused-face-96.png') }}"></label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadio6{{ question.id }}" value="0">
-    <label class="form-check-label" for="inlineRadio6{{ question.id }}"><img src="{{ asset('img/icons/emoticones96/icons8-loudly-crying-face-96.png') }}"></label>
-  </div>
-</div>
+  </li>
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 4}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 4">
+        <img src="img/icons/emoticones96/icons8-grinning-face-96.png" data-micron="tada">
+      </div>
+    </a>
+  </li>
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 3}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 3">
+        <img src="img/icons/emoticones96/icons8-slightly-smiling-face-96.png" data-micron="tada">
+      </div>
+    </a>
+  </li>
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 2}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 2">
+        <img src="img/icons/emoticones96/icons8-neutral-face-96.png" data-micron="tada">
+      </div>
+    </a>
+  </li>
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 1}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 1">
+        <img src="img/icons/emoticones96/icons8-unamused-face-96.png" data-micron="tada">
+      </div>
+    </a>
+  </li>
+  <li class="list-inline-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 0}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 0">
+        <img src="img/icons/emoticones96/icons8-loudly-crying-face-96.png" data-micron="tada">
+      </div>
+    </a>
+  </li>
+</ul>

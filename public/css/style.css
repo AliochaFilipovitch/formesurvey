@@ -1,0 +1,11 @@
+.backgroundcolorrose {
+	border-radius: 20px;
+	border: 2px solid white;
+	background-color: mistyrose;
+}
+
+.backgroundcolorwhite {
+	border-radius: 20px;
+	border: 2px solid white;
+	background-color: white;
+}
