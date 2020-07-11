@@ -46,9 +46,15 @@ class Question
      */
     private $answers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=QuestionMultipleChoice::class, mappedBy="question", orphanRemoval=true)
+     */
+    private $questionMultipleChoices;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->questionMultipleChoices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,6 +135,37 @@ class Question
             // set the owning side to null (unless already changed)
             if ($answer->getQuestion() === $this) {
                 $answer->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuestionMultipleChoice[]
+     */
+    public function getQuestionMultipleChoices(): Collection
+    {
+        return $this->questionMultipleChoices;
+    }
+
+    public function addQuestionMultipleChoice(QuestionMultipleChoice $questionMultipleChoice): self
+    {
+        if (!$this->questionMultipleChoices->contains($questionMultipleChoice)) {
+            $this->questionMultipleChoices[] = $questionMultipleChoice;
+            $questionMultipleChoice->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionMultipleChoice(QuestionMultipleChoice $questionMultipleChoice): self
+    {
+        if ($this->questionMultipleChoices->contains($questionMultipleChoice)) {
+            $this->questionMultipleChoices->removeElement($questionMultipleChoice);
+            // set the owning side to null (unless already changed)
+            if ($questionMultipleChoice->getQuestion() === $this) {
+                $questionMultipleChoice->setQuestion(null);
             }
         }
 

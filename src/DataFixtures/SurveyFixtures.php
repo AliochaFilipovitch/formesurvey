@@ -8,6 +8,7 @@ use App\Entity\Survey;
 use App\Entity\Question;
 use App\Entity\CategoryQuestion;
 use App\Entity\Answer;
+use App\Entity\QuestionMultipleChoice;
 
 class SurveyFixtures extends Fixture
 {
@@ -16,7 +17,7 @@ class SurveyFixtures extends Fixture
     	$faker = \Faker\Factory::create('fr_FR');
 
 		// Créer 3 catégories de questions au Survey
-		for($j = 1; $j <= 3; $j++){
+		for($j = 1; $j <= 5; $j++){
 			$categoryQuestion = new CategoryQuestion();
 			$categoryQuestion->setTitle($faker->word);
 
@@ -45,6 +46,15 @@ class SurveyFixtures extends Fixture
 
 				$manager->persist($question);
 
+				// Créer 0 - 3 QCM au Question
+				for($m = 0; $m <= mt_rand(0, 2); $m++){
+					$questionMultipleChoice = new QuestionMultipleChoice();
+					$questionMultipleChoice->setContent($faker->sentence())
+										   ->setQuestion($question);
+
+					$manager->persist($questionMultipleChoice);
+
+				}
 				// Créer 0 - 2 réponses au Question
 				for($l = 0; $l <= mt_rand(0, 2); $l++){
 					$answer = new answer();
