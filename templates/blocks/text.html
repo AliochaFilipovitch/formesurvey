@@ -1,11 +1,9 @@
 <form action="" method="post">
-	<div class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="Votre réponse..." id="postAnswer{{ num }}" name="postAnswer{{ num }}" required>
-
-		<div class="input-group-append">
-			<button class="btn btn-outline-secondary" type="submit">Enregistrer</button>
-		</div>
+	<div class="form-group">
+		<label for="exampleFormControlTextarea1">Votre réponse :</label>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Votre réponse..." id="postAnswer{{ num }}" name="postAnswer{{ num }}" required></textarea>
 	</div>
 	<input type="hidden" id="question{{ num }}" name="question{{ num }}" value="{{ question.id }}">
 	<input type="hidden" id="num" name="num"  value="{{ num }}">
+	<button class="btn btn-outline-secondary" type="submit">Enregistrer</button>
 </form>

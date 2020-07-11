@@ -94,9 +94,15 @@ class FormController extends AbstractController
             $manager->persist($answer);
             $manager->flush();
 
-            return $this->render('form/answer.html.twig', [
-                'survey' => $survey,
-            ]);
+            // return $this->render('form/answer.html.twig', [
+            //     'survey' => $survey,
+            // ]);
+
+            return $this->json([
+                'code' => 200, 
+                'message' => 'la réponse est enregistré', 
+                'answer' => $request->request->get("postAnswer$num")
+            ], 200);
         }
 
         return $this->render('form/answer.html.twig', [

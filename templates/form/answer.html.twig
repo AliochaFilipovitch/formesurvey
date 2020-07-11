@@ -45,7 +45,6 @@
 				  </div>
 				</div>
 			{% endfor %}
-		<hr>
 		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 	  </div>
 	</div>
@@ -85,7 +84,7 @@
 			});
 		}
 
-		document.querySelectorAll('a.js-mood').forEach(function(link){
+		document.querySelectorAll('a.js-selected').forEach(function(link){
 			link.addEventListener('click', onClickAnswerSelected);
 		});
 

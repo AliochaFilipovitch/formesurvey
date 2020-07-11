@@ -1,7 +1,7 @@
 <ul class="list-inline">
 	{% for i in 1..10 %}
   	<li class="list-inline-item">
-		<a href="{{ path('postAnswer', {'id': question.id, 'value': i}) }}" class="js-mood" id="{{ question.id }}">
+		<a href="{{ path('postAnswer', {'id': question.id, 'value': i}) }}" class="js-selected" id="{{ question.id }}">
 			<div class="contentImg backgroundcolorwhite {{ question.id }} {{ i }} m-1">
 				<span style="font-size: 4em; color: Tomato;">
 					{{ i }}
