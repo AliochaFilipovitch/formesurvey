@@ -70,7 +70,6 @@
 			});
 
 			const contentImg = this.querySelector('.contentImg');
-			// const spanAnswer = this.querySelector('span.answer');
 
 			axios.get(url).then(function(response) {
 
@@ -80,7 +79,6 @@
 				} 
 
 				console.log(response.data.answer);
-				// spanAnswer.textContent = response.data.answer;
 			});
 		}
 
@@ -88,7 +86,40 @@
 			link.addEventListener('click', onClickAnswerSelected);
 		});
 
-	</script>
+		document.querySelectorAll('div.alert').forEach(function(alert){
+			alert.hidden = true;
+		});
 
+    	function onClickPostAnswer(event){
+    		event.preventDefault();
+
+
+    		const selectId = this.id;
+    		console.log(selectId);
+    		
+    		const saisie = document.getElementById(selectId).value;
+
+    		var url = this.href;
+    		url = url.replace("value", saisie);
+
+			axios.get(url).then(function(response) {
+				console.log(response.data.answer);
+
+				document.querySelectorAll('div.alert').forEach(function(alert){
+					if (alert.classList.contains(selectId)) {
+						alert.hidden = false;
+						console.log(alert.firstChild.textContent);
+						alert.firstChild.textContent = response.data.answer;
+					} 
+				});
+			});
+
+    	}
+
+    	document.querySelectorAll('a.js-text').forEach(function(link){
+			link.addEventListener('click', onClickPostAnswer);
+		});
+
+	</script>
 
 {% endblock %}
