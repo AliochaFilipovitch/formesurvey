@@ -228,11 +228,6 @@ class FormController extends AbstractController
                 $manager->flush();
             }
 
-            // return $this->json([
-            //     'code' => 200, 
-            //     'message' => 'la réponse est supprimé',
-            //     'answer' => 'deleted'
-            // ], 200);
         }
 
         $answer = new Answer();

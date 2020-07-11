@@ -1,11 +1,17 @@
-.backgroundcolorrose {
+a.js-mood { 
+	text-decoration: none; 
+}
+
+.backgroundcolorgreen {
 	border-radius: 20px;
-	border: 2px solid white;
-	background-color: mistyrose;
+	border: 2px solid green;
+	background-color: honeydew;
+	text-align: center;
 }
 
 .backgroundcolorwhite {
 	border-radius: 20px;
 	border: 2px solid white;
 	background-color: white;
+	text-align: center;
 }

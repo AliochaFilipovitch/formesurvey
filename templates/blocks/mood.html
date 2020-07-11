@@ -1,7 +1,7 @@
 <ul class="list-inline">
   <li class="list-inline-item">
     <a href="{{ path('postAnswer', {'id': question.id, 'value': 5}) }}" class="js-mood" id="{{ question.id }}">
-      <div class="contentImg backgroundcolorwhite 5">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 5">
         <img src="img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png" data-micron="tada">
       </div>
     </a>

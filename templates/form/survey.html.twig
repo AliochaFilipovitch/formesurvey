@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
-
 {% block title %}Modifier{% endblock %}
+
+{% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 	<div class="row">
@@ -60,9 +60,9 @@
 		{% set num = survey.questions | length + 1 %}
 		{% for question in survey.questions | reverse %}
 			{% set num = num - 1 %}
-			<div class="card mt-1">
+			<div class="card mt-1 cardId {{ question.id }}">
 			  <div class="card-body">
-					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete">
+					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete" id="{{ question.id }}">
 						<button type="button" class="close" aria-label="Close">
 							<span style="font-size: 2rem; color: Tomato;">
 								<i class="far fa-times-circle"></i>
@@ -97,15 +97,24 @@
 
 {% block javascripts %}
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	<script>
 
 		const divAlert = document.querySelector('div.alert');
 		divAlert.hidden = true;
 
-		function onClickAherfDelete(event){
+		function onClickDelete(event){
 			event.preventDefault();
 
 			const url = this.href;
+			const selectId = this.id;
+			console.log(selectId);
+
+			document.querySelectorAll('.cardId').forEach(function(content){
+				if (content.classList.contains(selectId)) {
+					content.hidden = true;
+				} 
+			});
 			const deleteMessage = document.querySelector('span.deleteMessage');
 
 			axios.get(url).then(function(response) {
@@ -115,7 +124,7 @@
 		}
 
 		document.querySelectorAll('a.js-delete').forEach(function(link){
-			link.addEventListener('click', onClickAherfDelete);
+			link.addEventListener('click', onClickDelete);
 		});
 
 	</script>

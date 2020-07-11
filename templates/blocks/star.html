@@ -1,23 +1,67 @@
-<div class="m-5">
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="Radio1{{ question.id }}" value="5">
-    <label class="form-check-label" for="Radio1{{ question.id }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"></label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="Radio2{{ question.id }}" value="4">
-    <label class="form-check-label" for="Radio2{{ question.id }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"></label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="Radio3{{ question.id }}" value="3">
-    <label class="form-check-label" for="Radio3{{ question.id }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"></label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="Radio4{{ question.id }}" value="2">
-    <label class="form-check-label" for="Radio4{{ question.id }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"></label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="Radio5{{ question.id }}" value="1">
-    <label class="form-check-label" for="Radio5{{ question.id }}"><img src="{{ asset('img/icons/stars/icons8-star-48.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"><img src="{{ asset('img/icons/stars/icons8-star-48 emp.png') }}"></label>
-  </div>
-  <p><small class="form-text text-muted">1 étoile : peu / 5 étoiles : beaucoup</small></p>
-</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 5}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 5">
+        <span style="font-size: 3em; color: gold;">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </span>
+      </div>
+    </a>
+  </li>
+  <li class="list-group-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 4}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 4">
+        <span style="font-size: 3em; color: gold;">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </span>
+      </div>
+    </a>
+  </li>
+  <li class="list-group-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 3}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 3">
+        <span style="font-size: 3em; color: gold;">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </span>
+      </div>
+    </a>
+  </li>
+  <li class="list-group-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 2}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 2">
+        <span style="font-size: 3em; color: gold;">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </span>
+      </div>
+    </a>
+  </li>
+  <li class="list-group-item">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': 1}) }}" class="js-mood" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} 1">
+        <span style="font-size: 3em; color: gold;">
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </span>
+      </div>
+    </a>
+  </li>
+</ul>

@@ -19,7 +19,6 @@
 				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
 			</small>
 		</p>
-<a class="btn btn-primary" href="#" role="button" data-micron="bounce">Link</a>
 	  </div>
 	  <div class="col-sm-8">
 			{% set num = 0 %}
@@ -58,7 +57,7 @@
 
 	<script>
 
-		function onClickMood(event){
+		function onClickAnswerSelected(event){
 			event.preventDefault();
 
 			const url = this.href;
@@ -67,18 +66,17 @@
 
 			document.querySelectorAll('.contentImg').forEach(function(content){
 				if (content.classList.contains(selectId)) {
-					content.classList.replace('backgroundcolorrose','backgroundcolorwhite');
+					content.classList.replace('backgroundcolorgreen','backgroundcolorwhite');
 				} 
 			});
 
 			const contentImg = this.querySelector('.contentImg');
 			// const spanAnswer = this.querySelector('span.answer');
 
-
 			axios.get(url).then(function(response) {
 
 				if (contentImg.classList.contains(response.data.answer)) {
-					contentImg.classList.replace('backgroundcolorwhite','backgroundcolorrose');
+					contentImg.classList.replace('backgroundcolorwhite','backgroundcolorgreen');
 
 				} 
 
@@ -88,9 +86,10 @@
 		}
 
 		document.querySelectorAll('a.js-mood').forEach(function(link){
-			link.addEventListener('click', onClickMood);
+			link.addEventListener('click', onClickAnswerSelected);
 		});
 
 	</script>
+
 
 {% endblock %}

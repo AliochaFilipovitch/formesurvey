@@ -1,9 +1,13 @@
-<div class="m-5">
+<ul class="list-inline">
 	{% for i in 1..10 %}
-	<div class="form-check form-check-inline">
-		<input class="form-check-input" type="radio" name="postAnswer{{ question.id }}" id="inlineRadioMark{{ question.id }}{{ i }}" value="{{ i }}">
-		<label class="form-check-label" for="inlineRadioMark{{ question.id }}{{ i }}"><h1 class="display-4">{{ i }}</h1></label>
-	</div>
+  	<li class="list-inline-item">
+		<a href="{{ path('postAnswer', {'id': question.id, 'value': i}) }}" class="js-mood" id="{{ question.id }}">
+			<div class="contentImg backgroundcolorwhite {{ question.id }} {{ i }} m-1">
+				<span style="font-size: 4em; color: Tomato;">
+					{{ i }}
+				</span>
+			</div>
+		</a>
+	</li>
 	{% endfor %}
-	<p><small class="form-text text-muted">Note de 1 à 10</small></p>
-</div>
+</ul>
