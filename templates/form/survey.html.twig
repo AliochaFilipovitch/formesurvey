@@ -40,10 +40,10 @@
 		  <h5 class="card-header">Ajouter une question</h5>
 		  <div class="card-body">
 			{{ form_start (questionForm) }}
-				<div class="shadow-sm p-3 mb-5 bg-white rounded">
+				<div class="shadow-sm p-2 mb-3 bg-white rounded">
 					{{ form_row ( questionForm.question, {'label' : 'Question:','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
 				</div>
-				<div class="shadow-sm p-3 mb-5 bg-white rounded">
+				<div class="shadow-sm p-2 mb-3 bg-white rounded">
 					{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question:'} ) }}
 				</div>
 
@@ -55,12 +55,12 @@
 		  </div>
 		</div>
 		<div class="alert alert-danger" role="alert">
-			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}" style="color:red;"><i class="fas fa-sync-alt"></i></a>
+			<span class="deleteMessage"></span>
 		</div>
 		{% set num = survey.questions | length + 1 %}
 		{% for question in survey.questions | reverse %}
 			{% set num = num - 1 %}
-			<div class="card mt-1 cardId {{ question.id }}">
+			<div class="card mt-1 cardId {{ question.id }} shadow-lg">
 			  <div class="card-body">
 					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete" id="{{ question.id }}">
 						<button type="button" class="close" aria-label="Close">
