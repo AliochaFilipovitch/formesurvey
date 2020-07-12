@@ -68,6 +68,13 @@ class FormController extends AbstractController
      * @Route("/form/qcm/{id}", name="qcm_create")
      */
     public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager) {
+
+        if (!$question) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
         $questionMultipleChoice = new QuestionMultipleChoice;
 
         $form = $this->createFormBuilder($questionMultipleChoice) 
@@ -87,12 +94,15 @@ class FormController extends AbstractController
             $manager->persist($questionMultipleChoice);
             $manager->flush();
 
-            return $this->redirectToRoute('qcm_create', ['id'=>$question->getId()]);
+            return $this->redirectToRoute('qcm_create', [
+                'id'=>$question->getId()
+            ]);
 
         }
 
         return $this->render('form/qcm.html.twig', [
-            'formQCM' => $form->createView()
+            'formQCM' => $form->createView(),
+            'question'=>$question
         ]);
     }
 

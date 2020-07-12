@@ -15,7 +15,14 @@
 		<button type="submit" class="btn btn-primary btn-lg btn-block">
 			Ajouter
 		</button>
-		
+
 	{{ form_end(formQCM) }}
+
+
+	{% for questionMultipleChoice in question.questionMultipleChoices | reverse %}
+
+		<p>{{ questionMultipleChoice.content }}</p>
+
+	{% endfor %}
 
 {% endblock %}
