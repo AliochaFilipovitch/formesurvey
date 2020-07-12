@@ -33,6 +33,21 @@ class FormController extends AbstractController
     }
 
     /**
+     * @Route("/gif/{value}", name="gif")
+     */
+    public function indexAction(Request $request, $value)
+    {
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC';
+        $obj = json_decode(file_get_contents($url), true);
+
+        return $this->render('gif/index.html.twig', [
+            'value' => $value,
+            'alt' => $value,
+            'src' => $obj['data'][0]['images']['original']['url'],
+        ]);
+    }
+
+    /**
      * @Route("/form", name="form")
      */
     public function index(SurveyRepository $repo)
@@ -255,6 +270,7 @@ class FormController extends AbstractController
     }
 
     /**
+     * Maybe inutile car uniquement post answer via postAnswer
      * @Route("/{id}", name="answer")
      */
     public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)

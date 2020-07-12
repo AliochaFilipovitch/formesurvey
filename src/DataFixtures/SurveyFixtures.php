@@ -46,15 +46,6 @@ class SurveyFixtures extends Fixture
 
 				$manager->persist($question);
 
-				// Créer 0 - 3 QCM au Question
-				for($m = 0; $m <= mt_rand(0, 2); $m++){
-					$questionMultipleChoice = new QuestionMultipleChoice();
-					$questionMultipleChoice->setContent($faker->sentence())
-										   ->setQuestion($question);
-
-					$manager->persist($questionMultipleChoice);
-
-				}
 				// Créer 0 - 2 réponses au Question
 				for($l = 0; $l <= mt_rand(0, 2); $l++){
 					$answer = new answer();

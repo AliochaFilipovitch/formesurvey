@@ -16,7 +16,7 @@
 
 			{{ form_row(formQCM.content, {'label' : 'Une proposition de réponse :','attr':{'placeholder':"Une proposition de réponse..."}}) }}
 
-			<button type="submit" class="btn btn-primary btn-lg btn-block">
+			<button type="submit" class="btn btn-primary btn-lg btn-block m-1">
 			Ajouter
 			</button>
 
@@ -28,8 +28,7 @@
 			{% endfor %}
 		</ul>
 
-      	<a href="{{ path('form_survey', {'id': question.survey.id}) }}" class="btn btn-success btn-lg btn-block" role="button">Retour</a>
-
+      	<a href="{{ path('form_survey', {'id': question.survey.id}) }}" class="btn btn-success btn-lg btn-block m-1" role="button">Retour</a>
 
 		</div>
 	</div>
