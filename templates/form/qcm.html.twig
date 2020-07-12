@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formQCM 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}FormeSurvey{% endblock %}
+
+{% block body %}
+
+	<h4>add choices</h4>
+
+	{{ form_start(formQCM) }}
+
+		{{ form_row(formQCM.content, {'attr':{'placeholder':"Une propoition de réponse..."}}) }}
+
+		<button type="submit" class="btn btn-primary btn-lg btn-block">
+			Ajouter
+		</button>
+		
+	{{ form_end(formQCM) }}
+
+{% endblock %}

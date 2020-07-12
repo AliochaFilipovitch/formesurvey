@@ -70,7 +70,7 @@
 						</button>
 					</a>
 			    <h5 class="card-title">
-			    	{{ num }}. {{ question.question }}
+			    	{{ num }}. {{ question.question }} . {{ question.id }}
 			    </h5>
 				    {% if question.categoryQuestion.title == 'text'%}
 						<span class="badge badge-success">
@@ -94,6 +94,8 @@
 						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
 						  <i class="fas fa-list-ol"></i> Choice
 						</button>
+
+						<a href="{{ path('qcm_create', {'id': question.id}) }}">Choice</a>
 
 						<!-- Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

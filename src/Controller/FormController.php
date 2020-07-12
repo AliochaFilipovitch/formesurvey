@@ -12,9 +12,11 @@ use App\Repository\SurveyRepository;
 use App\Repository\QuestionRepository;
 use App\Entity\Survey;
 use App\Entity\Question;
+use App\Entity\QuestionMultipleChoice;
 use App\Entity\Answer;
 use App\Form\SurveyType;
 use App\Form\QuestionType;
+use App\Form\QuestionMultipleChoiceType;
 // use App\Form\AnswerType;
 
 
@@ -43,71 +45,94 @@ class FormController extends AbstractController
     }
 
     /**
-     * @Route("/form/{id}/status", name="status")
+     * @Route("/form/delete/{id}", name="delete")
      */
-    public function status(SurveyRepository $repo, Survey $survey = null, EntityManagerInterface $manager) : Response
+    public function deleteQuestion(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager) : Response
     {   
 
-        if (!$survey) {
+        if (!$question) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
         }
 
-        $survey = $repo->findOneBy(['id' => $survey->getId()]);
+        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
 
-        if ($survey->getStatus(true)) {
-            $survey->setStatus(false);
-        } else {
-            $survey->setStatus(true);
-        }
-
-        $manager->merge($survey);
+        $manager->remove($question);
         $manager->flush();
 
-        return $this->json(['code' => 200, 'message' => 'good'], 200);
+        return $this->json(['code' => 200, 'message' => 'La question a bien été supprimé.'], 200);
     }
 
+    /**
+     * @Route("/form/qcm/{id}", name="qcm_create")
+     */
+    public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager) {
+        $questionMultipleChoice = new QuestionMultipleChoice;
+
+        $form = $this->createFormBuilder($questionMultipleChoice) 
+                     ->add('content') 
+                     ->getForm();
+
+        $form->handleRequest($request);
+
+        dump($questionMultipleChoice);
+
+        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $questionMultipleChoice->setQuestion($question);
+
+            $manager->persist($questionMultipleChoice);
+            $manager->flush();
+
+            return $this->redirectToRoute('qcm_create', ['id'=>$question->getId()]);
+
+        }
+
+        return $this->render('form/qcm.html.twig', [
+            'formQCM' => $form->createView()
+        ]);
+    }
 
     /**
-     * @Route("/{id}", name="answer")
+     * @Route("/form/post/{id}/{value}", name="postAnswer")
      */
-    public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)
-    {
-        
-        if (!$survey) {
+    public function postAnswer(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager, $value) : Response
+    {   
+
+        if (!$question) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
         }
 
-        if ($request->request->count() > 0) {
+        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+        $answers = $question->getAnswers();
 
-            $num = $request->request->get("num");
-            $questionNum = $question->find($request->request->get("question$num"));
+        if ($answers->count() > 0) {
 
-            $answer = new Answer();
-            $answer->setQuestion($questionNum)
-                   ->setAnswer($request->request->get("postAnswer$num"))
-                   ->setCreatedAt(new \DateTime());
+            foreach ($answers as $answer) {
+                $manager->remove($answer);
+                $manager->flush();
+            }
 
-            $manager->persist($answer);
-            $manager->flush();
-
-            // return $this->render('form/answer.html.twig', [
-            //     'survey' => $survey,
-            // ]);
-
-            return $this->json([
-                'code' => 200, 
-                'message' => 'la réponse est enregistré', 
-                'answer' => $request->request->get("postAnswer$num")
-            ], 200);
         }
 
-        return $this->render('form/answer.html.twig', [
-            'survey' => $survey
-        ]);
+        $answer = new Answer();
+        $answer->setQuestion($question)
+               ->setAnswer($value)
+               ->setCreatedAt(new \DateTime());
+
+        $manager->persist($answer);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200, 
+            'message' => 'la réponse est enregistré', 
+            'answer' => $value
+        ], 200);
     }
 
     /**
@@ -140,6 +165,32 @@ class FormController extends AbstractController
     		'surveyForm' => $form->createView(),
     		'editMode' => $survey->getId() !== null
     	]);
+    }
+
+    /**
+     * @Route("/form/{id}/status", name="status")
+     */
+    public function status(SurveyRepository $repo, Survey $survey = null, EntityManagerInterface $manager) : Response
+    {   
+
+        if (!$survey) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
+        $survey = $repo->findOneBy(['id' => $survey->getId()]);
+
+        if ($survey->getStatus(true)) {
+            $survey->setStatus(false);
+        } else {
+            $survey->setStatus(true);
+        }
+
+        $manager->merge($survey);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'good'], 200);
     }
 
     /**
@@ -192,62 +243,46 @@ class FormController extends AbstractController
     		'survey' => $survey
     	]);
     }
-    /**
-     * @Route("/form/delete/{id}", name="delete")
-     */
-    public function deleteQuestion(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager) : Response
-    {   
 
-        if (!$question) {
+    /**
+     * @Route("/{id}", name="answer")
+     */
+    public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)
+    {
+        
+        if (!$survey) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
         }
 
-        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
+        if ($request->request->count() > 0) {
 
-        $manager->remove($question);
-        $manager->flush();
+            $num = $request->request->get("num");
+            $questionNum = $question->find($request->request->get("question$num"));
 
-        return $this->json(['code' => 200, 'message' => 'La question a bien été supprimé.'], 200);
-    }
+            $answer = new Answer();
+            $answer->setQuestion($questionNum)
+                   ->setAnswer($request->request->get("postAnswer$num"))
+                   ->setCreatedAt(new \DateTime());
 
-    /**
-     * @Route("/form/post/{id}/{value}", name="postAnswer")
-     */
-    public function postAnswer(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager, $value) : Response
-    {   
+            $manager->persist($answer);
+            $manager->flush();
 
-        if (!$question) {
-            return $this->render('error/error.html.twig', [
-                'error' => "ERROR 500"
-            ]);
+            // return $this->render('form/answer.html.twig', [
+            //     'survey' => $survey,
+            // ]);
+
+            return $this->json([
+                'code' => 200, 
+                'message' => 'la réponse est enregistré', 
+                'answer' => $request->request->get("postAnswer$num")
+            ], 200);
         }
 
-        $question = $questionRepo->findOneBy(['id' => $question->getId()]);
-        $answers = $question->getAnswers();
-
-        if ($answers->count() > 0) {
-
-            foreach ($answers as $answer) {
-                $manager->remove($answer);
-                $manager->flush();
-            }
-
-        }
-
-        $answer = new Answer();
-        $answer->setQuestion($question)
-               ->setAnswer($value)
-               ->setCreatedAt(new \DateTime());
-
-        $manager->persist($answer);
-        $manager->flush();
-
-        return $this->json([
-            'code' => 200, 
-            'message' => 'la réponse est enregistré', 
-            'answer' => $value
-        ], 200);
+        return $this->render('form/answer.html.twig', [
+            'survey' => $survey
+        ]);
     }
+
 }
