@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <img id="gif" src="{{ src }}" alt="{{ alt }}" />
-    <p>{{ src }}</p>
+	{% for i in 0..15 %}
+	    <img id="gif" src="{{ srcs[i] }}"/>
+	    <a href="{{ srcs[i] }}">Source</a>
+    {% endfor %}
 {% endblock %}

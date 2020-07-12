@@ -37,13 +37,17 @@ class FormController extends AbstractController
      */
     public function indexAction(Request $request, $value)
     {
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC&lang=fr';
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC&lang=fr&limit=16';
         $obj = json_decode(file_get_contents($url), true);
+        $srcs =[];
+        for ($i=0; $i <= 15; $i++) { 
+            array_push($srcs, $obj['data'][$i]['images']['original']['url']);
+        }
 
         return $this->render('gif/index.html.twig', [
             'value' => $value,
             'alt' => $value,
-            'src' => $obj['data'][0]['images']['original']['url'],
+            'srcs' => $srcs
         ]);
     }
 
