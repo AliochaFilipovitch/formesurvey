@@ -37,7 +37,7 @@ class FormController extends AbstractController
      */
     public function indexAction(Request $request, $value)
     {
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC';
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC&lang=fr';
         $obj = json_decode(file_get_contents($url), true);
 
         return $this->render('gif/index.html.twig', [
