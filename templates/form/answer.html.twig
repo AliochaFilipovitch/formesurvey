@@ -38,8 +38,8 @@
 							{% include 'blocks/star.html' %}
 						{% elseif question.categoryQuestion.title == 'mark'%}
 							{% include 'blocks/mark.html' %}
-						{% else %}
-							<i class="fas fa-list-ol"></i> Choice
+						{% elseif question.categoryQuestion.title == 'choice'%}
+							{% include 'blocks/choice.html' %}
 						{% endif %}
 				    </div>
 				  </div>
@@ -53,8 +53,10 @@
 
 {% block javascripts %}
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 	<script>
+		document.querySelectorAll('div.alert').forEach(function(alert){
+			alert.hidden = true;
+		});
 
 		function onClickAnswerSelected(event){
 			event.preventDefault();
@@ -86,10 +88,6 @@
 			link.addEventListener('click', onClickAnswerSelected);
 		});
 
-		document.querySelectorAll('div.alert').forEach(function(alert){
-			alert.hidden = true;
-		});
-
     	function onClickPostAnswer(event){
     		event.preventDefault();
 
@@ -113,7 +111,6 @@
 					} 
 				});
 			});
-
     	}
 
     	document.querySelectorAll('a.js-text').forEach(function(link){
@@ -121,5 +118,4 @@
 		});
 
 	</script>
-
 {% endblock %}

@@ -6,23 +6,33 @@
 
 {% block body %}
 
-	<h4>add choices</h4>
+<div class="container">
+	<div class="row">
+		<div class="col align-self-center m-5">
 
-	{{ form_start(formQCM) }}
+		<h4>{{ question.question }}</h4>
 
-		{{ form_row(formQCM.content, {'attr':{'placeholder':"Une propoition de réponse..."}}) }}
+		{{ form_start(formQCM) }}
 
-		<button type="submit" class="btn btn-primary btn-lg btn-block">
+			{{ form_row(formQCM.content, {'label' : 'Une proposition de réponse :','attr':{'placeholder':"Une proposition de réponse..."}}) }}
+
+			<button type="submit" class="btn btn-primary btn-lg btn-block">
 			Ajouter
-		</button>
+			</button>
 
-	{{ form_end(formQCM) }}
+		{{ form_end(formQCM) }}
+
+		<ul class="list-group list-group-flush">
+			{% for questionMultipleChoice in question.questionMultipleChoices | reverse %}
+				<li class="list-group-item">{{ questionMultipleChoice.content }}</li>
+			{% endfor %}
+		</ul>
+
+      	<a href="{{ path('form_survey', {'id': question.survey.id}) }}" class="btn btn-success btn-lg btn-block" role="button">Retour</a>
 
 
-	{% for questionMultipleChoice in question.questionMultipleChoices | reverse %}
-
-		<p>{{ questionMultipleChoice.content }}</p>
-
-	{% endfor %}
+		</div>
+	</div>
+</div>
 
 {% endblock %}
