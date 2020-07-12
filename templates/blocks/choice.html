@@ -2,8 +2,8 @@
 <ul class="list-group list-group-flush">
   {% for questionMultipleChoice in question.questionMultipleChoices | reverse %}
   <li class="list-group-item">
-    <a href="{{ path('postAnswer', {'id': question.id, 'value': questionMultipleChoice.content}) }}" class="js-selected" id="{{ question.id }}">
-      <div class="contentImg backgroundcolorwhite {{ question.id }} 5">
+    <a href="{{ path('postAnswer', {'id': question.id, 'value': questionMultipleChoice.id}) }}" class="js-selected" id="{{ question.id }}">
+      <div class="contentImg backgroundcolorwhite {{ question.id }} {{ questionMultipleChoice.id }}">
         {{ questionMultipleChoice.content }}
       </div>
     </a>
