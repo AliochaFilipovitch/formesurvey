@@ -94,6 +94,10 @@
 					    		<i class="fas fa-list-ol"></i> Choice
 					    	</span>
 						</a>
+				    {% elseif question.categoryQuestion.title == 'gif'%}
+				    	<span class="badge badge-success">
+							<i class="fas fa-video"></i> GIF
+						</span>
 				    {% endif %}
 				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d/m/Y') }}</small></p>
 			  </div>

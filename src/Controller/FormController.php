@@ -44,11 +44,20 @@ class FormController extends AbstractController
             array_push($srcs, $obj['data'][$i]['images']['original']['url']);
         }
 
-        return $this->render('gif/index.html.twig', [
+        // return $this->render('gif/index.html.twig', [
+        //     'value' => $value,
+        //     'alt' => $value,
+        //     'srcs' => $srcs
+        // ]);
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'API request is good.',
             'value' => $value,
             'alt' => $value,
             'srcs' => $srcs
-        ]);
+        ], 200);
+
     }
 
     /**

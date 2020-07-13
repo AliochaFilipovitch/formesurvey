@@ -40,6 +40,9 @@
 							{% include 'blocks/mark.html' %}
 						{% elseif question.categoryQuestion.title == 'choice'%}
 							{% include 'blocks/choice.html' %}
+						{% elseif question.categoryQuestion.title == 'gif'%}
+							<i class="fas fa-video"></i> GIF
+							{% include 'blocks/gif.html' %}
 						{% endif %}
 				    </div>
 				  </div>
@@ -91,7 +94,6 @@
     	function onClickPostAnswer(event){
     		event.preventDefault();
 
-
     		const selectId = this.id;
     		console.log(selectId);
     		
@@ -115,6 +117,40 @@
 
     	document.querySelectorAll('a.js-text').forEach(function(link){
 			link.addEventListener('click', onClickPostAnswer);
+		});
+
+		function onClickSearchGif(event){
+    		event.preventDefault();
+
+    		const selectId = this.id;
+    		console.log(selectId);
+    		
+    		const saisie = document.getElementById(selectId).value;
+
+    		var url = this.href;
+    		url = url.replace("value", saisie);
+
+			axios.get(url).then(function(response) {
+				console.log(response.data.srcs);
+
+				document.querySelectorAll('div.gif').forEach(function(gif){
+					if (gif.classList.contains(selectId)) {
+						console.log(response.data.srcs);
+
+						for (var i = 0; i < response.data.srcs.length; i++) {
+							var img = document.createElement('img');
+							img.style.height = '200px';
+							img.style.width = '200px';
+							img.src = response.data.srcs[i];
+							gif.appendChild(img);
+						}
+					} 
+				});
+			});
+    	}
+
+    	document.querySelectorAll('a.js-gif').forEach(function(link){
+			link.addEventListener('click', onClickSearchGif);
 		});
 
 	</script>
