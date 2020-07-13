@@ -1,11 +1,9 @@
 <div class="form-group">
 	<label for="{{ question.id }}">Votre réponse :</label>
-	<input type="text" class="form-control" id="{{ question.id }}">
-	<div class="alert {{ question.id }} alert-success mt-2" role="alert">
-		
+	<input type="text" class="form-control" id="{{ question.id }}" placeholder="Votre réponse...">
+	<div class="alert {{ question.id }} alert-success m-1" role="alert">
 	</div>
+	<a href="{{ path('postAnswer', {'id': question.id, 'value': 'value'}) }}" id="{{ question.id }}" class="js-text btn btn-primary btn-sm btn-block mt-1">
+		Enregistrer la réponse
+	</a>
 </div>
-
-<a href="{{ path('postAnswer', {'id': question.id, 'value': 'value'}) }}" id="{{ question.id }}" class="js-text btn btn-outline-secondary">
-	Enregistrer
-</a>

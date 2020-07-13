@@ -13,10 +13,18 @@
 		;">
 		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
-		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
+		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %} &#8226;
+		<STRONG>
+			{% if survey.status %}
+				OUVERT
+			{% else %}
+				FERMÉ
+			{% endif %}
+		</STRONG>
+		</h5>
 		<p>
 			<small class="text-muted">
-				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
+				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d M Y') }}
 			</small>
 		</p>
 	  </div>
@@ -26,10 +34,8 @@
 				{% set num = num + 1 %}
 				<div class="card mb-1 mt-1">
 				  <div class="card-body">
-				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
-				    <h5 class="card-title">{{ question.id }}</h5>
+				    <h5 class="card-title">{{ num }}. {{ question.id }}. {{ question.question }}</h5>
 				    <div class="form-group">
-				    	<label for="answer{{ num }}">Votre réponse:</label>
 						{% if question.categoryQuestion.title == 'text'%}
 							{% include 'blocks/text.html' %}
 						{% elseif question.categoryQuestion.title == 'mood'%}
@@ -41,7 +47,6 @@
 						{% elseif question.categoryQuestion.title == 'choice'%}
 							{% include 'blocks/choice.html' %}
 						{% elseif question.categoryQuestion.title == 'gif'%}
-							<i class="fas fa-video"></i> GIF
 							{% include 'blocks/gif.html' %}
 						{% endif %}
 				    </div>
@@ -57,7 +62,7 @@
 {% block javascripts %}
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
-	
+
 		document.querySelectorAll('div.alert').forEach(function(alert){
 			alert.hidden = true;
 		});
@@ -167,17 +172,17 @@
 
 						for (var i = 0; i < response.data.srcs.length; i++) {
 							
-							var getId = response.data.ids[i];
+							const getId = response.data.ids[i];
 							
 							console.log(getId);
 
-						    var route = {
+						    const route = {
 						        myroute:{
 						            route:"{{ path('postAnswer', {'id': 'id', 'value': 'value'}, true) }}"
 						        },
 						    };
 							
-							var a = document.createElement('a');
+							const a = document.createElement('a');
 							a.className = 'js-post-gif';
 							a.id = selectId;
 							// a.href = "../form/post/"+selectId+"/"+getId;
@@ -191,9 +196,9 @@
 
 						    console.log(a.href);
 
-							var img = document.createElement('img');
-							img.style.height = '200px';
-							img.style.width = '200px';
+							const img = document.createElement('img');
+							img.style.height = '100px';
+							img.style.width = '100px';
 							img.src = response.data.srcs[i];
 							img.alt = response.data.ids[i];
 							img.className = response.data.ids[i];

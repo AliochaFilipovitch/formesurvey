@@ -1,12 +1,10 @@
 <div class="form-group">
-	<label for="{{ question.id }}">Votre réponse :</label>
-	<input type="text" class="form-control" id="{{ question.id }}">
-	<a href="{{ path('gif', {'value': 'value'}) }}" id="{{ question.id }}" class="js-gif btn btn-outline-secondary mt-2">
-		Rechercher
+	<label for="{{ question.id }}">Rechercher un GIF :</label>
+	<input type="text" class="form-control" id="{{ question.id }}" placeholder="Rechercher un GIF...">
+	<a href="{{ path('gif', {'value': 'value'}) }}" id="{{ question.id }}" class="js-gif btn btn-outline-secondary btn-sm btn-block mt-1">
+		<i class="fas fa-search"></i> Rechercher
 	</a>
-<!-- 	<a href="{{ path('postAnswer', {'id': question.id, 'value': 'value'}) }}" class="gif {{ question.id }} getId" id="{{ question.id }}"> -->
-	<div class="gif {{ question.id }} getId" id="{{ question.id }}">
+	<div class="gif {{ question.id }} getId m-1" id="{{ question.id }}">
 		
 	</div>
-
 </div>
