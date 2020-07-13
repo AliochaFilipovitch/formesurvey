@@ -3,7 +3,7 @@
   <li class="list-group-item">
     <a href="{{ path('postAnswer', {'id': question.id, 'value': questionMultipleChoice.id}) }}" class="js-selected" id="{{ question.id }}">
       <div class="contentImg backgroundcolorwhite {{ question.id }} {{ questionMultipleChoice.id }}">
-        {{ questionMultipleChoice.content }}
+        <STRONG>{{ questionMultipleChoice.content }}</STRONG>
       </div>
     </a>
   </li>

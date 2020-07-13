@@ -36,8 +36,18 @@ class FormController extends AbstractController
      * @Route("/gif/{value}", name="gif")
      */
     public function indexAction(Request $request, $value)
-    {
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=16';
+    {   
+        $aremplacer = array(",",".",";",":","!","?","(",")","[","]","{","}","\"","'"," ");
+        $enremplacement = " ";
+        $sansponctuation = trim(str_replace($aremplacer, $enremplacement, $value));
+        $separateur = "#[ ]+#";
+        $mots = preg_split($separateur, $sansponctuation);
+        $phrase = "";
+        foreach ($mots as $mot) {
+            $phrase .= "$mot+";
+        }
+
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=16';
         $obj = json_decode(file_get_contents($url), true);
         $srcs = [];
         $ids = [];
@@ -50,9 +60,11 @@ class FormController extends AbstractController
             'code' => 200,
             'message' => 'API request is good.',
             'value' => $value,
+            'phrase' => $phrase,
             'alt' => $value,
             'srcs' => $srcs,
             'ids' => $ids,
+            'mots' => $mots,
             '$obj' => $obj
         ], 200);
 
