@@ -123,9 +123,26 @@
     		event.preventDefault();
 
     		var url = this.href;
+    		var selectId = this.id;
+    		console.log(selectId);
+    		// const saisie = document.getElementById(selectId).value;
+
+			document.querySelectorAll('img').forEach(function(img){
+				if (img.classList.contains(selectId)) {
+					img.classList.replace('backgroundcolorgreen','backgroundcolorwhite');
+				} 
+			});
 
 			axios.get(url).then(function(response) {
 				console.log(response.data.answer);
+
+				document.querySelectorAll('img').forEach(function(img){
+					
+					if (img.classList.contains(response.data.answer)) {
+						img.classList.replace('backgroundcolorwhite','backgroundcolorgreen');
+
+					} 
+				});
 
 
 			});
@@ -166,6 +183,7 @@
 							
 							var a = document.createElement('a');
 							a.className = 'js-post-gif';
+							a.id = selectId;
 							// a.href = "../form/post/"+selectId+"/"+getId;
 							a.href = route.myroute.route;
 
@@ -182,6 +200,9 @@
 							img.style.width = '200px';
 							img.src = response.data.srcs[i];
 							img.alt = response.data.ids[i];
+							img.className = response.data.ids[i];
+							img.classList.add(selectId);
+							img.classList.add("backgroundcolorwhite");
 
 							a.appendChild(img);
 
