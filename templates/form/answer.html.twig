@@ -113,7 +113,7 @@
 					} 
 				});
 			});
-    	}
+    	}    	
 
     	document.querySelectorAll('a.js-text').forEach(function(link){
 			link.addEventListener('click', onClickPostAnswer);
@@ -125,24 +125,50 @@
     		const selectId = this.id;
     		console.log(selectId);
     		
-    		const saisie = document.getElementById(selectId).value;
+    		const saisieGif = document.getElementById(selectId).value;
 
     		var url = this.href;
-    		url = url.replace("value", saisie);
+    		url = url.replace("value", saisieGif);
 
 			axios.get(url).then(function(response) {
 				console.log(response.data.srcs);
 
 				document.querySelectorAll('div.gif').forEach(function(gif){
 					if (gif.classList.contains(selectId)) {
-						console.log(response.data.srcs);
 
 						for (var i = 0; i < response.data.srcs.length; i++) {
+							
+							var getId = response.data.ids[i];
+
+						    var route = {
+						        myroute:{
+						            route:"{{ path('postAnswer', {'id': 'id', 'value': 'value'}, true) }}"
+						        },
+						    };
+
+							
+							var a = document.createElement('a');
+							a.class = selectId;
+							a.class = "js-post-gif";
+							// a.href = "../form/post/"+selectId+"/"+getId;
+							a.href = route.myroute.route;
+
+			        		a.href = a.href.replace("id", selectId);
+			        		a.href = a.href.replace("value", getId);
+							
+							gif.appendChild(a);
+
+
+						    console.log(a.href);
+
 							var img = document.createElement('img');
 							img.style.height = '200px';
 							img.style.width = '200px';
 							img.src = response.data.srcs[i];
-							gif.appendChild(img);
+							img.alt = response.data.ids[i];
+
+							a.appendChild(img);
+
 						}
 					} 
 				});
@@ -152,6 +178,7 @@
     	document.querySelectorAll('a.js-gif').forEach(function(link){
 			link.addEventListener('click', onClickSearchGif);
 		});
+
 
 	</script>
 {% endblock %}

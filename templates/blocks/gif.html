@@ -1,11 +1,12 @@
 <div class="form-group">
 	<label for="{{ question.id }}">Votre réponse :</label>
 	<input type="text" class="form-control" id="{{ question.id }}">
-	<div class="gif {{ question.id }} mt-2">
+	<a href="{{ path('gif', {'value': 'value'}) }}" id="{{ question.id }}" class="js-gif btn btn-outline-secondary mt-2">
+		Rechercher
+	</a>
+<!-- 	<a href="{{ path('postAnswer', {'id': question.id, 'value': 'value'}) }}" class="gif {{ question.id }} getId" id="{{ question.id }}"> -->
+	<div class="gif {{ question.id }} getId" id="{{ question.id }}">
 		
 	</div>
-</div>
 
-<a href="{{ path('gif', {'value': 'value'}) }}" id="{{ question.id }}" class="js-gif btn btn-outline-secondary">
-	Rechercher
-</a>
+</div>
