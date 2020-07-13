@@ -57,6 +57,7 @@
 {% block javascripts %}
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
+	
 		document.querySelectorAll('div.alert').forEach(function(alert){
 			alert.hidden = true;
 		});
@@ -125,7 +126,6 @@
     		var url = this.href;
     		var selectId = this.id;
     		console.log(selectId);
-    		// const saisie = document.getElementById(selectId).value;
 
 			document.querySelectorAll('img').forEach(function(img){
 				if (img.classList.contains(selectId)) {
@@ -147,10 +147,6 @@
 
 			});
     	}    	
-
-    	document.querySelectorAll('a.js-text').forEach(function(link){
-			link.addEventListener('click', onClickPostAnswer);
-		});
 
 		function onClickSearchGif(event){
     		event.preventDefault();
@@ -220,8 +216,6 @@
     	document.querySelectorAll('a.js-gif').forEach(function(link){
 			link.addEventListener('click', onClickSearchGif);
 		}); 
-
-
 
 	</script>
 {% endblock %}

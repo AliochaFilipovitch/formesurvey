@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier{% endblock %}
+{% block title %}FormeSurvey &#8226; {{ survey.title }}{% endblock %}
 
 {% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
 
@@ -13,54 +13,36 @@
 			mistyrose
 		{% endif %}
 		;">
-		<h1 class="display-4">{{ survey.title }}<br>
-			<small>
-				<a href="{{ path('form_edit', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i></a>
-				&#8226;
-				<a href="{{ path('answer', {'id': survey.id}) }}"><i class="fas fa-eye"></i></a>
-			</small>
-		</h1>
+		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
-		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
-		<p>
-			<small class="text-muted">
-				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d/m/Y') }}
-			</small>
-		</p>
-		<p><STRONG>
+		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %} &#8226;
+		<STRONG>
 			{% if survey.status %}
 				OUVERT
 			{% else %}
 				FERMÉ
 			{% endif %}
-		</STRONG></p>
+		</STRONG>
+		</h5>
+		<p>
+			<small class="text-muted">
+				Enquête réalisée par {{ survey.author }}, le {{ survey.createdAt | date('d M Y') }}
+			</small>
+		</p>
+		<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			<a class="btn btn-light" href="{{ path('form_edit', {'id': survey.id}) }}" role="button"><i class="fas fa-pen-nib"></i> Modifier</a>
+			<a class="btn btn-light" href="{{ path('answer', {'id': survey.id}) }}" role="button"><i class="fas fa-eye"></i> Enquête</a>
+			<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button"><i class="fas fa-poll"></i> Résultat</a>
+		</div>
 	  </div>
 	  <div class="col-sm-8">
-		<div class="card border-success mb-3 mt-1">
-		  <h5 class="card-header">Ajouter une question</h5>
-		  <div class="card-body">
-			{{ form_start (questionForm) }}
-				<div class="shadow-sm p-2 mb-3 bg-white rounded">
-					{{ form_row ( questionForm.question, {'label' : 'Question:','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
-				</div>
-				<div class="shadow-sm p-2 mb-3 bg-white rounded">
-					{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question:'} ) }}
-				</div>
-
-				<button type="submit" class="btn btn-success btn-lg btn-block">
-					<i class="fas fa-plus-square"></i> Ajouter
-				</button>
-
-			{{ form_end (questionForm) }}
-		  </div>
-		</div>
-		<div class="alert alert-danger" role="alert">
+		<div class="alert alert-danger m-1" role="alert">
 			<span class="deleteMessage"></span>
 		</div>
-		{% set num = survey.questions | length + 1 %}
-		{% for question in survey.questions | reverse %}
-			{% set num = num - 1 %}
-			<div class="card mt-1 cardId {{ question.id }} shadow-lg">
+		{% set num = 0 %}
+		{% for question in survey.questions %}
+			{% set num = num + 1 %}
+			<div class="card m-1 cardId {{ question.id }}">
 			  <div class="card-body">
 					<a href="{{ path('delete', {'id': question.id}) }}" class="js-delete" id="{{ question.id }}">
 						<button type="button" class="close" aria-label="Close">
@@ -70,7 +52,7 @@
 						</button>
 					</a>
 			    <h5 class="card-title">
-			    	{{ num }}. {{ question.question }} . {{ question.id }}
+			    	{{ num }}. {{ question.id }}. {{ question.question }}
 			    </h5>
 				    {% if question.categoryQuestion.title == 'text'%}
 						<span class="badge badge-success">
@@ -91,7 +73,10 @@
 				    {% elseif question.categoryQuestion.title == 'choice'%}
 						<a href="{{ path('qcm_create', {'id': question.id}) }}">
 							<span class="badge badge-success">
-					    		<i class="fas fa-list-ol"></i> Choice
+					    		<i class="fas fa-list-ol"></i> Choice 
+					    		<span class="badge badge-light">
+					    			{{ question.questionMultipleChoices | length }}
+					    		</span>
 					    	</span>
 						</a>
 				    {% elseif question.categoryQuestion.title == 'gif'%}
@@ -99,11 +84,28 @@
 							<i class="fas fa-video"></i> GIF
 						</span>
 				    {% endif %}
-				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d/m/Y') }}</small></p>
+				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d M Y') }}</small></p>
 			  </div>
 			</div>
 		{% endfor %}
-		<p class="text-center"><small class="text-muted">début du formulaire</small></p>
+		<div class="card border-success m-1">
+		  <h5 class="card-header">Ajouter une question</h5>
+		  <div class="card-body">
+			{{ form_start (questionForm) }}
+				<div class="p-1 m-1">
+					{{ form_row ( questionForm.question, {'label' : 'Question :','attr' : {'placeholder': "Comment as-tu trouvé cette réunion ?"}} ) }}
+				</div>
+				<div class="p-1 m-1">
+					{{ form_row ( questionForm.categoryQuestion, {'label' : 'Type de la question :'} ) }}
+				</div>
+
+				<button type="submit" class="btn btn-success btn-lg btn-block">
+					<i class="fas fa-plus-square"></i> Ajouter
+				</button>
+
+			{{ form_end (questionForm) }}
+		  </div>
+		</div>
 	  </div>
 	</div>
 {% endblock %}
