@@ -16,3 +16,8 @@ a.js-selected {
 	background-color: white;
 	text-align: center;
 }
+
+.table-responsive{
+    max-height: 300px;
+    overflow:scroll; 
+}

@@ -47,11 +47,11 @@ class FormController extends AbstractController
             $phrase .= "$mot+";
         }
 
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=16';
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=9';
         $obj = json_decode(file_get_contents($url), true);
         $srcs = [];
         $ids = [];
-        for ($i=0; $i <= 15; $i++) { 
+        for ($i=0; $i <= 8; $i++) { 
             array_push($srcs, $obj['data'][$i]['images']['original']['url']);
             array_push($ids, $obj['data'][$i]['id']);
         }
@@ -59,12 +59,8 @@ class FormController extends AbstractController
         return $this->json([
             'code' => 200,
             'message' => 'API request is good.',
-            'value' => $value,
-            'phrase' => $phrase,
-            'alt' => $value,
             'srcs' => $srcs,
             'ids' => $ids,
-            'mots' => $mots,
             '$obj' => $obj
         ], 200);
 
