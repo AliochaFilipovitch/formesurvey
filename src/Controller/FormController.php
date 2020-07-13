@@ -39,23 +39,21 @@ class FormController extends AbstractController
     {
         $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=16';
         $obj = json_decode(file_get_contents($url), true);
-        $srcs =[];
+        $srcs = [];
+        $ids = [];
         for ($i=0; $i <= 15; $i++) { 
             array_push($srcs, $obj['data'][$i]['images']['original']['url']);
+            array_push($ids, $obj['data'][$i]['id']);
         }
-
-        // return $this->render('gif/index.html.twig', [
-        //     'value' => $value,
-        //     'alt' => $value,
-        //     'srcs' => $srcs
-        // ]);
 
         return $this->json([
             'code' => 200,
             'message' => 'API request is good.',
             'value' => $value,
             'alt' => $value,
-            'srcs' => $srcs
+            'srcs' => $srcs,
+            'ids' => $ids,
+            '$obj' => $obj
         ], 200);
 
     }
