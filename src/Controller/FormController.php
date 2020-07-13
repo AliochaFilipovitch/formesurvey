@@ -37,7 +37,7 @@ class FormController extends AbstractController
      */
     public function indexAction(Request $request, $value)
     {
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key=dc6zaTOxFJmzC&lang=fr&limit=16';
+        $url = 'http://api.giphy.com/v1/gifs/search?q='.$value.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=16';
         $obj = json_decode(file_get_contents($url), true);
         $srcs =[];
         for ($i=0; $i <= 15; $i++) { 
