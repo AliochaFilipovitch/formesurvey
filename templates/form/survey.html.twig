@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FormeSurvey &#8226; {{ survey.title }}{% endblock %}
+{% block title %}{{ survey.title }}{% endblock %}
 
 {% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
 
@@ -116,7 +116,7 @@
 
 	<script>
 
-		const divAlert = document.querySelector('div.alert');
+		var divAlert = document.querySelector('div.alert');
 		divAlert.hidden = true;
 
 		function onClickDelete(event){
