@@ -190,32 +190,37 @@ class FormController extends AbstractController
      * @Route("/form/{id}/edit", name="form_edit")
      */
     public function form(Survey $survey = null , Request $request, EntityManagerInterface $manager)
-    {	
-    	if (!$survey) {
-    		$survey = new Survey();
-    	}
-    	
-    	$form = $this->createForm(SurveyType::class, $survey); 
+    {   
+        $user = $this->getUser();
 
-    	$form->handleRequest($request);
+        if (!$survey) {
+            $survey = new Survey();
+        }
+        
+        $form = $this->createForm(SurveyType::class, $survey); 
 
-    	if ($form->isSubmitted() && $form->isValid()) {
-    		if (!$survey->getId()) {
-    			$survey->setCreatedAt(new \DateTime());
-    		}
-    		
-    		$manager->persist($survey);
-    		$manager->flush();
+        $form->handleRequest($request);
 
-    		return $this->redirectToRoute('form_survey', ['id'=>$survey->getId()]);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$survey->getId()) {
+                $survey->setCreatedAt(new \DateTime())
+                       ->setStatus(true)
+                       ->setAuthor($user);
+            }
+            
+            $manager->persist($survey);
+            $manager->flush();
 
-    	}
+            return $this->redirectToRoute('form_survey', ['id'=>$survey->getId()]);
 
-    	return $this->render('form/create.html.twig', [
-    		'surveyForm' => $form->createView(),
-    		'editMode' => $survey->getId() !== null
-    	]);
+        }
+
+        return $this->render('form/create.html.twig', [
+            'surveyForm' => $form->createView(),
+            'editMode' => $survey->getId() !== null
+        ]);
     }
+
 
     /**
      * @Route("/form/{id}/status", name="status")
