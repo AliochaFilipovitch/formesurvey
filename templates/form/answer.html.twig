@@ -49,6 +49,15 @@
 						{% elseif question.categoryQuestion.title == 'gif'%}
 							{% include 'blocks/gif.html' %}
 						{% endif %}
+							{% for answer in question.answers %}
+								{% if answer.author == app.user %}
+									{% if answer.answer > 1 %}
+										<div class="alert alert-info {{ question.id }}" role="alert">
+											Réponse enregistrée : {{ answer.answer }}
+										</div>
+									{% endif %}
+								{% endif %}
+							{% endfor %}
 				    </div>
 				  </div>
 				</div>
@@ -63,7 +72,7 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 
-		document.querySelectorAll('div.alert').forEach(function(alert){
+		document.querySelectorAll('div.alert-success').forEach(function(alert){
 			alert.hidden = true;
 		});
 
@@ -78,6 +87,12 @@
 				if (content.classList.contains(selectId)) {
 					content.classList.replace('backgroundcolorgreen','backgroundcolorwhite');
 				} 
+			});
+
+			document.querySelectorAll('div.alert-info').forEach(function(alert){
+				if (alert.classList.contains(selectId)) {
+					alert.hidden = true;
+				}
 			});
 
 			const contentImg = this.querySelector('.contentImg');
@@ -108,6 +123,12 @@
     		var url = this.href;
     		url = url.replace("value", saisie);
 
+    		document.querySelectorAll('div.alert-info').forEach(function(alert){
+				if (alert.classList.contains(selectId)) {
+					alert.hidden = true;
+				}
+			});
+
 			axios.get(url).then(function(response) {
 				console.log(response.data.answer);
 
@@ -115,7 +136,7 @@
 					if (alert.classList.contains(selectId)) {
 						alert.hidden = false;
 						console.log(alert.firstChild.textContent);
-						alert.firstChild.textContent = response.data.answer;
+						alert.firstChild.textContent = "Réponse enregistrée : "+response.data.answer;
 					} 
 				});
 			});
@@ -136,6 +157,12 @@
 				if (img.classList.contains(selectId)) {
 					img.classList.replace('backgroundcolorgreen','backgroundcolorwhite');
 				} 
+			});
+
+			document.querySelectorAll('div.alert-info').forEach(function(alert){
+				if (alert.classList.contains(selectId)) {
+					alert.hidden = true;
+				}
 			});
 
 			axios.get(url).then(function(response) {
