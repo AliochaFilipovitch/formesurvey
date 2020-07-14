@@ -161,8 +161,10 @@ class FormController extends AbstractController
         if ($answers->count() > 0) {
 
             foreach ($answers as $answer) {
-                $manager->remove($answer);
-                $manager->flush();
+                if($answer->getAuthor() === $user) {
+                    $manager->remove($answer);
+                    $manager->flush();
+                }
             }
 
         }
@@ -293,7 +295,7 @@ class FormController extends AbstractController
     }
 
     /**
-     * Maybe inutile car uniquement post answer via postAnswer
+     * Peut-être inutile car uniquement post answer via postAnswer
      * @Route("/{id}", name="answer")
      */
     public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)

@@ -93,6 +93,10 @@ class Answer
         return $this;
     }
 
+    /**
+     * Public fonction qui ne marche pas...
+     */
+
     public function isPostedByUser(User $user): bool
     {
         foreach ($this->$answers as $answer) {

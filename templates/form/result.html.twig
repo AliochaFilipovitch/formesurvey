@@ -36,7 +36,7 @@
 			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
 			    {% for answer in question.answers %}
-			    	<p>{{ answer.answer }}</p>
+			    	<p>{{ answer.author.username }} : {{ answer.answer }}</p>
 			    {% endfor %}
 			  </div>
 			</div>
