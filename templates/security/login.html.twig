@@ -10,18 +10,35 @@
 
 <form action="{{ path('security_login') }}" method="post">
 	<div>
-		<input type="text" name="_username" placeholder="adresse mail" required class="form-control">
+		<input type="text" name="_username" placeholder="adresse mail" required class="form-control name" value="{{ app.request.get('filter')['_username'] }}">
 	</div>
 	<div>
-		<input type="password" name="_password" placeholder="password" required class="form-control">
+		<input type="password" name="_password" placeholder="password" required class="form-control pass" value="{{ app.request.get('filter')['_password'] }}">
 	</div>
 	<div>
-		<button type="submit" class="btn btn-success ">
+		<button type="submit" class="btn btn-success" id="btn">
 			Login
 		</button>
 	</div>
 </form>
 
+{% endblock %}
 
+{% block javascripts %}
+	
 
+	<script>
+
+		const formName = document.querySelector('.name').value;
+		const formPass = document.querySelector('.pass').value;
+		
+		console.log(formName);
+		console.log(formPass);
+
+		if (formName != null && formPass != null) {
+			document.getElementById('btn').click();
+
+		}
+
+	</script>
 {% endblock %}
