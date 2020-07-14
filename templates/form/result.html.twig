@@ -19,13 +19,6 @@
 				Enquête réalisée par {{ survey.author.username }}, le {{ survey.createdAt | date('d/m/Y') }}
 			</small>
 		</p>
-		<p><STRONG>
-			{% if survey.status %}
-				OUVERT
-			{% else %}
-				FERMÉ
-			{% endif %}
-		</STRONG></p>
 	  </div>
 	  <div class="col-sm-8">
 		{% set num = 0 %}
@@ -35,9 +28,28 @@
 			  <div class="card-body">
 			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-			    {% for answer in question.answers %}
-			    	<p>{{ answer.author.username }} : {{ answer.answer }}</p>
-			    {% endfor %}
+			    {% if (question.categoryQuestion.title == 'choice') or (question.categoryQuestion.title == 'text')%}
+				    <ol>
+				    	{% for answer in question.answers %}
+	  						<li>{{ answer.author.id }} : {{ answer.answer }}</li>
+				    	{% endfor %}
+					</ol> 
+				{% elseif (question.categoryQuestion.title == 'mark') or (question.categoryQuestion.title == 'mood') or (question.categoryQuestion.title == 'star') %}
+					{% set longueur = question.answers | length %}
+					<p>Nombre de réponses : {{ longueur }}</p>
+					{% set counter = 0 %}
+			    	{% for answer in question.answers %}
+			    		{% set counter = counter + answer.answer %}
+			    	{% endfor %}
+					<p>Somme : {{ counter }}</p>
+					<p>Moyenne : {{ (counter/longueur) }}</p>
+				{% elseif question.categoryQuestion.title == 'gif' %}
+				    <ol>
+				    	{% for answer in question.answers %}
+	  						<li>{{ answer.author.id }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
+				    	{% endfor %}
+					</ol> 
+				{% endif %}
 			  </div>
 			</div>
 		{% endfor %}

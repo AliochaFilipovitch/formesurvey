@@ -49,15 +49,15 @@
 						{% elseif question.categoryQuestion.title == 'gif'%}
 							{% include 'blocks/gif.html' %}
 						{% endif %}
-							{% for answer in question.answers %}
-								{% if answer.author == app.user %}
-									{% if answer.answer > 1 %}
-										<div class="alert alert-info {{ question.id }}" role="alert">
-											Réponse enregistrée : {{ answer.answer }}
-										</div>
-									{% endif %}
+						{% for answer in question.answers %}
+							{% if answer.author == app.user %}
+								{% if answer.answer > 1 %}
+									<div class="alert alert-info {{ question.id }} m-1" role="alert">
+										Réponse enregistrée : {{ answer.answer }}
+									</div>
 								{% endif %}
-							{% endfor %}
+							{% endif %}
+						{% endfor %}
 				    </div>
 				  </div>
 				</div>
