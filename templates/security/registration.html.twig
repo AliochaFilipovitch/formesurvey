@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+
+<h1 class="display-4">Inscription</h1>
+
+{{ form_start (form) }}
+
+	{{ form_row ( form.username, {'label' : 'Auteur de l\'enquête (5 caractères min.)','attr' : {'placeholder': "Auteur de l'enquête"}} ) }}
+	{{ form_row ( form.email, {'label' : 'Titre de l\'enquête (10 caractères min.)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
+	{{ form_row ( form.password, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
+	{{ form_row ( form.confirm_password, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
+
+	<button type="submit" class="btn btn-success btn-lg btn-block">
+		Inscription
+	</button>
+
+{{ form_end (form) }}
+
+{% endblock %}
