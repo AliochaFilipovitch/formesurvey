@@ -36,8 +36,8 @@ class User implements UserInterface
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
-     *      minMessage = "Your username must be at least {{ limit }} characters long",
-     *      maxMessage = "Your username cannot be longer than {{ limit }} characters",
+     *      minMessage = "Your username must be at least '{{ limit }}' characters long",
+     *      maxMessage = "Your username cannot be longer than '{{ limit }}' characters",
      *      allowEmptyString = false
      * )
      */
@@ -52,9 +52,12 @@ class User implements UserInterface
      *      maxMessage = "Your password cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      * )
-     */
+     */  
     private $password;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password")
+     */
     public $confirm_password;
 
     public function getId(): ?int
