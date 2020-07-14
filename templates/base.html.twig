@@ -19,42 +19,31 @@
         <title>{% block title %}FormeSurvey{% endblock %}</title>
     </head>
     <body>
-
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="{{ path('home') }}">
+			<a class="navbar-brand" href="#">
 				<img src="https://img.icons8.com/ios-filled/30/000000/cool.png" width="30" height="30" class="d-inline-block align-top" alt="">
 				FormeSurvey
 			</a>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			    <span class="navbar-toggler-icon"></span>
-			  </button>
-
-			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-			    <ul class="navbar-nav mr-auto">
-			      <li class="nav-item">
-					<a class="nav-link" href="{{ path('form') }}">Enquêtes</a>
-			      </li>
-			      <li class="nav-item">
-					<a class="nav-link" href="{{ path('form_create') }}">Créer une enquête</a>
-			      </li>
-			    </ul>
-				<div class="my-2 my-lg-0">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>	
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('form') }}">Enquêtes</a>
+					</li>      
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('form_create') }}">Créer une enquête</a>
+					</li>
+				</ul>
+				<span class="navbar-text">
 					{% if not app.user %}
 						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_login') }}" role="button">Connexion</a>
 					{% else %}
-						<div class="btn-group">
-						  <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    {{ app.user.email }}
-						  </button>
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						    <a class="dropdown-item" href="{{ path('security_logout') }}">Déconnexion</a>
-						    <a class="dropdown-item" href="#">Another action</a>
-						    <a class="dropdown-item" href="#">Something else here</a>
-						  </div>
-						</div>
+						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_logout') }}" role="button">Déconnexion</a>
 					{% endif %}
-			    </div>
-			  </div>
+				</span>
+			</div>
 		</nav>
     	<div class="container">
         	{% block body %}{% endblock %}

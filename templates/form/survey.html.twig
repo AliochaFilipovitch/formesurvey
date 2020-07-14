@@ -37,7 +37,8 @@
 	  </div>
 	  <div class="col-sm-8">
 		<div class="alert alert-danger m-1" role="alert">
-			<span class="deleteMessage"></span>
+			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-sync-alt"></i> Rafraîchir la page</a>
+
 		</div>
 		{% set num = 0 %}
 		{% for question in survey.questions %}

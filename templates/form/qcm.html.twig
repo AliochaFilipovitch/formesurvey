@@ -6,32 +6,28 @@
 
 {% block body %}
 
-<div class="container">
-	<div class="row">
-		<div class="col align-self-center m-5">
+	<h1 class="display-4">{{ question.question }}</h1>
 
-		<h4>{{ question.question }}</h4>
+	<h6>Propositions de réponse :</h6>
 
+	<ul class="list-group list-group-flush">
+		{% for questionMultipleChoice in question.questionMultipleChoices %}
+			<li class="list-group-item list-group-item-action">{{ questionMultipleChoice.content }}</li>
+		{% endfor %}
+	</ul>
+	<div class="m-2">
 		{{ form_start(formQCM) }}
 
-			{{ form_row(formQCM.content, {'label' : 'Une proposition de réponse :','attr':{'placeholder':"Une proposition de réponse..."}}) }}
+			{{ form_widget(formQCM.content, {'attr':{'placeholder':"Une nouvelle proposition de réponse..."}}) }}
 
-			<button type="submit" class="btn btn-primary btn-lg btn-block m-1">
+			<button type="submit" class="btn btn-success btn-block mt-1">
 			Ajouter
 			</button>
 
 		{{ form_end(formQCM) }}
-
-		<ul class="list-group list-group-flush">
-			{% for questionMultipleChoice in question.questionMultipleChoices | reverse %}
-				<li class="list-group-item">{{ questionMultipleChoice.content }}</li>
-			{% endfor %}
-		</ul>
-
-      	<a href="{{ path('form_survey', {'id': question.survey.id}) }}" class="btn btn-success btn-lg btn-block m-1" role="button">Retour</a>
-
-		</div>
 	</div>
-</div>
+
+
+	<br><a href="{{ path('form_survey', {'id': question.survey.id}) }}"><i class="far fa-hand-point-left"></i> Retour</a>
 
 {% endblock %}
