@@ -103,7 +103,9 @@ class FormController extends AbstractController
      */
     public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager) {
 
-        if (!$question) {
+        $user = $this->getUser();
+
+        if (!$question OR !$user) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
@@ -145,8 +147,9 @@ class FormController extends AbstractController
      */
     public function postAnswer(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager, $value) : Response
     {   
+        $user = $this->getUser();
 
-        if (!$question) {
+        if (!$question OR !$user) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
@@ -167,6 +170,7 @@ class FormController extends AbstractController
         $answer = new Answer();
         $answer->setQuestion($question)
                ->setAnswer($value)
+               ->setAuthor($user)
                ->setCreatedAt(new \DateTime());
 
         $manager->persist($answer);

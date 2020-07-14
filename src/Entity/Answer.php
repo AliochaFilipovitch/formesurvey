@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -91,4 +92,17 @@ class Answer
 
         return $this;
     }
+
+    public function isPostedByUser(User $user): bool
+    {
+        foreach ($this->$answers as $answer) {
+            if($answer->getAuthor() === $user) {
+                return true;
+
+            }
+        }
+
+        return false;
+    }
+
 }
