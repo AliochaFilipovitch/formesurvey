@@ -72,6 +72,11 @@ class User implements UserInterface
      */
     private $surveys;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="user")
+     */
+    private $department;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -183,6 +188,18 @@ class User implements UserInterface
                 $survey->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }    
