@@ -67,9 +67,15 @@ class User implements UserInterface
      */
     private $answers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Survey::class, mappedBy="author")
+     */
+    private $surveys;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->surveys = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,6 +150,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($answer->getAuthor() === $this) {
                 $answer->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            // set the owning side to null (unless already changed)
+            if ($survey->getAuthor() === $this) {
+                $survey->setAuthor(null);
             }
         }
 

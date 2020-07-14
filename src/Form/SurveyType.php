@@ -12,7 +12,6 @@ class SurveyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('author')
             ->add('title')
             ->add('description')
         ;

@@ -23,7 +23,7 @@
 		      <th scope="row"><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.id }}</a></th>
 		      <td>{{ survey.title }}</td>
 		      <td>{{ survey.description }}</td>
-		      <td>{{ survey.author }}</td>
+		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
 		      <td>
 		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
