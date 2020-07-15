@@ -1,5 +1,6 @@
 <ol>
 	{% for answer in question.answers %}
-			<li>{{ answer.author.id }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
+		<li>{{ answer.author.id }}. {{ answer.author.department.name }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
+		<img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif">
 	{% endfor %}
 </ol> 
