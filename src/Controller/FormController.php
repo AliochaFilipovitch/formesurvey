@@ -316,7 +316,7 @@ class FormController extends AbstractController
                 'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
             ]);
         }
-        
+
         if (!$survey) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
@@ -329,12 +329,18 @@ class FormController extends AbstractController
     }
 
     /**
-     * Peut-être inutile car uniquement post answer via postAnswer
      * @Route("/{id}", name="answer")
      */
     public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)
     {
-        
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+
         if (!$survey) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
