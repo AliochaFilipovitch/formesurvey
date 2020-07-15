@@ -52,9 +52,9 @@
           </li>
           <li class="nav-item">
             {% if not app.user %}
-              <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">Connexion</a>
+              <a class="nav-link js-scroll-trigger" href="/inscription/login">Connexion</a>
             {% else %}
-              <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">Déconnexion</a>
+              <a class="nav-link js-scroll-trigger" href="/inscription/deconnexion">Déconnexion</a>
             {% endif %}
           </li>
         </ul>
@@ -68,7 +68,7 @@
       <div class="col-md-12 my-auto">
           <h1><strong>Notre solution</strong> : créer des liens entre collègues via une plateforme en ligne permettant de rejoindre un groupe autour d'une passion personnelle, d'une compétence ou d’une connaissance professionnelle !</h1><br>
           <div class="badges">
-            <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">FormeSurvey en action <i class="fas fa-angle-right"></i></a>
+            <a href="/form" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">FormeSurvey en action <i class="fas fa-angle-right"></i></a>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ Les réponses se font naturellement (texte libre, choix fermés, avec des emojis
 
 Nous intégrons également la notion de réciprocité des attentions au coeur de l’expérience. C’est pourquoi, une fois l’enquête complétée, les réponses données par l’ensemble des participants sont partagées, de façon anonyme.</p>
           <div class="badges">
-            <a href="{{ path('form') }}" class="btn btn-outline btn-xl btn-secondary js-scroll-trigger" target="_blank">
+            <a href="/form" class="btn btn-outline btn-xl btn-secondary js-scroll-trigger" target="_blank">
               FormeSurvey en action <i class="fas fa-angle-right"></i>
             </a>
           </div>
@@ -203,7 +203,7 @@ En étant alerté pour décider rapidement</p>
     <div class="cta-content">
       <div class="container">
         <h2>Créée par des agents, pour les agents de la Fonction Publique.</h2>
-        <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Go ! <i class="fas fa-angle-right"></i></a>
+        <a href="/form" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Go ! <i class="fas fa-angle-right"></i></a>
       </div>
     </div>
     <div class="overlay"></div>

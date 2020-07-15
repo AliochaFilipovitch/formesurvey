@@ -70,7 +70,15 @@ class FormController extends AbstractController
      * @Route("/form", name="form")
      */
     public function index(SurveyRepository $repo)
-    {
+    {   
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+
     	$surveys = $repo->findAll();
         return $this->render('form/index.html.twig', [
             'controller_name' => 'FormController',
@@ -193,6 +201,12 @@ class FormController extends AbstractController
     {   
         $user = $this->getUser();
 
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+
         if (!$survey) {
             $survey = new Survey();
         }
@@ -253,6 +267,13 @@ class FormController extends AbstractController
      */
     public function survey(Survey $survey = null, Request $request, EntityManagerInterface $manager)
     {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
 
         if (!$survey) {
             return $this->render('error/error.html.twig', [
@@ -288,6 +309,14 @@ class FormController extends AbstractController
      */
     public function result(Survey $survey = null)
     {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+        
         if (!$survey) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
