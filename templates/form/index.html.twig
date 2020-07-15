@@ -24,7 +24,7 @@
 		      <td>{{ survey.title }}</td>
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.author.username }}</td>
-		      <td>{{ survey.createdAt | date('d/m/Y') }}</td>
+		      <td>{{ survey.createdAt | date('d M Y') }}</td>
 		      <td>
 		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
 					{% if survey.status != false %}
