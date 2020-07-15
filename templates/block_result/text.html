@@ -1,0 +1,5 @@
+<ol>
+	{% for answer in question.answers %}
+			<li>{{ answer.author.id }} : {{ answer.answer }}</li>
+	{% endfor %}
+</ol>

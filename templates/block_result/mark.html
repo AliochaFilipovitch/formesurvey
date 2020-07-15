@@ -1,0 +1,8 @@
+{% set longueur = question.answers | length %}
+<p>Nombre de réponses : {{ longueur }}</p>
+{% set counter = 0 %}
+{% for answer in question.answers %}
+	{% set counter = counter + answer.answer %}
+{% endfor %}
+<p>Somme : {{ counter }}</p>
+<p>Moyenne : {{ (counter/longueur) }}</p>

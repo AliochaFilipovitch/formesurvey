@@ -28,27 +28,18 @@
 			  <div class="card-body">
 			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-			    {% if (question.categoryQuestion.title == 'choice') or (question.categoryQuestion.title == 'text')%}
-				    <ol>
-				    	{% for answer in question.answers %}
-	  						<li>{{ answer.author.id }} : {{ answer.answer }}</li>
-				    	{% endfor %}
-					</ol> 
-				{% elseif (question.categoryQuestion.title == 'mark') or (question.categoryQuestion.title == 'mood') or (question.categoryQuestion.title == 'star') %}
-					{% set longueur = question.answers | length %}
-					<p>Nombre de réponses : {{ longueur }}</p>
-					{% set counter = 0 %}
-			    	{% for answer in question.answers %}
-			    		{% set counter = counter + answer.answer %}
-			    	{% endfor %}
-					<p>Somme : {{ counter }}</p>
-					<p>Moyenne : {{ (counter/longueur) }}</p>
-				{% elseif question.categoryQuestion.title == 'gif' %}
-				    <ol>
-				    	{% for answer in question.answers %}
-	  						<li>{{ answer.author.id }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
-				    	{% endfor %}
-					</ol> 
+		    	{% if question.categoryQuestion.title == 'text'%}
+					{% include 'block_result/text.html' %}
+				{% elseif question.categoryQuestion.title == 'mood'%}
+					{% include 'block_result/mood.html' %}
+				{% elseif question.categoryQuestion.title == 'star'%}
+					{% include 'block_result/star.html' %}
+				{% elseif question.categoryQuestion.title == 'mark'%}
+					{% include 'block_result/mark.html' %}
+				{% elseif question.categoryQuestion.title == 'choice'%}
+					{% include 'block_result/choice.html' %}
+				{% elseif question.categoryQuestion.title == 'gif'%}
+					{% include 'block_result/gif.html' %}
 				{% endif %}
 			  </div>
 			</div>

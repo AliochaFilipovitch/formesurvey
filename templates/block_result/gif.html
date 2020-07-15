@@ -1,0 +1,5 @@
+<ol>
+	{% for answer in question.answers %}
+			<li>{{ answer.author.id }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
+	{% endfor %}
+</ol> 

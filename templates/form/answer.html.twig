@@ -37,17 +37,17 @@
 				    <h5 class="card-title">{{ num }}. {{ question.id }}. {{ question.question }}</h5>
 				    <div class="form-group">
 						{% if question.categoryQuestion.title == 'text'%}
-							{% include 'blocks/text.html' %}
+							{% include 'block/text.html' %}
 						{% elseif question.categoryQuestion.title == 'mood'%}
-							{% include 'blocks/mood.html' %}
+							{% include 'block/mood.html' %}
 						{% elseif question.categoryQuestion.title == 'star'%}
-							{% include 'blocks/star.html' %}
+							{% include 'block/star.html' %}
 						{% elseif question.categoryQuestion.title == 'mark'%}
-							{% include 'blocks/mark.html' %}
+							{% include 'block/mark.html' %}
 						{% elseif question.categoryQuestion.title == 'choice'%}
-							{% include 'blocks/choice.html' %}
+							{% include 'block/choice.html' %}
 						{% elseif question.categoryQuestion.title == 'gif'%}
-							{% include 'blocks/gif.html' %}
+							{% include 'block/gif.html' %}
 						{% endif %}
 						{% for answer in question.answers %}
 							{% if answer.author == app.user %}
