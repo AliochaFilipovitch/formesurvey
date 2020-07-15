@@ -39,7 +39,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
-        "symfony/web-server-bundle": "^4.4.2"
+        "symfony/web-server-bundle": "^4.4.5"
     },
     "config": {
         "optimize-autoloader": true,
