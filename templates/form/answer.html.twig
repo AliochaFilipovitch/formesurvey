@@ -51,7 +51,7 @@
 						{% endif %}
 						{% for answer in question.answers %}
 							{% if answer.author == app.user %}
-								{% if answer.answer > 1 %}
+								{% if (answer.answer | length) > 0 %}
 									<div class="alert alert-info {{ question.id }} m-1" role="alert">
 										Réponse enregistrée : {{ answer.answer }}
 									</div>
