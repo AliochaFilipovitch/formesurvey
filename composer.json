@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "doctrine/annotations": "^1.10",
         "sensio/framework-extra-bundle": "^5.1",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
         "symfony/dotenv": "5.1.*",
@@ -84,7 +85,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.1.*"
         }
     }
