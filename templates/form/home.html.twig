@@ -52,9 +52,9 @@
           </li>
           <li class="nav-item">
             {% if not app.user %}
-              <a class="nav-link js-scroll-trigger" href="/inscription/login">Connexion</a>
+              <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">Connexion</a>
             {% else %}
-              <a class="nav-link js-scroll-trigger" href="/inscription/deconnexion">Déconnexion</a>
+              <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">Déconnexion</a>
             {% endif %}
           </li>
         </ul>
@@ -66,9 +66,11 @@
     <div class="container h-100">
       <div class="row h-100">
       <div class="col-md-12 my-auto">
-          <h1><strong>Notre solution</strong> : créer des liens entre collègues via une plateforme en ligne permettant de rejoindre un groupe autour d'une passion personnelle, d'une compétence ou d’une connaissance professionnelle !</h1><br>
+          <h1>FormeSurvey aide les managers et DRH à placer les collaborateurs au centre de leur activité.</h1>
+          <br>
+          <br>
           <div class="badges">
-            <a href="/form" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">FormeSurvey en action <i class="fas fa-angle-right"></i></a>
+            <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Passez à l'action <i class="fas fa-angle-right"></i></a>
           </div>
         </div>
       </div>
@@ -78,24 +80,22 @@
   <section class="download bg-primary text-center" id="download">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5 my-auto">
+        <div class="col-lg-4 my-auto">
           <div class="header-content mx-auto">
-            <p>1. Je construis des enquêtes engageantes, simplement.
+            <h3>1. Je construis des enquêtes engageantes, simplement.</h3>
 
-Adapté à toutes typologies d’entreprises, le back office permet de segmenter les participants en fonction de critères qui font sens pour l’organisation (métiers, départements, zones géographiques, etc.)
+            <p>Le back office permet de segmenter les participants en fonction de critères qui font sens pour l’organisation (métiers, départements, zones géographiques, etc.)</p>
 
-Créer et planifier ses enquêtes, anticiper les relances :
+            <p>Créer et planifier ses enquêtes, anticiper les relances :</p>
 
-C’est rapide avec la bibliothèque de 200 questions catégorisées
-C’est simple avec l’éditeur d’enquêtes « drag and drop »
-Et c’est également sur mesure avec des questions adaptées à mes besoins</p>
+            <p>C’est rapide avec la bibliothèque de 200 questions catégorisées</p>
+            <p>C’est simple avec l’éditeur d’enquêtes « drag and drop »</p>
+            <p>Et c’est également sur mesure avec des questions adaptées à mes besoins</p>
           </div>
         </div>
-        <div class="col-lg-7 my-auto">
-                <img src="img/create_survey.png" class="img-fluid" alt="">
-
+        <div class="col-lg-8 my-auto">
+          <img src="img/create_survey.png" class="img-fluid img-thumbnail" alt="">
         </div>
-        
       </div>
     </div>
   </section>
@@ -110,27 +110,23 @@ Et c’est également sur mesure avec des questions adaptées à mes besoins</p>
             <div class="device">
               <div class="screen">
                 <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                <img src="img/view_survey.png" class="img-fluid" alt="">
+                <img src="img/view_survey.png" class="img-fluid img-thumbnail" alt="">
               </div>
               <div class="button">
                 <!-- You can hook the "home button" to some JavaScript events or just remove it -->
               </div>
             </div>
           </div>
-                <p>Répondre aux enquêtes se fait de façon conversationnelle !
+            <p>Répondre aux enquêtes se fait de façon conversationnelle !<p>
 
-Via notre propre et unique chatbot, répondre devient rapide et engageant, pour de meilleurs taux de participation.
+            <p>Via notre propre et unique chatbot, répondre devient rapide et engageant, pour de meilleurs taux de participation.<p>
 
-Les réponses se font naturellement (texte libre, choix fermés, avec des emojis ou avec des Gifs, etc.).
+            <p>Les réponses se font naturellement (texte libre, choix fermés, avec des emojis ou avec des Gifs, etc.).<p>
 
-Nous intégrons également la notion de réciprocité des attentions au coeur de l’expérience. C’est pourquoi, une fois l’enquête complétée, les réponses données par l’ensemble des participants sont partagées, de façon anonyme.</p>
-          <div class="badges">
-            <a href="/form" class="btn btn-outline btn-xl btn-secondary js-scroll-trigger" target="_blank">
-              FormeSurvey en action <i class="fas fa-angle-right"></i>
-            </a>
-          </div>
+            <p>Nous intégrons également la notion de réciprocité des attentions au coeur de l’expérience. C’est pourquoi, une fois l’enquête complétée, les réponses données par l’ensemble des participants sont partagées, de façon anonyme.</p>
 
       </div>
+
       <div class="row">
 
         <div class="col-lg-12 my-auto">
@@ -175,27 +171,25 @@ Nous intégrons également la notion de réciprocité des attentions au coeur de
 
   <section class="contact bg-primary" id="why">
     <div class="container">
-      <h2>Pourquoi (re)créer du lien entre les agents ?</h2>
-      <h4>L'isolement des agents est de plus en plus observé dans la fonction publique.<br>L'application FormeSurvey renforce les liens entre collègues et permet de rejoindre un groupe autour d'une passion personnelle, d'une compétence ou connaissance professionnelle.</h4><br>
+      <h2>3. J’analyse, je prends des décisions et je mesure l’impact de mes plans d’actions.</h2>
+      
       <div class="row">
-            <div class="col-lg-5 my-auto">
+        <div class="col-lg-5 my-auto">
           <div class="header-content mx-auto">
-            <p>3. J’analyse, je prends des décisions et je mesure l’impact de mes plans d’actions.
 
-En suivant l’évolution des indicateurs d’expérience employé et de l’employee Net Promoter Score  (eNPS / Bloomin Score)
-En comprenant les promoteurs et détracteurs
-En identifiant les irritants les plus importants
-En capitalisant sur les éléments sources de motivation
-En comparant les équipes et différents départements de l’entreprise
-En filtrant par typologie de salarié (ancienneté, homme/femme, âge, région, fonciton…)
-En étant alerté pour décider rapidement</p>
+          <p>En suivant l’évolution des indicateurs d’expérience employé et de l’employee Net Promoter Score  (eNPS / FormeSurvey Score)</p>
+          <p>En comprenant les promoteurs et détracteurs</p>
+          <p>En identifiant les irritants les plus importants</p>
+          <p>En capitalisant sur les éléments sources de motivation</p>
+          <p>En comparant les équipes et différents départements de l’entreprise</p>
+          <p>En filtrant par typologie de salarié (ancienneté, homme/femme, âge, région, fonciton…)</p>
+          <p>En étant alerté pour décider rapidement</p>
+
           </div>
         </div>
         <div class="col-lg-7 my-auto">
-                <img src="img/result_survey.png" class="img-fluid" alt="">
-
+          <img src="img/result_survey.png" class="img-fluid img-thumbnail" alt="">
         </div>
-     
     </div>
 </section>
 
@@ -203,7 +197,7 @@ En étant alerté pour décider rapidement</p>
     <div class="cta-content">
       <div class="container">
         <h2>Créée par des agents, pour les agents de la Fonction Publique.</h2>
-        <a href="/form" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Go ! <i class="fas fa-angle-right"></i></a>
+        <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Go ! <i class="fas fa-angle-right"></i></a>
       </div>
     </div>
     <div class="overlay"></div>
