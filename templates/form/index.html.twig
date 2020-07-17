@@ -21,7 +21,7 @@
 	  	{% for survey in surveys  %}
 		    <tr>
 		      <th scope="row"><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.id }}</a></th>
-		      <td>{{ survey.title }}</td>
+		      <td><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.title }}</a></td>
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d M Y') }}</td>
@@ -38,8 +38,8 @@
 					{% endif %}
 		      	</a>
 		      </td>
-		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i></a></td>
-		      <td><a href="{{ path('form_result', {'id': survey.id}) }}"><i class="fas fa-poll"></i></a></td>
+		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i> modifier</a></td>
+		      <td><a href="{{ path('form_result', {'id': survey.id}) }}"><i class="fas fa-poll"></i> résultat</a></td>
 		    </tr>
 	    {% endfor %}
 	  </tbody>

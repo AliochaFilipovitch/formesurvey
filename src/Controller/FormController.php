@@ -282,9 +282,9 @@ class FormController extends AbstractController
     }
 
     /**
-     * @Route("/result/{id}", name="form_result")
+     * @Route("/result/{id}/{value}", name="form_result")
      */
-    public function result(Survey $survey = null)
+    public function result(Survey $survey = null, $value = null)
     {
 
         if (!$survey) {
@@ -294,7 +294,8 @@ class FormController extends AbstractController
         }
 
     	return $this->render('form/result.html.twig', [
-    		'survey' => $survey
+    		'survey' => $survey,
+            'value' => $value
     	]);
     }
 

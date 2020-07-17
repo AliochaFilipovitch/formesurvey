@@ -1,8 +1,90 @@
-{% set longueur = question.answers | length %}
-<p>Nombre de réponses : {{ longueur }}</p>
 {% set counter = 0 %}
+{% set counter0 = 0 %}
+{% set counter1 = 0 %}
+{% set counter2 = 0 %}
+{% set counter3 = 0 %}
+{% set counter4 = 0 %}
+{% set counter5 = 0 %}
 {% for answer in question.answers %}
-  {% set counter = counter + answer.answer %}
+	{% if answer.author.department.id == value %}
+		{% set longueur = answer | length %}
+		<p>Nombre de réponses : {{ longueur }}</p>
+		{% set counter = counter + answer.answer %}
+		{% if answer.answer == 0 %}
+			{% set counter0 = counter0 + 1 %}
+		{% elseif answer.answer == 1 %}
+			{% set counter1 = counter1 + 1 %}
+		{% elseif answer.answer == 2 %}
+			{% set counter2 = counter2 + 1 %}
+		{% elseif answer.answer == 3 %}
+			{% set counter3 = counter3 + 1 %}
+		{% elseif answer.answer == 4 %}
+			{% set counter4 = counter4 + 1 %}
+		{% elseif answer.answer == 5 %}
+			{% set counter5 = counter5 + 1 %}
+		{% endif %}
+		<p>Somme : {{ counter }}</p>
+		<p>Moyenne : {{ (counter/longueur) }}</p>
+	{% endif %}
 {% endfor %}
-<p>Somme : {{ counter }}</p>
-<p>Moyenne : {{ (counter/longueur) }}</p>
+
+{% if value == null %}
+	{% set longueur = question.answers | length %}
+	<p>Nombre de réponses : {{ longueur }}</p>
+	{% set counter = 0 %}
+	{% for answer in question.answers %}
+		{% set counter = counter + answer.answer %}
+		{% if answer.answer == 0 %}
+			{% set counter0 = counter0 + 1 %}
+		{% elseif answer.answer == 1 %}
+			{% set counter1 = counter1 + 1 %}
+		{% elseif answer.answer == 2 %}
+			{% set counter2 = counter2 + 1 %}
+		{% elseif answer.answer == 3 %}
+			{% set counter3 = counter3 + 1 %}
+		{% elseif answer.answer == 4 %}
+			{% set counter4 = counter4 + 1 %}
+		{% elseif answer.answer == 5 %}
+			{% set counter5 = counter5 + 1 %}
+		{% endif %}
+	{% endfor %}
+	<p>Somme : {{ counter }}</p>
+	<p>Moyenne : {{ (counter/longueur) }}</p>
+{% endif %}
+
+<canvas id="myChartMood"></canvas>
+
+{% block javascripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script type="text/javascript">
+	var ctx = document.getElementById('myChartMood').getContext('2d');
+	var chart = new Chart(ctx, {
+	// The type of chart we want to create
+	type: 'bar',
+
+	// The data for our dataset
+	data: {
+	labels: [':D', ':))', ':)', ':-|', ':-/', ':('],
+	datasets: [{
+	label: 'Humeur',
+	backgroundColor: 'rgb(255, 99, 132)',
+	borderColor: 'rgb(255, 99, 132)',
+	data: [
+		"{{ counter5|json_encode }}",
+		"{{ counter4|json_encode }}",
+		"{{ counter3|json_encode }}",
+		"{{ counter2|json_encode }}",
+		"{{ counter1|json_encode }}",
+		"{{ counter0|json_encode }}"
+		]
+	}]
+	},
+
+	// Configuration options go here
+	options: {}
+	});
+</script>
+
+{% endblock %}
