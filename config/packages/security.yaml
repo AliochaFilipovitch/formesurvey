@@ -15,8 +15,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern:   ^/
-            http_basic: ~
             anonymous: true
             lazy: true
             provider: in_database
@@ -39,5 +37,4 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/form, roles: ROLE_USER }
-        - { path: ^/result, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }
