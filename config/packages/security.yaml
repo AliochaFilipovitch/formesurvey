@@ -19,13 +19,13 @@ security:
             lazy: true
             provider: in_database
             form_login:
-                login_path: ^/security_login
+                login_path: security_login
                 default_target_path: ^/form
-                check_path: ^/security_login
+                check_path: security_login
 
             logout:
-                path: ^/security_logout
-                target: ^/home
+                path: security_logout
+                target: ^/
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
