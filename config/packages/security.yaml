@@ -19,13 +19,13 @@ security:
             lazy: true
             provider: in_database
             form_login:
-                login_path: security_login
-                default_target_path: form
-                check_path: security_login
+                login_path: ^/security_login
+                default_target_path: ^/form
+                check_path: ^/security_login
 
             logout:
-                path: security_logout
-                target: home
+                path: ^/security_logout
+                target: ^/home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -36,5 +36,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/form, roles: ROLE_ADMIN, requires_channel: https }
+        # - { path: ^/form, roles: ROLE_ADMIN, requires_channel: https }
         # - { path: ^/profile, roles: ROLE_USER }
