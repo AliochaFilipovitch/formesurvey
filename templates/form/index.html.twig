@@ -10,8 +10,8 @@
 	      <th scope="col">#</th>
 	      <th scope="col">Enquête</th>
 	      <th scope="col">Description</th>
-	      <th scope="col"><i class="fas fa-user-ninja vanished"></i></th>
-	      <th scope="col"><i class="far fa-clock"></i></th>
+	      <th scope="col"><i class="fas fa-user-ninja vanished"></i> Auteur</th>
+	      <th scope="col"><i class="far fa-clock"></i> Date</th>
 	      <th scope="col"><i class="fas fa-toggle-on"></i> On/Off</th>
 	      <th scope="col"><i class="fas fa-pen-nib"></i> Modifier</th>
 	      <th scope="col"><i class="fas fa-poll"></i> Résultat</th>
@@ -21,8 +21,8 @@
 	  	{% for survey in surveys  %}
 		    <tr>
 		      <th scope="row">{{ survey.id }}</th>
-		      <td><a href="{{ path('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title }}</a></td>
-		      <td>{{ survey.description }}</td>
+		      <td><a href="{{ path('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title | u.truncate(20, '...') }}</a></td>
+		      <td>{{ survey.description | u.truncate(20, '...') }}</td>
 		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d M Y') }}</td>
 		      <td>
