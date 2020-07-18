@@ -2,21 +2,21 @@
 
 {% form_theme surveyForm 'bootstrap_4_layout.html.twig' %}
 
-{% block title %}FormeSurvey &#8226; Nouvelle enquête{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
 	<h1 class="display-4">
 		{% if editMode %}
-			Modification
+			Modifier
 		{% else %}
-			Création
+			Créer
 		{% endif %}
-		d'une enquête
+		une enquête
 	</h1>
 
 	{{ form_start (surveyForm) }}
 
-		{{ form_row ( surveyForm.title, {'label' : 'Titre de l\'enquête (10 caractères min.)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
+		{{ form_row ( surveyForm.title, {'label' : 'Titre de l\'enquête (5 caractères minimum)','attr' : {'placeholder': "Titre de l'enquête"}} ) }}
 		{{ form_row ( surveyForm.description, {'label' : 'Description de l\'enquête (option)','attr' : {'placeholder': "Description de l'enquête"}} ) }}
 
 		<button type="submit" class="btn btn-primary btn-lg btn-block">

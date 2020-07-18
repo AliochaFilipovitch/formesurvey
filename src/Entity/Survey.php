@@ -23,17 +23,13 @@ class Survey
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *      min = 10,
-     *      max = 255
+     *      min = 5
      * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(
-     *      min = 10
-     * )
      */
     private $description;
 

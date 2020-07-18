@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Toutes les enquêtes{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block body %}
 	<h1 class="display-4">Toutes les enquêtes</h1>
@@ -22,7 +22,13 @@
 		    <tr>
 		      <th scope="row">{{ survey.id }}</th>
 		      <td><a href="{{ path('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title | u.truncate(20, '...') }}</a></td>
-		      <td>{{ survey.description | u.truncate(20, '...') }}</td>
+		      <td>
+		      	{% if not survey.description %}
+		      		<em>non renseignée</em>
+		      	{% else %}
+		      		{{ survey.description | u.truncate(20, '...') }}
+		      	{% endif %}
+		      </td>
 		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d M Y') }}</td>
 		      <td>

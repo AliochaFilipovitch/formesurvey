@@ -71,10 +71,17 @@ class FormController extends AbstractController
      */
     public function index(SurveyRepository $repo)
     {   
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
 
     	$surveys = $repo->findAll();
         return $this->render('form/index.html.twig', [
-            'controller_name' => 'FormController',
+            'title' => "Toutes les enquêtes",
             'surveys' => $surveys
         ]);
     }
@@ -96,13 +103,21 @@ class FormController extends AbstractController
         $manager->remove($question);
         $manager->flush();
 
-        return $this->json(['code' => 200, 'message' => 'La question a bien été supprimé.'], 200);
+        return $this->json(['code' => 200, 'message' => 'La question a bien été supprimée.'], 200);
     }
 
     /**
      * @Route("/form/qcm/{id}", name="qcm_create")
      */
     public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager) {
+
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
 
         if (!$question) {
             return $this->render('error/error.html.twig', [
@@ -136,6 +151,7 @@ class FormController extends AbstractController
         }
 
         return $this->render('form/qcm.html.twig', [
+            'title' => $question->getQuestion($question),
             'formQCM' => $form->createView(),
             'question'=>$question
         ]);
@@ -191,6 +207,14 @@ class FormController extends AbstractController
     public function form(Survey $survey = null , Request $request, EntityManagerInterface $manager)
     {   
 
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+
         if (!$survey) {
             $survey = new Survey();
         }
@@ -214,6 +238,7 @@ class FormController extends AbstractController
         }
 
         return $this->render('form/create.html.twig', [
+            'title' => "Créer une enquête",
             'surveyForm' => $form->createView(),
             'editMode' => $survey->getId() !== null
         ]);
@@ -251,6 +276,13 @@ class FormController extends AbstractController
      */
     public function survey(Survey $survey = null, Request $request, EntityManagerInterface $manager)
     {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
 
         if (!$survey) {
             return $this->render('error/error.html.twig', [

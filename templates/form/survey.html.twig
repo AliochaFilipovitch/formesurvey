@@ -30,16 +30,17 @@
 			</small>
 		</p>
 		<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			<a class="btn btn-light" href="{{ path('form_edit', {'id': survey.id}) }}" role="button"><i class="fas fa-pen-nib"></i> Modifier</a>
-			<a class="btn btn-light" href="{{ path('answer', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-eye"></i> Enquête</a>
-			<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-poll"></i> Résultat</a>
+			<a class="btn btn-primary" href="{{ path('answer', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-eye"></i> Enquête</a>
+			<a class="btn btn-primary" href="{{ path('form_result', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-poll"></i> Résultat</a>
+			<a class="btn btn-primary" href="{{ path('form_edit', {'id': survey.id}) }}" role="button"><i class="fas fa-pen-nib"></i> Modifier</a>
 		</div>
 	  </div>
 	  <div class="col-sm-8">
+
 		<div class="alert alert-danger m-1" role="alert">
 			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-sync-alt"></i> Rafraîchir la page</a>
-
 		</div>
+
 		{% set num = 0 %}
 		{% for question in survey.questions %}
 			{% set num = num + 1 %}
@@ -53,44 +54,34 @@
 						</button>
 					</a>
 			    <h5 class="card-title">
-			    	{{ num }}. {{ question.id }}. {{ question.question }}
+			    	{{ num }}. {{ question.question }}
 			    </h5>
-				    {% if question.categoryQuestion.title == 'text'%}
-						<span class="badge badge-success">
-							<i class="far fa-comment"></i> Texte
-						</span>
-				    {% elseif question.categoryQuestion.title == 'mood'%}
-				    	<span class="badge badge-success">
-				    		<i class="far fa-smile"></i> Humeur
-				    	</span>
-				    {% elseif question.categoryQuestion.title == 'star'%}
-				    	<span class="badge badge-success">
-				    		<i class="far fa-star"></i> Stars
-				    	</span>
-				    {% elseif question.categoryQuestion.title == 'mark'%}
-				    	<span class="badge badge-success">
-				    		<i class="fas fa-marker"></i> Mark
-				    	</span>
-				    {% elseif question.categoryQuestion.title == 'choice'%}
-						<a href="{{ path('qcm_create', {'id': question.id}) }}">
-							<span class="badge badge-success">
-					    		<i class="fas fa-list-ol"></i> Choice 
+					<span class="badge badge-success">
+					    {% if question.categoryQuestion.title == 'text'%}
+								<i class="far fa-comment"></i> {{ question.categoryQuestion.title }}
+					    {% elseif question.categoryQuestion.title == 'mood'%}
+					    		<i class="far fa-smile"></i> {{ question.categoryQuestion.title }}
+					    {% elseif question.categoryQuestion.title == 'star'%}
+					    		<i class="far fa-star"></i> {{ question.categoryQuestion.title }}
+					    {% elseif question.categoryQuestion.title == 'mark'%}
+					    		<i class="fas fa-marker"></i> {{ question.categoryQuestion.title }}
+					    {% elseif question.categoryQuestion.title == 'choice'%}
+							<a href="{{ path('qcm_create', {'id': question.id}) }}" class="choice">
+					    		<i class="fas fa-list-ol"></i> {{ question.categoryQuestion.title }} 
 					    		<span class="badge badge-light">
 					    			{{ question.questionMultipleChoices | length }}
 					    		</span>
-					    	</span>
-						</a>
-				    {% elseif question.categoryQuestion.title == 'gif'%}
-				    	<span class="badge badge-success">
-							<i class="fas fa-video"></i> GIF
-						</span>
-				    {% endif %}
+							</a>
+					    {% elseif question.categoryQuestion.title == 'gif'%}
+								<i class="fas fa-video"></i> {{ question.categoryQuestion.title }}
+					    {% endif %}
+					</span>
 				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d M Y') }}</small></p>
 			  </div>
 			</div>
 		{% endfor %}
 		<div class="card border-success m-1">
-		  <h5 class="card-header">Ajouter une question</h5>
+		  <h5 class="card-header">Ajouter une question à l'enquête</h5>
 		  <div class="card-body">
 			{{ form_start (questionForm) }}
 				<div class="p-1 m-1">
@@ -101,9 +92,8 @@
 				</div>
 
 				<button type="submit" class="btn btn-success btn-lg btn-block">
-					<i class="fas fa-plus-square"></i> Ajouter
+					Ajouter
 				</button>
-
 			{{ form_end (questionForm) }}
 		  </div>
 		</div>

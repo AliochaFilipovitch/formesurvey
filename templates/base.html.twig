@@ -38,9 +38,9 @@
 				</ul>
 				<span class="navbar-text">
 					{% if not app.user %}
-						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_login') }}" role="button">Connexion</a>
+						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_login') }}" role="button">Se connecter</a>
 					{% else %}
-						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_logout') }}" role="button">Déconnexion</a>
+						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_logout') }}" role="button">Se déconnecter</a>
 					{% endif %}
 				</span>
 			</div>
