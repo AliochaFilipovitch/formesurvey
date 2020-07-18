@@ -17,7 +17,6 @@ use App\Entity\Answer;
 use App\Form\SurveyType;
 use App\Form\QuestionType;
 use App\Form\QuestionMultipleChoiceType;
-// use App\Form\AnswerType;
 
 
 class FormController extends AbstractController
@@ -35,7 +34,7 @@ class FormController extends AbstractController
     /**
      * @Route("/gif/{value}", name="gif")
      */
-    public function indexAction(Request $request, $value)
+    public function gif(Request $request, $value)
     {   
         $aremplacer = array(",",".",";",":","!","?","(",")","[","]","{","}","\"","'"," ");
         $enremplacement = " ";
@@ -47,18 +46,20 @@ class FormController extends AbstractController
             $phrase .= "$mot+";
         }
 
-        $url = 'http://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=9';
+        $url = 'https://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=5';
         $obj = json_decode(file_get_contents($url), true);
+
         $srcs = [];
         $ids = [];
-        for ($i=0; $i <= 8; $i++) { 
+
+        for ($i=0; $i <= 4; $i++) { 
             array_push($srcs, $obj['data'][$i]['images']['original']['url']);
             array_push($ids, $obj['data'][$i]['id']);
         }
 
         return $this->json([
             'code' => 200,
-            'message' => 'API request is good.',
+            'message' => "ALL GOOD",
             'srcs' => $srcs,
             'ids' => $ids,
             '$obj' => $obj
@@ -109,7 +110,8 @@ class FormController extends AbstractController
     /**
      * @Route("/form/qcm/{id}", name="qcm_create")
      */
-    public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager) {
+    public function qcmCreate(QuestionRepository $questionRepo, Question $question, Request $request, EntityManagerInterface $manager)
+    {
 
         $user = $this->getUser();
 

@@ -61,6 +61,8 @@
 											à cette question.
 										{% elseif question.categoryQuestion.id == 5 %}
 											: <STRONG>"{{ answer.answer }}"</STRONG>
+										{% elseif question.categoryQuestion.id == 6 %}
+											: <br><img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif">
 										{% endif %}
 									</div>
 								{% endif %}
@@ -171,107 +173,7 @@
 			link.addEventListener('click', onClickPostAnswer);
 		});    	
 
-		function onClickPostGif(event){
-    		event.preventDefault();
-
-    		var url = this.href;
-    		var selectId = this.id;
-    		console.log(selectId);
-
-			document.querySelectorAll('img').forEach(function(img){
-				if (img.classList.contains(selectId)) {
-					img.classList.replace('backgroundcolorgreen','backgroundcolorwhite');
-				} 
-			});
-
-			document.querySelectorAll('div.alert-info').forEach(function(alert){
-				if (alert.classList.contains(selectId)) {
-					alert.hidden = true;
-				}
-			});
-
-			axios.get(url).then(function(response) {
-				console.log(response.data.answer);
-
-				document.querySelectorAll('img').forEach(function(img){
-					
-					if (img.classList.contains(response.data.answer)) {
-						img.classList.replace('backgroundcolorwhite','backgroundcolorgreen');
-
-					} 
-				});
-
-
-			});
-    	}    	
-
-		function onClickSearchGif(event){
-    		event.preventDefault();
-
-    		const selectId = this.id;
-    		console.log(selectId);
-    		
-    		const saisieGif = document.getElementById(selectId).value;
-
-    		var url = this.href;
-    		url = url.replace("value", saisieGif);
-
-			axios.get(url).then(function(response) {
-				console.log(response.data.srcs);
-
-				document.querySelectorAll('div.gif').forEach(function(gif){
-					if (gif.classList.contains(selectId)) {
-
-						for (var i = 0; i < response.data.srcs.length; i++) {
-							
-							const getId = response.data.ids[i];
-							
-							console.log(getId);
-
-						    const route = {
-						        myroute:{
-						            route:"{{ path('postAnswer', {'id': 'id', 'value': 'value'}, true) }}"
-						        },
-						    };
-							
-							const a = document.createElement('a');
-							a.className = 'js-post-gif';
-							a.id = selectId;
-							// a.href = "../form/post/"+selectId+"/"+getId;
-							a.href = route.myroute.route;
-
-			        		a.href = a.href.replace("id", selectId);
-			        		a.href = a.href.replace("value", getId);
-							
-							gif.appendChild(a);
-
-						    console.log(a.href);
-
-							const img = document.createElement('img');
-							img.style.height = '205px';
-							img.style.width = '205px';
-							img.src = response.data.srcs[i];
-							img.alt = response.data.ids[i];
-							img.className = response.data.ids[i];
-							img.classList.add(selectId);
-							img.classList.add("backgroundcolorwhite");
-
-							a.appendChild(img);
-
-							console.log(document.querySelectorAll('a.js-post-gif'));
-
-							document.querySelectorAll('a.js-post-gif').forEach(function(link){
-								link.addEventListener('click', onClickPostGif);
-							});
-						}
-					} 
-				});
-			});
-    	}
-
-    	document.querySelectorAll('a.js-gif').forEach(function(link){
-			link.addEventListener('click', onClickSearchGif);
-		}); 
+ 
 
 	</script>
 {% endblock %}

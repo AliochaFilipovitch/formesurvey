@@ -16,13 +16,12 @@ a.choice {
 }
 
 .backgroundcolorwhite {
-	border-radius: 20px;
 	border: 1px solid white;
 	background-color: white;
 	text-align: center;
 }
 
 .table-responsive{
-    max-height: 300px;
+    max-height: 200px;
     overflow:scroll; 
 }
