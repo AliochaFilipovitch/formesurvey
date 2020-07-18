@@ -9,8 +9,8 @@ a.choice {
 }
 
 .backgroundcolorgreen {
-	border-radius: 40px;
-	border: 5px solid green;
+	border-radius: 20px;
+	border: 1px solid green;
 	background-color: honeydew;
 	text-align: center;
 }
