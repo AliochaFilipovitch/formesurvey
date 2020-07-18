@@ -40,7 +40,6 @@
 		<div class="alert alert-danger m-1" role="alert">
 			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-sync-alt"></i> Rafraîchir la page</a>
 		</div>
-
 		{% set num = 0 %}
 		{% for question in survey.questions %}
 			{% set num = num + 1 %}
@@ -57,22 +56,22 @@
 			    	{{ num }}. {{ question.question }}
 			    </h5>
 					<span class="badge badge-success">
-					    {% if question.categoryQuestion.title == 'text'%}
-								<i class="far fa-comment"></i> {{ question.categoryQuestion.title }}
-					    {% elseif question.categoryQuestion.title == 'mood'%}
+					    {% if question.categoryQuestion.id == 1 %}
 					    		<i class="far fa-smile"></i> {{ question.categoryQuestion.title }}
-					    {% elseif question.categoryQuestion.title == 'star'%}
+					    {% elseif question.categoryQuestion.id == 2 %}
 					    		<i class="far fa-star"></i> {{ question.categoryQuestion.title }}
-					    {% elseif question.categoryQuestion.title == 'mark'%}
+					    {% elseif question.categoryQuestion.id == 3 %}
 					    		<i class="fas fa-marker"></i> {{ question.categoryQuestion.title }}
-					    {% elseif question.categoryQuestion.title == 'choice'%}
-							<a href="{{ path('qcm_create', {'id': question.id}) }}" class="choice">
-					    		<i class="fas fa-list-ol"></i> {{ question.categoryQuestion.title }} 
-					    		<span class="badge badge-light">
-					    			{{ question.questionMultipleChoices | length }}
-					    		</span>
-							</a>
-					    {% elseif question.categoryQuestion.title == 'gif'%}
+					    {% elseif question.categoryQuestion.id == 4 %}
+								<a href="{{ path('qcm_create', {'id': question.id}) }}" class="choice">
+						    		<i class="fas fa-list-ol"></i> {{ question.categoryQuestion.title }} 
+						    		<span class="badge badge-light">
+						    			{{ question.questionMultipleChoices | length }}
+						    		</span>
+								</a>
+					    {% elseif question.categoryQuestion.id == 5 %}
+								<i class="far fa-comment"></i> {{ question.categoryQuestion.title }}
+					    {% elseif question.categoryQuestion.id == 6 %}
 								<i class="fas fa-video"></i> {{ question.categoryQuestion.title }}
 					    {% endif %}
 					</span>

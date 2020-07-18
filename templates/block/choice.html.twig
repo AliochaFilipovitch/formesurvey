@@ -1,0 +1,15 @@
+{% if (question.questionMultipleChoices | length) > 0 %}
+	<ul class="list-group list-group-flush">
+	  {% for questionMultipleChoice in question.questionMultipleChoices %}
+	  <li class="list-group-item list-group-item-action">
+	    <a href="{{ path('postAnswer', {'id': question.id, 'value': questionMultipleChoice.id}) }}" class="js-selected" id="{{ question.id }}">
+	      <div class="contentImg backgroundcolorwhite {{ question.id }} {{ questionMultipleChoice.id }}">
+	        <STRONG>{{ questionMultipleChoice.content }}</STRONG>
+	      </div>
+	    </a>
+	  </li>
+	  {% endfor %}
+	</ul>
+{% else %}
+	<p class="text-center"><small class="text-muted">Il n'y a pas de proposition encore.</small></p>
+{% endif %}
