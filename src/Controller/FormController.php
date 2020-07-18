@@ -32,19 +32,30 @@ class FormController extends AbstractController
     }
 
     /**
-     * @Route("/gif/{value}", name="gif")
+     * Public fonction remplaceFunction
      */
-    public function gif(Request $request, $value)
-    {   
+    public function remplaceFunction($sentence)
+    {
+
         $aremplacer = array(",",".",";",":","!","?","(",")","[","]","{","}","\"","'"," ");
         $enremplacement = " ";
-        $sansponctuation = trim(str_replace($aremplacer, $enremplacement, $value));
+        $sansponctuation = trim(str_replace($aremplacer, $enremplacement, $sentence));
         $separateur = "#[ ]+#";
         $mots = preg_split($separateur, $sansponctuation);
         $phrase = "";
         foreach ($mots as $mot) {
             $phrase .= "$mot+";
         }
+
+        return $phrase;
+    }
+
+    /**
+     * @Route("/gif/{value}", name="gif")
+     */
+    public function gif(Request $request, $value)
+    {   
+        $phrase = $this->remplaceFunction($value);
 
         $url = 'https://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=5';
         $obj = json_decode(file_get_contents($url), true);
