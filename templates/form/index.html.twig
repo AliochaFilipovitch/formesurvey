@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FormeSurvey &#8226; Enquêtes{% endblock %}
+{% block title %}Toutes les enquêtes{% endblock %}
 
 {% block body %}
 	<h1 class="display-4">Toutes les enquêtes</h1>
@@ -12,16 +12,16 @@
 	      <th scope="col">Description</th>
 	      <th scope="col"><i class="fas fa-user-ninja vanished"></i></th>
 	      <th scope="col"><i class="far fa-clock"></i></th>
-	      <th scope="col"><i class="fas fa-toggle-on"></i></th>
-	      <th scope="col"><i class="fas fa-pen-nib"></i></th>
-	      <th scope="col"><i class="fas fa-poll"></i></th>
+	      <th scope="col"><i class="fas fa-toggle-on"></i> On/Off</th>
+	      <th scope="col"><i class="fas fa-pen-nib"></i> Modifier</th>
+	      <th scope="col"><i class="fas fa-poll"></i> Résultat</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  	{% for survey in surveys  %}
 		    <tr>
-		      <th scope="row"><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.id }}</a></th>
-		      <td><a href="{{ path('answer', {'id': survey.id}) }}">{{ survey.title }}</a></td>
+		      <th scope="row">{{ survey.id }}</th>
+		      <td><a href="{{ path('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title }}</a></td>
 		      <td>{{ survey.description }}</td>
 		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d M Y') }}</td>
@@ -38,8 +38,20 @@
 					{% endif %}
 		      	</a>
 		      </td>
-		      <td><a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-pen-nib"></i> modifier</a></td>
-		      <td><a href="{{ path('form_result', {'id': survey.id}) }}"><i class="fas fa-poll"></i> résultat</a></td>
+		      <td>
+		      	<a href="{{ path('form_survey', {'id': survey.id}) }}" target="_blank">
+			      	<span class="badge badge-primary">
+			      		<i class="fas fa-pen-nib"></i> Modifier
+			      	</span>
+		      	</a>
+		      </td>
+		      <td>
+		      	<a href="{{ path('form_result', {'id': survey.id}) }}" target="_blank">
+		      		<span class="badge badge-primary">
+		      			<i class="fas fa-poll"></i> Résultat
+		      		</span>
+		      	</a>
+		      </td>
 		    </tr>
 	    {% endfor %}
 	  </tbody>
