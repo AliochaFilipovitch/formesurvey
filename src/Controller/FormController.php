@@ -133,8 +133,6 @@ class FormController extends AbstractController
 
         $form->handleRequest($request);
 
-        dump($questionMultipleChoice);
-
         $question = $questionRepo->findOneBy(['id' => $question->getId()]);
 
         if ($form->isSubmitted() && $form->isValid()) {
