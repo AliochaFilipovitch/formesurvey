@@ -224,7 +224,7 @@ class FormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$survey->getId()) {
                 $survey->setCreatedAt(new \DateTime())
-                       ->setStatus(true)
+                       ->setStatus(false)
                        ->setAuthor($user);
             }
             
