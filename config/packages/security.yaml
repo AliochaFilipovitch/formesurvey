@@ -15,7 +15,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            security: true
             anonymous: true
             lazy: true
             provider: in_database

@@ -21,7 +21,7 @@
 	  	{% for survey in surveys  %}
 		    <tr>
 		      <th scope="row">{{ survey.id }}</th>
-		      <td><a href="{{ path('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title | u.truncate(20, '...') }}</a></td>
+		      <td><a href="{{ url('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title | u.truncate(20, '...') }}</a></td>
 		      <td>
 		      	{% if not survey.description %}
 		      		<em>non renseignée</em>
@@ -32,7 +32,7 @@
 		      <td>{{ survey.author.username }}</td>
 		      <td>{{ survey.createdAt | date('d M Y') }}</td>
 		      <td>
-		      	<a href="{{ path('status', {'id': survey.id}) }}" class="js-status">
+		      	<a href="{{ url('status', {'id': survey.id}) }}" class="js-status">
 					{% if survey.status != false %}
 						<span style="font-size: 1rem;">
 							<i class="fas fa-toggle-on"></i>
@@ -45,14 +45,14 @@
 		      	</a>
 		      </td>
 		      <td>
-		      	<a href="{{ path('form_survey', {'id': survey.id}) }}" target="_blank">
+		      	<a href="{{ url('form_survey', {'id': survey.id}) }}" target="_blank">
 			      	<span class="badge badge-primary">
 			      		<i class="fas fa-pen-nib"></i> Modifier
 			      	</span>
 		      	</a>
 		      </td>
 		      <td>
-		      	<a href="{{ path('form_result', {'id': survey.id}) }}" target="_blank">
+		      	<a href="{{ url('form_result', {'id': survey.id}) }}" target="_blank">
 		      		<span class="badge badge-primary">
 		      			<i class="fas fa-poll"></i> Résultat
 		      		</span>
