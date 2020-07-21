@@ -13,7 +13,6 @@
 		;">
 		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
-		<p>Département : {{ value }}</p>
 		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
 		<p>
 			<small class="text-muted">
@@ -21,7 +20,32 @@
 			</small>
 		</p>
 	  </div>
-	  <div class="col-sm-8">
+	  <div class="col-sm-8 mt-1">
+		{% if value %}
+			<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
+			    		<i class="fas fa-poll"></i> DRIEE
+			    	</a>
+			    {% for department in departments %}
+			    	{% if department.id == value %}
+				    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+				    		<i class="fas fa-poll"></i> {{ department.name }}
+				    	</a>
+			    	{% else %}
+			    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+			    	{% endif %}
+			    {% endfor %}
+			</div>
+		{% else %}
+			<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+			    		<i class="fas fa-poll"></i> DRIEE
+			    	</a>
+			    {% for department in departments %}
+			    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+			    {% endfor %}
+			</div>
+		{% endif %}
 		<div class="card mb-1 mt-1">
 			<div class="card-body">
 			</div>

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 
+use App\Repository\DepartmentRepository;
 use App\Repository\SurveyRepository;
 use App\Repository\QuestionRepository;
 use App\Entity\Survey;
@@ -327,8 +328,15 @@ class FormController extends AbstractController
     /**
      * @Route("/result/{id}/{value}", name="form_result")
      */
-    public function result(Survey $survey = null, $value = null)
+    public function result(Survey $survey = null, $value = null, DepartmentRepository $department)
     {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
 
         if (!$survey) {
             return $this->render('error/error.html.twig', [
@@ -336,9 +344,12 @@ class FormController extends AbstractController
             ]);
         }
 
+        $departments = $department->findAll();
+
     	return $this->render('form/result.html.twig', [
     		'survey' => $survey,
-            'value' => $value
+            'value' => $value,
+            'departments' => $departments
     	]);
     }
 
