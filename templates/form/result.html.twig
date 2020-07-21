@@ -32,18 +32,17 @@
 			<div class="card mb-1 mt-1">
 			  <div class="card-body">
 			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
-			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
-		    	{% if question.categoryQuestion.title == 'text'%}
-					{% include 'block_result/text.html.twig' %}
-				{% elseif question.categoryQuestion.title == 'mood'%}
+				{% if question.categoryQuestion.id == 1 %}
 					{% include 'block_result/mood.html.twig' %}
-				{% elseif question.categoryQuestion.title == 'star'%}
+				{% elseif question.categoryQuestion.id == 2 %}
 					{% include 'block_result/star.html.twig' %}
-				{% elseif question.categoryQuestion.title == 'mark'%}
+				{% elseif question.categoryQuestion.id == 3 %}
 					{% include 'block_result/mark.html.twig' %}
-				{% elseif question.categoryQuestion.title == 'choice'%}
+				{% elseif question.categoryQuestion.id == 4 %}
 					{% include 'block_result/choice.html.twig' %}
-				{% elseif question.categoryQuestion.title == 'gif'%}
+				{% elseif question.categoryQuestion.id == 5 %}
+					{% include 'block_result/text.html.twig' %}
+				{% elseif question.categoryQuestion.id == 6 %}
 					{% include 'block_result/gif.html.twig' %}
 				{% endif %}
 			  </div>
