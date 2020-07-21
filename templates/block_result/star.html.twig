@@ -7,7 +7,6 @@
 {% for answer in question.answers %}
 	{% if answer.author.department.id == value %}
 		{% set longueur = answer | length %}
-		<p>Nombre de réponses : {{ longueur }}</p>
 		{% set counter = counter + answer.answer %}
 		{% if answer.answer == 1 %}
 			{% set counter1 = counter1 + 1 %}
@@ -20,14 +19,26 @@
 		{% elseif answer.answer == 5 %}
 			{% set counter5 = counter5 + 1 %}
 		{% endif %}
-		<p>Somme : {{ counter }}</p>
-		<p>Moyenne : {{ (counter/longueur) }}</p>
+		<div class="container">
+			<div class="row text-center bg-light text-dark p-3">
+				<div class="col-sm">
+					<STRONG><i class="far fa-star"></i> {{ question.categoryQuestion.title }}</STRONG>
+				</div>
+				<div class="col-sm">
+					<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
+				</div>
+				{% if longueur > 0 %}
+					<div class="col-sm">
+						<STRONG>{{ (counter/longueur) }} / 5 de moyenne</STRONG>
+					</div>
+				{% endif %}
+			</div>
+		</div>
 	{% endif %}
 {% endfor %}
 
 {% if value == null %}
 	{% set longueur = question.answers | length %}
-	<p>Nombre de réponses : {{ longueur }}</p>
 	{% set counter = 0 %}
 	{% for answer in question.answers %}
 		{% set counter = counter + answer.answer %}
@@ -43,8 +54,21 @@
 			{% set counter5 = counter5 + 1 %}
 		{% endif %}
 	{% endfor %}
-	<p>Somme : {{ counter }}</p>
-	<p>Moyenne : {{ (counter/longueur) }}</p>
+	<div class="container">
+		<div class="row text-center bg-light text-dark p-3">
+			<div class="col-sm">
+				<STRONG><i class="far fa-star"></i> {{ question.categoryQuestion.title }}</STRONG>
+			</div>
+			<div class="col-sm">
+				<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
+			</div>
+			{% if longueur > 0 %}
+				<div class="col-sm">
+					<STRONG>{{ (counter/longueur) }} / 5 de moyenne</STRONG>
+				</div>
+			{% endif %}
+		</div>
+	</div>
 {% endif %}
 
 <canvas id="myChartStar"></canvas>

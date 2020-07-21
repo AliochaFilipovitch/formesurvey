@@ -1,8 +1,45 @@
-{% set longueur = question.answers | length %}
-<p>Nombre de réponses : {{ longueur }}</p>
 {% set counter = 0 %}
 {% for answer in question.answers %}
-	{% set counter = counter + answer.answer %}
+	{% if answer.author.department.id == value %}
+		{% set longueur = answer | length %}
+		{% set counter = counter + answer.answer %}
+		<div class="container">
+			<div class="row text-center bg-light text-dark p-3">
+				<div class="col-sm">
+					<STRONG><i class="fas fa-marker"></i> {{ question.categoryQuestion.title }}</STRONG>
+				</div>
+				<div class="col-sm">
+					<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
+				</div>
+				{% if longueur > 0 %}
+					<div class="col-sm">
+						<STRONG>{{ (counter/longueur) }} / 5 de moyenne</STRONG>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
 {% endfor %}
-<p>Somme : {{ counter }}</p>
-<p>Moyenne : {{ (counter/longueur) }}</p>
+
+{% if value == null %}
+	{% set longueur = question.answers | length %}
+	{% set counter = 0 %}
+	{% for answer in question.answers %}
+		{% set counter = counter + answer.answer %}
+	{% endfor %}
+	<div class="container">
+		<div class="row text-center bg-light text-dark p-3">
+			<div class="col-sm">
+				<STRONG><i class="fas fa-marker"></i> {{ question.categoryQuestion.title }}</STRONG>
+			</div>
+			<div class="col-sm">
+				<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
+			</div>
+			{% if longueur > 0 %}
+				<div class="col-sm">
+					<STRONG>{{ (counter/longueur) }} / 5 de moyenne</STRONG>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endif %}
