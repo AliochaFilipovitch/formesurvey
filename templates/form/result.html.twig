@@ -34,17 +34,17 @@
 			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 			    <p class="card-text">{{ question.categoryQuestion.title }}</p>
 		    	{% if question.categoryQuestion.title == 'text'%}
-					{% include 'block_result/text.html' %}
+					{% include 'block_result/text.html.twig' %}
 				{% elseif question.categoryQuestion.title == 'mood'%}
-					{% include 'block_result/mood.html' %}
+					{% include 'block_result/mood.html.twig' %}
 				{% elseif question.categoryQuestion.title == 'star'%}
-					{% include 'block_result/star.html' %}
+					{% include 'block_result/star.html.twig' %}
 				{% elseif question.categoryQuestion.title == 'mark'%}
-					{% include 'block_result/mark.html' %}
+					{% include 'block_result/mark.html.twig' %}
 				{% elseif question.categoryQuestion.title == 'choice'%}
-					{% include 'block_result/choice.html' %}
+					{% include 'block_result/choice.html.twig' %}
 				{% elseif question.categoryQuestion.title == 'gif'%}
-					{% include 'block_result/gif.html' %}
+					{% include 'block_result/gif.html.twig' %}
 				{% endif %}
 			  </div>
 			</div>
