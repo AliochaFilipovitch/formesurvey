@@ -1,5 +1,23 @@
 <ol>
 	{% for answer in question.answers %}
-			<li>{{ answer.author.id }} : {{ answer.answer }}</li>
+		{% if answer.author.department.id == value %}
+			<li>
+				<STRONG>
+					{{ answer.answer }}
+				</STRONG>
+			</li>
+		{% endif %}
 	{% endfor %}
 </ol>
+
+{% if value == null %}
+	<ol>
+		{% for answer in question.answers %}
+			<li>
+				<STRONG>
+					{{ answer.answer }}
+				</STRONG>
+			</li>
+		{% endfor %}
+	</ol>
+{% endif %}

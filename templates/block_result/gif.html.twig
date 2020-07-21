@@ -1,6 +1,15 @@
 <ol>
 	{% for answer in question.answers %}
-		<li>{{ answer.author.id }}. {{ answer.author.department.name }} : <a href="https://giphy.com/gifs/{{ answer.answer }}" target="_blank">GIF</a></li>
-		<img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif">
+		{% if answer.author.department.id == value %}
+			<img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif" class="img-fluid" style="height: 40%;width: 40%;">
+		{% endif %}
 	{% endfor %}
-</ol> 
+</ol>
+
+{% if value == null %}
+	<ol>
+		{% for answer in question.answers %}
+			<img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif" class="img-fluid" style="height: 40%;width: 40%;">
+		{% endfor %}
+	</ol>
+{% endif %}

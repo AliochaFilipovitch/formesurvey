@@ -1,5 +1,34 @@
 <ol>
 	{% for answer in question.answers %}
-			<li>{{ answer.author.id }} : {{ answer.answer }}</li>
+		{% if answer.author.department.id == value %}
+			<li>
+				{% for questionMultipleChoice in question.questionMultipleChoices %}
+					{% if questionMultipleChoice.id == answer.answer %}
+						<STRONG>
+							{{ questionMultipleChoice.content }}
+						</STRONG>
+					{% endif %}
+				{% endfor %}
+			</li>
+		{% endif %}
 	{% endfor %}
 </ol> 
+
+{% if value == null %}
+	<ol>
+		{% for answer in question.answers %}
+				<li>
+					{% for questionMultipleChoice in question.questionMultipleChoices %}
+						{% if questionMultipleChoice.id == answer.answer %}
+							<STRONG>
+								{{ questionMultipleChoice.content }}
+							</STRONG>
+						{% endif %}
+					{% endfor %}
+				</li>
+		{% endfor %}
+	</ol> 
+{% endif %}
+
+
+
