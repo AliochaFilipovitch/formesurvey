@@ -19,7 +19,13 @@
 			</a>
 			{% for survey in surveys  %}
 		  		{% if app.user == survey.author %}
-					<div class="card">
+					<div class="card {{ survey.id }}
+						{% if survey.status %}
+							backgroundcolorhoneydew
+						{% else %}
+							backgroundcolormistyrose
+						{% endif %}
+						;">
 						<div class="card-body m-2">
 							<div class="container">
 								<div class="row justify-content-between">
@@ -32,13 +38,13 @@
 									      		{{ survey.description | u.truncate(50, '...') }}
 									      	{% endif %}
 										</p>
-										<a href="{{ url('status', {'id': survey.id}) }}" class="js-status">
+										<a href="{{ url('status', {'id': survey.id}) }}" class="js-status" id="{{ survey.id }}">
 											{% if survey.status != false %}
-												<span style="font-size: 1.5rem;">
+												<span style="font-size: 1.5rem; color:black;">
 													<i class="fas fa-toggle-on"></i>
 												</span>
 											{% else %}
-												<span style="font-size: 1.5rem;">
+												<span style="font-size: 1.5rem; color:black;">
 													<i class="fas fa-toggle-off"></i>
 												</span>
 											{% endif %}
@@ -84,6 +90,7 @@
 
 			const url = this.href;
 			const icone = this.querySelector('i');
+			const surveyId = this.id;
 
 			axios.get(url).then(function(response) {
 				if(icone.classList.contains('fa-toggle-on')) {
@@ -91,6 +98,15 @@
 				} else {
 					icone.classList.replace('fa-toggle-off', 'fa-toggle-on');
 				}
+
+				document.querySelectorAll('.card').forEach(function(card){
+					if(card.classList.contains(surveyId) && card.classList.contains('backgroundcolorhoneydew')) {
+						card.classList.replace('backgroundcolorhoneydew', 'backgroundcolormistyrose');
+					} else {
+						card.classList.replace('backgroundcolormistyrose', 'backgroundcolorhoneydew');
+					}
+				});
+
 			});
 		}
 
