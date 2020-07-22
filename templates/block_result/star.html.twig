@@ -22,9 +22,6 @@
 		<div class="container">
 			<div class="row text-center bg-light text-dark p-3">
 				<div class="col-sm">
-					<STRONG><i class="far fa-star"></i> {{ question.categoryQuestion.title }}</STRONG>
-				</div>
-				<div class="col-sm">
 					<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
 				</div>
 				{% if longueur > 0 %}
@@ -56,9 +53,6 @@
 	{% endfor %}
 	<div class="container">
 		<div class="row text-center bg-light text-dark p-3">
-			<div class="col-sm">
-				<STRONG><i class="far fa-star"></i> {{ question.categoryQuestion.title }}</STRONG>
-			</div>
 			<div class="col-sm">
 				<STRONG>{{ longueur }} réponse{% if longueur > 1 %}s{% endif %}</STRONG>
 			</div>

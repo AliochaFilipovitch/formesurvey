@@ -22,7 +22,7 @@
 						    {% for department in departments %}
 						    	{% if department.id == value %}
 							    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-							    		DRIEE/{{ department.name }}
+							    		{{ department.name }}
 							    	</a>
 						    	{% else %}
 						    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
@@ -36,20 +36,39 @@
 						    	</a>
 						    {% for department in departments %}
 						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
-						    		DRIEE/{{ department.name }}
+						    		{{ department.name }}
 						    	</a>
 						    {% endfor %}
 						{% endif %}
 					</div>
 				</div>
 			</div>
+			<div class="border border-secondary p-1 m-1">
 			<h3 class="m-4">Question par question :</h3>
 			{% set num = 0 %}
 			{% for question in survey.questions %}
 				{% set num = num + 1 %}
 				<div class="card m-1">
 				  <div class="card-body">
-				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
+				    <h5 class="card-title">
+				    	<span class="badge badge-success">
+						    {% if question.categoryQuestion.id == 1 %}
+						    		<i class="far fa-smile"></i>
+						    {% elseif question.categoryQuestion.id == 2 %}
+						    		<i class="far fa-star"></i>
+						    {% elseif question.categoryQuestion.id == 3 %}
+						    		<i class="fas fa-marker"></i>
+						    {% elseif question.categoryQuestion.id == 4 %}
+							    	<i class="fas fa-list-ol"></i> 
+						    {% elseif question.categoryQuestion.id == 5 %}
+									<i class="far fa-comment"></i>
+						    {% elseif question.categoryQuestion.id == 6 %}
+									<i class="fas fa-video"></i>
+						    {% endif %}
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ num }}
+						</span>
+				    	{{ question.question }}
+				    </h5>
 					{% if question.categoryQuestion.id == 1 %}
 						{% include 'block_result/mood.html.twig' %}
 					{% elseif question.categoryQuestion.id == 2 %}
@@ -66,6 +85,7 @@
 				  </div>
 				</div>
 			{% endfor %}
+			</div>
 		</div>
 	</div>
 {% endblock %}
