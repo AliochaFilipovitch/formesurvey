@@ -6,15 +6,13 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col text-center m-2">
-			{% include 'utilities/navbar.html.twig' %}
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-sm-3">
 			{% include 'utilities/description.html.twig' %}
 		</div>
 		<div class="col-sm-9">
+			<div class="text-center m-2">
+				{% include 'utilities/navbar.html.twig' %}
+			</div>
 			<div class="alert alert-danger m-1" role="alert">
 				<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-sync-alt"></i> Rafraîchir la page</a>
 			</div>

@@ -4,42 +4,40 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col text-center m-2">
-			{% include 'utilities/navbar.html.twig' %}
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-sm-3">
 			{% include 'utilities/description.html.twig' %}
 		</div>
-		<div class="col-sm-8 mt-1">
-			{% if value %}
-				<div class="btn-group btn-group-sm" role="group" aria-label="...">
-				    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
-				    		<i class="fas fa-poll"></i> DRIEE
-				    	</a>
-				    {% for department in departments %}
-				    	{% if department.id == value %}
-					    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-					    		<i class="fas fa-poll"></i> {{ department.name }}
-					    	</a>
-				    	{% else %}
-				    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
-				    	{% endif %}
-				    {% endfor %}
-				</div>
-			{% else %}
-				<div class="btn-group btn-group-sm" role="group" aria-label="...">
-				    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-				    		<i class="fas fa-poll"></i> DRIEE
-				    	</a>
-				    {% for department in departments %}
-				    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
-				    {% endfor %}
-				</div>
-			{% endif %}
+		<div class="col-sm-9">
+			<div class="col text-center m-2">
+				{% include 'utilities/navbar.html.twig' %}
+			</div>
 			<div class="card mb-1 mt-1">
 				<div class="card-body">
+					{% if value %}
+						<div class="btn-group btn-group-sm" role="group" aria-label="...">
+						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
+						    		<i class="fas fa-poll"></i> DRIEE
+						    	</a>
+						    {% for department in departments %}
+						    	{% if department.id == value %}
+							    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+							    		<i class="fas fa-poll"></i> {{ department.name }}
+							    	</a>
+						    	{% else %}
+						    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+						    	{% endif %}
+						    {% endfor %}
+						</div>
+					{% else %}
+						<div class="btn-group btn-group-sm" role="group" aria-label="...">
+						    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+						    		<i class="fas fa-poll"></i> DRIEE
+						    	</a>
+						    {% for department in departments %}
+						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+						    {% endfor %}
+						</div>
+					{% endif %}
 				</div>
 			</div>
 			{% set num = 0 %}
