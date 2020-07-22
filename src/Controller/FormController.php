@@ -354,6 +354,30 @@ class FormController extends AbstractController
     }
 
     /**
+     * @Route("/share/{id}", name="share")
+     */
+    public function share(Survey $survey = null)
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->render('error/error.html.twig', [
+                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+            ]);
+        }
+
+        if (!$survey) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
+        return $this->render('form/share.html.twig', [
+            'survey' => $survey
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="answer")
      */
     public function answer(QuestionRepository $question, Survey $survey = null, Request $request, EntityManagerInterface $manager)

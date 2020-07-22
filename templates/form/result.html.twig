@@ -8,12 +8,12 @@
 			{% include 'utilities/description.html.twig' %}
 		</div>
 		<div class="col-sm-9">
-			<div class="col text-center m-2">
+			<div class="text-center mt-1">
 				{% include 'utilities/navbar.html.twig' %}
 			</div>
 			<div class="card m-1">
 				<div class="card-body">
-					<h3>Vue d'ensemble :</h3>
+					<h3>Vue d'ensemble</h3>
 					<div class="btn-group btn-group-sm m-1" role="group" aria-label="...">
 						{% if value %}
 						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="border border-secondary p-1 m-1">
-			<h3 class="m-4">Question par question :</h3>
+			<h3 class="m-4">Question par question</h3>
 			{% set num = 0 %}
 			{% for question in survey.questions %}
 				{% set num = num + 1 %}
