@@ -76,14 +76,14 @@
 	</div>
 {% endif %}
 
-<canvas id="myChartMood"></canvas>
+<canvas id="myChartMood{{ question.id }}"></canvas>
 
 {% block javascripts %}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <script type="text/javascript">
-	var ctx = document.getElementById('myChartMood').getContext('2d');
+	var ctx = document.getElementById('myChartMood{{ question.id }}').getContext('2d');
 	var chart = new Chart(ctx, {
 	// The type of chart we want to create
 	type: 'bar',
