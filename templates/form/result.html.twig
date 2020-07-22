@@ -4,7 +4,7 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-3 mt-2">
 			{% include 'utilities/description.html.twig' %}
 		</div>
 		<div class="col-sm-9">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="border border-secondary p-1 m-1">
-			<h3 class="m-4">Question par question</h3>
+			<h3 class="m-3">Question par question</h3>
 			{% set num = 0 %}
 			{% for question in survey.questions %}
 				{% set num = num + 1 %}

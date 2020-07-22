@@ -4,16 +4,22 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-3 mt-2">
 			{% include 'utilities/description.html.twig' %}
 		</div>
 		<div class="col-sm-9">
 			<div class="text-center mt-1">
 				{% include 'utilities/navbar.html.twig' %}
 			</div>
+			<h3 class="m-3">Partager son FormeSurvey</h3>
 			<div class="card m-1">
 				<div class="card-body">
-					<h3>Partager</h3>
+					<span style="font-size: 40px;">
+						<i class="fas fa-share-alt"></i>
+					</span>
+					<div class="m-1">
+					    <input type="text" class="form-control" value="{{ app.request.schemeAndHttpHost }}/{{ survey.id }}">
+					</div>
 				</div>
 			</div>
 
