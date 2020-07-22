@@ -1,0 +1,26 @@
+<a href="{{ path('form') }}" class="form">
+	<i class="far fa-hand-point-left"></i> Mon espace
+</a>
+<h1 class="display-4">{{ survey.title }}</h1>
+<p>
+	{{ survey.description }}
+	<a href="{{ path('form_edit', {'id': survey.id}) }}">
+		<span class="badge badge-light">
+			modifier
+		</span>
+	</a>
+</p>
+<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %} &#8226;
+<STRONG>
+	{% if survey.status %}
+		<i class="fas fa-eye"></i>
+	{% else %}
+		<i class="fas fa-eye-slash"></i>
+	{% endif %}
+</STRONG>
+</h5>
+<p>
+	<small class="text-muted">
+		Enquête réalisée par {{ survey.author.username }}, le {{ survey.createdAt | date('d M Y') }}
+	</small>
+</p>

@@ -4,76 +4,67 @@
 
 {% block body %}
 	<div class="row">
-	  <div class="col-sm-4" style="background-color:
-		{% if survey.status %}
-			honeydew
-		{% else %}
-			mistyrose
-		{% endif %}
-		;">
-		<h1 class="display-4">{{ survey.title }}</h1>
-		<p>{{ survey.description }}</p>
-		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}</h5>
-		<p>
-			<small class="text-muted">
-				Enquête réalisée par {{ survey.author.username }}, le {{ survey.createdAt | date('d/m/Y') }}
-			</small>
-		</p>
-	  </div>
-	  <div class="col-sm-8 mt-1">
-		{% if value %}
-			<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
-			    		<i class="fas fa-poll"></i> DRIEE
-			    	</a>
-			    {% for department in departments %}
-			    	{% if department.id == value %}
-				    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-				    		<i class="fas fa-poll"></i> {{ department.name }}
-				    	</a>
-			    	{% else %}
-			    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
-			    	{% endif %}
-			    {% endfor %}
-			</div>
-		{% else %}
-			<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-			    		<i class="fas fa-poll"></i> DRIEE
-			    	</a>
-			    {% for department in departments %}
-			    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
-			    {% endfor %}
-			</div>
-		{% endif %}
-		<div class="card mb-1 mt-1">
-			<div class="card-body">
-			</div>
+		<div class="col text-center m-2">
+			{% include 'utilities/navbar.html.twig' %}
 		</div>
-		{% set num = 0 %}
-		{% for question in survey.questions %}
-			{% set num = num + 1 %}
-			<div class="card mb-1 mt-1">
-			  <div class="card-body">
-			    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
-				{% if question.categoryQuestion.id == 1 %}
-					{% include 'block_result/mood.html.twig' %}
-				{% elseif question.categoryQuestion.id == 2 %}
-					{% include 'block_result/star.html.twig' %}
-				{% elseif question.categoryQuestion.id == 3 %}
-					{% include 'block_result/mark.html.twig' %}
-				{% elseif question.categoryQuestion.id == 4 %}
-					{% include 'block_result/choice.html.twig' %}
-				{% elseif question.categoryQuestion.id == 5 %}
-					{% include 'block_result/text.html.twig' %}
-				{% elseif question.categoryQuestion.id == 6 %}
-					{% include 'block_result/gif.html.twig' %}
-				{% endif %}
-			  </div>
-			</div>
-		{% endfor %}
-		<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
-	  </div>
 	</div>
-
+	<div class="row">
+		<div class="col-sm-3">
+			{% include 'utilities/description.html.twig' %}
+		</div>
+		<div class="col-sm-8 mt-1">
+			{% if value %}
+				<div class="btn-group btn-group-sm" role="group" aria-label="...">
+				    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
+				    		<i class="fas fa-poll"></i> DRIEE
+				    	</a>
+				    {% for department in departments %}
+				    	{% if department.id == value %}
+					    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+					    		<i class="fas fa-poll"></i> {{ department.name }}
+					    	</a>
+				    	{% else %}
+				    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+				    	{% endif %}
+				    {% endfor %}
+				</div>
+			{% else %}
+				<div class="btn-group btn-group-sm" role="group" aria-label="...">
+				    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+				    		<i class="fas fa-poll"></i> DRIEE
+				    	</a>
+				    {% for department in departments %}
+				    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+				    {% endfor %}
+				</div>
+			{% endif %}
+			<div class="card mb-1 mt-1">
+				<div class="card-body">
+				</div>
+			</div>
+			{% set num = 0 %}
+			{% for question in survey.questions %}
+				{% set num = num + 1 %}
+				<div class="card mb-1 mt-1">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
+					{% if question.categoryQuestion.id == 1 %}
+						{% include 'block_result/mood.html.twig' %}
+					{% elseif question.categoryQuestion.id == 2 %}
+						{% include 'block_result/star.html.twig' %}
+					{% elseif question.categoryQuestion.id == 3 %}
+						{% include 'block_result/mark.html.twig' %}
+					{% elseif question.categoryQuestion.id == 4 %}
+						{% include 'block_result/choice.html.twig' %}
+					{% elseif question.categoryQuestion.id == 5 %}
+						{% include 'block_result/text.html.twig' %}
+					{% elseif question.categoryQuestion.id == 6 %}
+						{% include 'block_result/gif.html.twig' %}
+					{% endif %}
+				  </div>
+				</div>
+			{% endfor %}
+			<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
+		</div>
+	</div>
 {% endblock %}

@@ -38,3 +38,11 @@ a.form {
 .backgroundcolormistyrose {
 	background-color: mistyrose;
 }
+
+.fixed-div
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
