@@ -1,67 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}FormeSurvey &bull; {{ title }}{% endblock %}
 
 {% block body %}
-	<h1 class="display-4">Toutes les enquêtes</h1>
-	<table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">Enquête</th>
-	      <th scope="col">Description</th>
-	      <th scope="col"><i class="fas fa-user-ninja vanished"></i> Auteur</th>
-	      <th scope="col"><i class="far fa-clock"></i> Date</th>
-	      <th scope="col"><i class="fas fa-toggle-on"></i> On/Off</th>
-	      <th scope="col"><i class="fas fa-pen-nib"></i> Modifier</th>
-	      <th scope="col"><i class="fas fa-poll"></i> Résultat</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  	{% for survey in surveys  %}
-		    <tr>
-		      <th scope="row">{{ survey.id }}</th>
-		      <td><a href="{{ url('answer', {'id': survey.id}) }}" target="_blank">{{ survey.title | u.truncate(20, '...') }}</a></td>
-		      <td>
-		      	{% if not survey.description %}
-		      		<em>non renseignée</em>
-		      	{% else %}
-		      		{{ survey.description | u.truncate(20, '...') }}
-		      	{% endif %}
-		      </td>
-		      <td>{{ survey.author.username }}</td>
-		      <td>{{ survey.createdAt | date('d M Y') }}</td>
-		      <td>
-		      	<a href="{{ url('status', {'id': survey.id}) }}" class="js-status">
-					{% if survey.status != false %}
-						<span style="font-size: 1rem;">
-							<i class="fas fa-toggle-on"></i>
-						</span>
-					{% else %}
-						<span style="font-size: 1rem;">
-							<i class="fas fa-toggle-off"></i>
-						</span>
-					{% endif %}
-		      	</a>
-		      </td>
-		      <td>
-		      	<a href="{{ url('form_survey', {'id': survey.id}) }}" target="_blank">
-			      	<span class="badge badge-primary">
-			      		<i class="fas fa-pen-nib"></i> Modifier
-			      	</span>
-		      	</a>
-		      </td>
-		      <td>
-		      	<a href="{{ url('form_result', {'id': survey.id}) }}" target="_blank">
-		      		<span class="badge badge-primary">
-		      			<i class="fas fa-poll"></i> Résultat
-		      		</span>
-		      	</a>
-		      </td>
-		    </tr>
-	    {% endfor %}
-	  </tbody>
-	</table>
+	<h1 class="display-4">Mon espace de travail</h1>
+		<div class="card-columns">
+			<a href="{{ url('form_create') }}">
+				<div class="card p-4 bg-primary text-white">
+					<blockquote class="blockquote mb-0 card-body">
+						<h2>Nouveau FormeSurvey</h2>
+						<div class="text-center">
+							<span style="font-size: 48px;">
+								<i class="fas fa-plus-circle"></i>
+							</span>
+						</div>
+					</blockquote>
+				</div>
+			</a>
+			{% for survey in surveys  %}
+		  		{% if app.user == survey.author %}
+					<div class="card">
+						<div class="card-body m-2">
+							<div class="container">
+								<div class="row justify-content-between">
+									<div class="col-11 p-0">
+										<h5 class="card-title">#{{ survey.id }} &bull; {{ survey.title | u.truncate(50, '...') }}</h5>
+										<p class="card-text">
+											{% if not survey.description %}
+									      		<em>non renseignée</em>
+									      	{% else %}
+									      		{{ survey.description | u.truncate(50, '...') }}
+									      	{% endif %}
+										</p>
+										<a href="{{ url('status', {'id': survey.id}) }}" class="js-status">
+											{% if survey.status != false %}
+												<span style="font-size: 1.5rem;">
+													<i class="fas fa-toggle-on"></i>
+												</span>
+											{% else %}
+												<span style="font-size: 1.5rem;">
+													<i class="fas fa-toggle-off"></i>
+												</span>
+											{% endif %}
+										</a>
+									</div>
+									<div class="col-1 p-0">
+										<!-- Split dropleft button -->
+										<div class="btn-group {{ survey.id }}">
+										  <div class="btn-group dropleft {{ survey.id }}" role="group">
+										    <button type="button" class="btn btn-outline-dark btn-sm dropdown-toggle dropdown-toggle-split {{ survey.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										      <span class="sr-only">Toggle Dropleft</span>
+										    </button>
+										    <div class="dropdown-menu {{ survey.id }}" id="{{ survey.id }}">
+										      <!-- Dropdown menu links -->
+												<a class="dropdown-item" href="{{ path('answer', {'id': survey.id}) }}" target="_blank">Visualiser <i class="fas fa-external-link-alt"></i></a>
+												<a class="dropdown-item" href="{{ path('form_survey', {'id': survey.id}) }}">Modifier</a>
+												<a class="dropdown-item" href="#">Partager</a>
+												<a class="dropdown-item" href="{{ path('form_result', {'id': survey.id}) }}">Résultats</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item text-danger" href="#">Supprimer</a>
+										    </div>
+										  </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer text-muted">
+							{{ survey.createdAt | date('d M Y') }}
+						</div>					
+					</div>
+				{% endif %}
+	    	{% endfor %}
+		</div>
 {% endblock %}
 
 {% block javascripts %}

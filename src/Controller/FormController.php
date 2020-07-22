@@ -94,7 +94,7 @@ class FormController extends AbstractController
 
     	$surveys = $repo->findAll();
         return $this->render('form/index.html.twig', [
-            'title' => "Toutes les enquêtes",
+            'title' => "Espace de travail",
             'surveys' => $surveys
         ]);
     }

@@ -22,26 +22,32 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="{{ path('home') }}">
 				<img src="https://img.icons8.com/ios-filled/30/000000/cool.png" width="30" height="30" class="d-inline-block align-top" alt="">
-				FormeSurvey
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>	
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('form') }}">Enquêtes</a>
-					</li>      
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('form_create') }}">Créer une enquête</a>
-					</li>
+					{% if not app.user %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('security_login') }}">Se connecter</a>
+						</li>   
+					{% else %}   
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								{{ app.user.username }}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{{ path('security_logout') }}">Se déconnecter</a>
+							</div>
+						</li>
+					{% endif %}
 				</ul>
 				<span class="navbar-text">
-					{% if not app.user %}
-						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_login') }}" role="button">Se connecter</a>
-					{% else %}
-						<a class="btn btn-outline-secondary btn-sm" href="{{ path('security_logout') }}" role="button">Se déconnecter</a>
-					{% endif %}
+					version beta +
 				</span>
 			</div>
 		</nav>
