@@ -15,7 +15,7 @@
 		<h1 class="display-4">{{ survey.title }}</h1>
 		<p>{{ survey.description }}</p>
 		<h5>
-			{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %}
+			{% include 'utilities/progress.html.twig' %}
 		</h5>
 		<p>
 			<small class="text-muted">
@@ -36,7 +36,7 @@
 								{% if answer.author == app.user %}
 									{% if (answer.answer | length) > 0 %}
 										<div class="alert alert-info {{ question.id }} m-1" role="alert">
-												<i class="fas fa-hourglass-start"></i>
+												<i class="fas fa-check"></i>
 												Vous avez indiqué le {{ answer.createdAt | date('d/m') }}
 											{% if question.categoryQuestion.id == 1 %}
 												que votre humeur était de {{ answer.answer }} sur 5.
@@ -57,52 +57,36 @@
 											{% elseif question.categoryQuestion.id == 5 %}
 												: <STRONG>"{{ answer.answer }}"</STRONG>
 											{% elseif question.categoryQuestion.id == 6 %}
-												: <br><img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif" class="img-fluid">
+												: <br><img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif" class="img-fluid"><br>
 											{% endif %}
+
+											{# <button class="btn btn-outline-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample{{ question.id }}" aria-expanded="false" aria-controls="collapseExample{{ question.id }}">
+												modifier
+											</button> #}
+
 										</div>
 									{% endif %}
 								{% endif %}
 							{% endfor %}
-						    {% if question.categoryQuestion.id == 1 %}
-								{% include 'block/mood.html.twig' %}
-						    {% elseif question.categoryQuestion.id == 2 %}
-								{% include 'block/star.html.twig' %}
-						    {% elseif question.categoryQuestion.id == 3 %}
-								{% include 'block/mark.html.twig' %}
-						    {% elseif question.categoryQuestion.id == 4 %}
-								{% include 'block/choice.html.twig' %}
-						    {% elseif question.categoryQuestion.id == 5 %}
-								{% include 'block/text.html.twig' %}
-						    {% elseif question.categoryQuestion.id == 6 %}
-								{% include 'block/gif.html.twig' %}
-							{% endif %}
-					    </div>
+{# 							<div class="collapse" id="collapseExample{{ question.id }}">
+ #}							    {% if question.categoryQuestion.id == 1 %}
+									{% include 'block/mood.html.twig' %}
+							    {% elseif question.categoryQuestion.id == 2 %}
+									{% include 'block/star.html.twig' %}
+							    {% elseif question.categoryQuestion.id == 3 %}
+									{% include 'block/mark.html.twig' %}
+							    {% elseif question.categoryQuestion.id == 4 %}
+									{% include 'block/choice.html.twig' %}
+							    {% elseif question.categoryQuestion.id == 5 %}
+									{% include 'block/text.html.twig' %}
+							    {% elseif question.categoryQuestion.id == 6 %}
+									{% include 'block/gif.html.twig' %}
+								{% endif %}
+{# 							</div>
+ #}					    </div>
 					  </div>
 					</div>
 				{% endfor %}
-				<div class="alert alert-danger" role="alert">
-					Il a 
-					{% set numAnswer = 0 %}
-						{% if (survey.questions | length) > 0 %}
-							{% for question in survey.questions %}
-								{% for answer in question.answers %}
-									{% if answer.author == app.user %}
-										{% set numAnswer = numAnswer + 1 %}
-									{% endif %}
-								{% endfor %}
-							{% endfor %}
-						{% endif %}
-					{{ numAnswer }}
-					réponse{% if numAnswer > 1 %}s{% endif %} envoyée{% if numAnswer > 1 %}s{% endif %}
-					sur {{ survey.questions | length }} question{% if survey.questions | length > 1 %}s{% endif %}.
-					{% if numAnswer == (survey.questions | length) %}
-						<i class="fas fa-fire-alt"></i> Bravo !
-					{% else %}
-						Complétez ce qui manque et
-						<a href="{{ path('answer', {'id': survey.id}) }}">
-							envoyez</a>.
-					{% endif %}
-				</div>
 				<p class="text-center"><small class="text-muted">fin de l'enquête</small></p>
 			{% else %}
 				<p class="text-center">

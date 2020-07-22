@@ -1,0 +1,18 @@
+{% set numAnswer = 0 %}
+	{% if (survey.questions | length) > 0 %}
+		{% for question in survey.questions %}
+			{% for answer in question.answers %}
+				{% if answer.author == app.user %}
+					{% set numAnswer = numAnswer + 1 %}
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
+{{ numAnswer }}
+sur {{ survey.questions | length }} question{% if survey.questions | length > 1 %}s{% endif %}
+
+{% if numAnswer == (survey.questions | length) %}
+	<i class="fas fa-fire-alt"></i> Bravo !
+{# {% else %}
+	Encore un petit effort. #}
+{% endif %}
