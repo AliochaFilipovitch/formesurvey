@@ -1,7 +1,7 @@
 <div class="form-group">
 	<input type="text" class="form-control" id="{{ question.id }}" placeholder="Votre réponse...">
 	<a href="{{ path('postAnswer', {'id': question.id, 'value': 'value'}) }}" id="{{ question.id }}" class="js-text btn btn-success btn-sm btn-block mt-1">
-		<i class="far fa-paper-plane"></i> Envoyer
+		<i class="far fa-paper-plane"></i> Enregistrer ma réponse
 	</a>
 </div>
 <div class="alert {{ question.id }} alert-success m-1" role="alert">
