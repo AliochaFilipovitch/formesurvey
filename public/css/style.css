@@ -8,6 +8,11 @@ a.choice {
 	color: white;
 }
 
+a.form { 
+	text-decoration: none; 
+	color: black;
+}
+
 .backgroundcolorgreen {
 	border-radius: 20px;
 	border: 1px solid green;

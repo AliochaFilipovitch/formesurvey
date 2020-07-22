@@ -1,26 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ survey.title }}{% endblock %}
+{% block title %}FormeSurvey &bull; {{ survey.title }}{% endblock %}
 
 {% form_theme questionForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 	<div class="row">
-	  <div class="col-sm-4" style="background-color:
-		{% if survey.status %}
-			honeydew
-		{% else %}
-			mistyrose
-		{% endif %}
-		;">
+		<div class="col text-center m-2">
+			<div class="btn-group btn-group-sm" role="group" aria-label="...">
+				<a class="btn btn-light active" href="#" role="button" aria-pressed="true"><i class="fas fa-lightbulb"></i> Créer</a>
+				<a class="btn btn-light" href="{{ path('answer', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-eye"></i> Visualiser</a>
+				<a class="btn btn-light" href="#" role="button"><i class="fas fa-pen-nib"></i> Partager</a>
+				<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-poll"></i> Résultats</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-sm-3">
+		<a href="{{ path('form') }}" class="form">
+			<i class="far fa-hand-point-left"></i> Mon espace
+		</a>
 		<h1 class="display-4">{{ survey.title }}</h1>
-		<p>{{ survey.description }}</p>
+		<p>
+			{{ survey.description }}
+			<a href="{{ path('form_edit', {'id': survey.id}) }}">
+				<span class="badge badge-light">
+					modifier
+				</span>
+			</a>
+		</p>
 		<h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %} &#8226;
 		<STRONG>
 			{% if survey.status %}
-				OUVERT
+				<i class="fas fa-eye"></i>
 			{% else %}
-				FERMÉ
+				<i class="fas fa-eye-slash"></i>
 			{% endif %}
 		</STRONG>
 		</h5>
@@ -29,13 +43,8 @@
 				Enquête réalisée par {{ survey.author.username }}, le {{ survey.createdAt | date('d M Y') }}
 			</small>
 		</p>
-		<div class="btn-group btn-group-sm" role="group" aria-label="...">
-			<a class="btn btn-primary" href="{{ path('answer', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-eye"></i> Enquête</a>
-			<a class="btn btn-primary" href="{{ path('form_result', {'id': survey.id}) }}" role="button" target="_blank"><i class="fas fa-poll"></i> Résultat</a>
-			<a class="btn btn-primary" href="{{ path('form_edit', {'id': survey.id}) }}" role="button"><i class="fas fa-pen-nib"></i> Modifier</a>
-		</div>
 	  </div>
-	  <div class="col-sm-8">
+	  <div class="col-sm-9">
 
 		<div class="alert alert-danger m-1" role="alert">
 			<span class="deleteMessage"></span> <a href="{{ path('form_survey', {'id': survey.id}) }}"><i class="fas fa-sync-alt"></i> Rafraîchir la page</a>
@@ -53,29 +62,35 @@
 						</button>
 					</a>
 			    <h5 class="card-title">
-			    	{{ num }}. {{ question.question }}
-			    </h5>
 					<span class="badge badge-success">
 					    {% if question.categoryQuestion.id == 1 %}
-					    		<i class="far fa-smile"></i> {{ question.categoryQuestion.title }}
+					    		<i class="far fa-smile"></i>
 					    {% elseif question.categoryQuestion.id == 2 %}
-					    		<i class="far fa-star"></i> {{ question.categoryQuestion.title }}
+					    		<i class="far fa-star"></i>
 					    {% elseif question.categoryQuestion.id == 3 %}
-					    		<i class="fas fa-marker"></i> {{ question.categoryQuestion.title }}
+					    		<i class="fas fa-marker"></i>
 					    {% elseif question.categoryQuestion.id == 4 %}
-								<a href="{{ path('qcm_create', {'id': question.id}) }}" class="choice">
-						    		<i class="fas fa-list-ol"></i> {{ question.categoryQuestion.title }} 
-						    		<span class="badge badge-light">
-						    			{{ question.questionMultipleChoices | length }}
-						    		</span>
-								</a>
+						    	<i class="fas fa-list-ol"></i> 
 					    {% elseif question.categoryQuestion.id == 5 %}
-								<i class="far fa-comment"></i> {{ question.categoryQuestion.title }}
+								<i class="far fa-comment"></i>
 					    {% elseif question.categoryQuestion.id == 6 %}
-								<i class="fas fa-video"></i> {{ question.categoryQuestion.title }}
+								<i class="fas fa-video"></i>
 					    {% endif %}
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ num }}
 					</span>
-				<p class="card-text"><small class="text-muted">Ajoutée le {{ question.createdAt | date('d M Y') }}</small></p>
+			    	{{ question.question }}
+			    </h5>
+			    <small class="text-muted">
+			    	{% if question.categoryQuestion.id == 4 %}
+						<a href="{{ path('qcm_create', {'id': question.id}) }}">
+							<span class="badge badge-danger">
+								{{ question.questionMultipleChoices | length }} choix
+							</span>
+						</a>
+						&bull;
+			    	{% endif %}
+			    	{{ question.categoryQuestion.title }} &bull; le {{ question.createdAt | date('d M Y') }}
+			    </small>
 			  </div>
 			</div>
 		{% endfor %}
