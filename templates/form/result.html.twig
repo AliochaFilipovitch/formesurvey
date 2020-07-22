@@ -11,39 +11,43 @@
 			<div class="col text-center m-2">
 				{% include 'utilities/navbar.html.twig' %}
 			</div>
-			<div class="card mb-1 mt-1">
+			<div class="card m-1">
 				<div class="card-body">
-					{% if value %}
-						<div class="btn-group btn-group-sm" role="group" aria-label="...">
+					<h3>Vue d'ensemble :</h3>
+					<div class="btn-group btn-group-sm m-1" role="group" aria-label="...">
+						{% if value %}
 						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
-						    		<i class="fas fa-poll"></i> DRIEE
+						    		DRIEE
 						    	</a>
 						    {% for department in departments %}
 						    	{% if department.id == value %}
 							    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-							    		<i class="fas fa-poll"></i> {{ department.name }}
+							    		DRIEE/{{ department.name }}
 							    	</a>
 						    	{% else %}
-						    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+						    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
+						    			{{ department.name }}
+						    		</a>
 						    	{% endif %}
 						    {% endfor %}
-						</div>
-					{% else %}
-						<div class="btn-group btn-group-sm" role="group" aria-label="...">
+						{% else %}
 						    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-						    		<i class="fas fa-poll"></i> DRIEE
+						    		DRIEE
 						    	</a>
 						    {% for department in departments %}
-						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button"><i class="fas fa-poll"></i> {{ department.name }}</a>
+						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
+						    		DRIEE/{{ department.name }}
+						    	</a>
 						    {% endfor %}
-						</div>
-					{% endif %}
+						{% endif %}
+					</div>
 				</div>
 			</div>
+			<h3 class="m-4">Question par question :</h3>
 			{% set num = 0 %}
 			{% for question in survey.questions %}
 				{% set num = num + 1 %}
-				<div class="card mb-1 mt-1">
+				<div class="card m-1">
 				  <div class="card-body">
 				    <h5 class="card-title">{{ num }}. {{ question.question }}</h5>
 					{% if question.categoryQuestion.id == 1 %}
@@ -62,7 +66,6 @@
 				  </div>
 				</div>
 			{% endfor %}
-			<p class="text-center"><small class="text-muted">fin du formulaire</small></p>
 		</div>
 	</div>
 {% endblock %}
