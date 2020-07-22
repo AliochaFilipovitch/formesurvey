@@ -60,7 +60,8 @@
 										    <div class="dropdown-menu {{ survey.id }}" id="{{ survey.id }}">
 										      <!-- Dropdown menu links -->
 												<a class="dropdown-item" href="{{ path('answer', {'id': survey.id}) }}" target="_blank">Visualiser <i class="fas fa-external-link-alt"></i></a>
-												<a class="dropdown-item" href="{{ path('form_survey', {'id': survey.id}) }}">Modifier</a>
+												<a class="dropdown-item" href="{{ path('form_edit', {'id': survey.id}) }}">Modifier</a>
+												<a class="dropdown-item" href="{{ path('form_survey', {'id': survey.id}) }}">Créer</a>
 												<a class="dropdown-item" href="#">Partager</a>
 												<a class="dropdown-item" href="{{ path('form_result', {'id': survey.id}) }}">Résultats</a>
 												<div class="dropdown-divider"></div>

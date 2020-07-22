@@ -4,11 +4,6 @@
 <h1 class="display-4">{{ survey.title }}</h1>
 <p>
 	{{ survey.description }}
-	<a href="{{ path('form_edit', {'id': survey.id}) }}">
-		<span class="badge badge-light">
-			modifier
-		</span>
-	</a>
 </p>
 <h5>{{ survey.questions | length }} Question{% if survey.questions | length > 1 %}s{% endif %} &#8226;
 <STRONG>
