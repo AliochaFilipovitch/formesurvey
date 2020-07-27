@@ -1,0 +1,53 @@
+
+{% if value == null %}
+
+	{{ users | length }} Membre{% if users | length > 1 %}s{% endif %} &#8226;
+
+	{% set numAnswer = 0 %}
+	
+	{% if (survey.questions | length) > 0 %}
+		{% for question in survey.questions %}
+			{% for answer in question.answers %}
+				 {% set numAnswer = numAnswer + 1 %}
+			{% endfor %}
+		{% endfor %}
+	{% endif %}
+	
+	{{ numAnswer }} Réponse{% if numAnswer > 1 %}s{% endif %} &#8226;
+
+	{% if ((users | length) > 0) and ((survey.questions | length) > 0) %}
+
+		{{ (numAnswer / ((users | length)*(survey.questions | length)))*100 }} %
+
+	{% endif %}
+
+{% else %}
+
+	{% set userLength = 0 %}
+	{% for user in users %}
+		{% if user.department.id == value %}
+			{% set userLength = userLength + 1 %}
+			{{ userLength }} Membre{% if userLength > 1 %}s{% endif %} &#8226;
+		{% endif %}
+	{% endfor %}
+
+	{% set numAnswer = 0 %}
+		{% if (survey.questions | length) > 0 %}
+			{% for question in survey.questions %}
+				{% for answer in question.answers %}
+					{% if answer.author.department.id == value %}
+						{% set numAnswer = numAnswer + 1 %}
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		{% endif %}
+
+	{{ numAnswer }} Réponse{% if numAnswer > 1 %}s{% endif %} &#8226;
+	
+	{% if (userLength > 0) and ((survey.questions | length) > 0) %}
+
+		{{ (numAnswer / (userLength*(survey.questions | length)))*100 }} %
+
+	{% endif %}
+	
+{% endif %}

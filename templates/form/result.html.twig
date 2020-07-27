@@ -10,37 +10,39 @@
 		<div class="col-sm-9">
 			<div class="text-center mt-1">
 				{% include 'utilities/navbar.html.twig' %}
+				<br>
+				<div class="btn-group btn-group-sm mt-4" role="group" aria-label="...">
+					{% if value %}
+					    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
+					    		DRIEE
+					    	</a>
+					    {% for department in departments %}
+					    	{% if department.id == value %}
+						    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+						    		{{ department.name }}
+						    	</a>
+					    	{% else %}
+					    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
+					    			{{ department.name }}
+					    		</a>
+					    	{% endif %}
+					    {% endfor %}
+					{% else %}
+					    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
+					    		DRIEE
+					    	</a>
+					    {% for department in departments %}
+					    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
+					    		{{ department.name }}
+					    	</a>
+					    {% endfor %}
+					{% endif %}
+				</div>
 			</div>
 			<div class="card m-1">
 				<div class="card-body">
 					<h3>Vue d'ensemble</h3>
-					<div class="btn-group btn-group-sm m-1" role="group" aria-label="...">
-						{% if value %}
-						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id}) }}" role="button">
-						    		DRIEE
-						    	</a>
-						    {% for department in departments %}
-						    	{% if department.id == value %}
-							    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-							    		{{ department.name }}
-							    	</a>
-						    	{% else %}
-						    		<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
-						    			{{ department.name }}
-						    		</a>
-						    	{% endif %}
-						    {% endfor %}
-						{% else %}
-						    	<a class="btn btn-light active" href="#" role="button" aria-pressed="true">
-						    		DRIEE
-						    	</a>
-						    {% for department in departments %}
-						    	<a class="btn btn-light" href="{{ path('form_result', {'id': survey.id, 'value': department.id}) }}" role="button">
-						    		{{ department.name }}
-						    	</a>
-						    {% endfor %}
-						{% endif %}
-					</div>
+					<h1 class="display-4">{% include 'block_result/overview.html.twig' %}</h1>
 				</div>
 			</div>
 			<div class="border border-secondary p-1 m-1">

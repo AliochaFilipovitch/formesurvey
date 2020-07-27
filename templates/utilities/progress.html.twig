@@ -13,6 +13,4 @@ sur {{ survey.questions | length }} question{% if survey.questions | length > 1 
 
 {% if numAnswer == (survey.questions | length) %}
 	<i class="fas fa-fire-alt"></i> Bravo !
-{# {% else %}
-	<br><a class="btn btn-primary btn-sm m-2" href="{{ path('answer', {'id': survey.id}) }}" role="button">Envoyer les réponses</a> #}
 {% endif %}
