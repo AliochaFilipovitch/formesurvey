@@ -7,250 +7,239 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/cool.png">
 
   <title>FormeSurvey</title>
 
-  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap Core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
-  <!-- Plugin CSS -->
-  <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/new-age.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="css/stylish-portfolio.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="https://img.icons8.com/ios-filled/30/000000/cool.png"> FormeSurvey, la forme?</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#download">Enquête</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Réponse</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#why">Analyse</a>
-          </li>
-          <li class="nav-item">
-            {% if not app.user %}
-              <a class="nav-link js-scroll-trigger" href="{{ path('security_login') }}">Connexion</a>
-            {% else %}
-              <a class="nav-link js-scroll-trigger" href="{{ path('security_logout') }}">Déconnexion</a>
-            {% endif %}
-          </li>
-        </ul>
-      </div>
-    </div>
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#services">Services</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#portfolio">Portfolio</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
   </nav>
 
-  <header class="masthead">
-    <div class="container h-100">
-      <div class="row h-100">
-      <div class="col-md-12 my-auto">
-          <h1>FormeSurvey aide les managers et DRH à placer les collaborateurs au centre de leur activité.</h1>
-          <br>
-          <br>
-          <div class="badges">
-            <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Passez à l'action <i class="fas fa-angle-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section class="download bg-primary text-center" id="download">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 my-auto">
-          <div class="header-content mx-auto">
-            <h3>1. Je construis des enquêtes engageantes, simplement.</h3>
-
-            <p>Le back office permet de segmenter les participants en fonction de critères qui font sens pour l’organisation (métiers, départements, zones géographiques, etc.)</p>
-
-            <p>Créer et planifier ses enquêtes, anticiper les relances :</p>
-
-            <p>C’est rapide avec la bibliothèque de 200 questions catégorisées</p>
-            <p>C’est simple avec l’éditeur d’enquêtes « drag and drop »</p>
-            <p>Et c’est également sur mesure avec des questions adaptées à mes besoins</p>
-          </div>
-        </div>
-        <div class="col-lg-8 my-auto">
-          <img src="img/create_survey.png" class="img-fluid img-thumbnail" alt="">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-heading text-center">
-
-        <h2>2. Les collaborateurs répondent régulièrement, ça prend 1 minute !</h2>
-        <p class="text-muted">Regardez ce qu'il est possible de faire avec FormeSurvey !</p>
-          <div class="device-mockup imac">
-            <div class="device">
-              <div class="screen">
-                <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                <img src="img/view_survey.png" class="img-fluid img-thumbnail" alt="">
-              </div>
-              <div class="button">
-                <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-              </div>
-            </div>
-          </div>
-            <p>Répondre aux enquêtes se fait de façon conversationnelle !<p>
-
-            <p>Via notre propre et unique chatbot, répondre devient rapide et engageant, pour de meilleurs taux de participation.<p>
-
-            <p>Les réponses se font naturellement (texte libre, choix fermés, avec des emojis ou avec des Gifs, etc.).<p>
-
-            <p>Nous intégrons également la notion de réciprocité des attentions au coeur de l’expérience. C’est pourquoi, une fois l’enquête complétée, les réponses données par l’ensemble des participants sont partagées, de façon anonyme.</p>
-
-      </div>
-
-      <div class="row">
-
-        <div class="col-lg-12 my-auto">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-screen-smartphone text-primary"></i>
-                  <h3>Responsive</h3>
-                  <p class="text-muted">Notre solution s'adapte à tous les écrans.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-camera text-primary"></i>
-                  <h3>Assos</h3>
-                  <p class="text-muted">Mettez en lumière vos associations du personnel ! <span class="badge badge-success">bientôt</span></p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-present text-primary"></i>
-                  <h3>0 €</h3>
-                  <p class="text-muted">FormeSurvey est entièrement gratuite, avec des mises à jour fréquentes.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-lock text-primary"></i>
-                  <h3>RGPD</h3>
-                  <p class="text-muted">FormeSurvey est conforme au RGPD. Un seul clic suffit à supprimer son compte et ses données personnelles associées.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact bg-primary" id="why">
-    <div class="container">
-      <h2>3. J’analyse, je prends des décisions et je mesure l’impact de mes plans d’actions.</h2>
-      
-      <div class="row">
-        <div class="col-lg-5 my-auto">
-          <div class="header-content mx-auto">
-
-          <p>En suivant l’évolution des indicateurs d’expérience employé et de l’employee Net Promoter Score  (eNPS / FormeSurvey Score)</p>
-          <p>En comprenant les promoteurs et détracteurs</p>
-          <p>En identifiant les irritants les plus importants</p>
-          <p>En capitalisant sur les éléments sources de motivation</p>
-          <p>En comparant les équipes et différents départements de l’entreprise</p>
-          <p>En filtrant par typologie de salarié (ancienneté, homme/femme, âge, région, fonciton…)</p>
-          <p>En étant alerté pour décider rapidement</p>
-
-          </div>
-        </div>
-        <div class="col-lg-7 my-auto">
-          <img src="img/result_survey.png" class="img-fluid img-thumbnail" alt="">
-        </div>
-    </div>
-</section>
-
-  <section class="cta">
-    <div class="cta-content">
-      <div class="container">
-        <h2>Créée par des agents, pour les agents de la Fonction Publique.</h2>
-        <a href="{{ path('form') }}" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Go ! <i class="fas fa-angle-right"></i></a>
-      </div>
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1">FormeSurvey</h1>
+      <h3 class="mb-5">
+        <em>A Free Bootstrap Theme by Start Bootstrap</em>
+      </h3>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
     </div>
     <div class="overlay"></div>
-  </section>
+  </header>
 
-<!--   <section class="contact bg-primary" id="contact">
-    <div class="container">
-      <h2>En contribuant à FormeSurvey, tu nous permets d'aider plein d'administrations à devenir géniales !</h2>
-      <h4>Choisis un montant pour ta contribution, à partir de... 0€ ;)</h4><br>
-      <a href="https://www.leetchi.com/c/FormeSurvey" class="btn btn-outline btn-xl js-scroll-trigger" target="_blank">Contribuer à la cagnotte leetchi <i class="fas fa-angle-right"></i></a>
-      <br><br><br>
-        <div class="card w-50" style="margin: 0 auto; text-align: left; background-color: lightgrey;">
-          <div class="card-body">
-            <h5 class="card-title">Objectif actuel :<br><strong>4 000€</strong></h5>
-            <div class="progress">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 2%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"></div>
-            </div><br>
-            <p class="card-text">Avec 4 000€, on engage une nouvelle personne dans l’équipe pour accélérer le développement de la plateforme. On a plein d’idées en tête pour améliorer l’expérience FormeSurvey, mais il nous faut de la force de frappe au niveau du code. Et qui sait, cette personne, c’est peut-être toi ;)</p>
-          </div>
-        </div>   
-    </div>
-</section> -->
-<!-- 
-<section class="contact bg-primary" id="contact">
-    <div class="container-fluid">
-      <div class="row mt-3">
-          <div class="col-lg-4 col-md-12 py-5" style="padding: 5%;">
-              <a class="twitter-timeline" data-width="400" data-height="400" data-theme="light" data-link-color="#981CEB" href="https://twitter.com/FormeSurveyTwit?ref_src=twsrc%5Etfw">Tweets by FormeSurveyTwit</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-          </div>
-          <div class="col-lg-6 col-md-10 py-5 m-auto">
-              <p class="display-4 mb-4 text-secondary">
-                  <i class="fa fa-quote-left"></i>
-              </p>
-              <p class="display-4 mb-4">Ils nous font confiance</p>
-              <a href="http://www.douane.gouv.fr" target="_blank"><img src="img/logo/Douanes-droits-indirects.jpg" alt="..." class="img-thumbnail" height="200" width="200"></a>
-              <a href="https://travail-emploi.gouv.fr" target="_blank"><img src="img/logo/238bab83b842888e1040fa154ac3e3.jpg" alt="..." class="img-thumbnail" height="150" width="150"></a>
-              <a href="https://lafabriquerh.wordpress.com/" target="_blank"><img src="img/logo/Y2pFAuRk_400x400-2.jpg" alt="..." class="img-thumbnail" height="180" width="180"></a>
-              <a href="https://www.ecologique-solidaire.gouv.fr/" target="_blank"><img src="img/logo/Logo_DRIEE_Ile-de-France.png" alt="..." class="img-thumbnail" height="150" width="150"></a>
-              <a href="https://www.ird.fr" target="_blank"><img src="img/logo/01ac2dceab5eb6a3-ff559.jpg" alt="..." class="img-thumbnail" height="150" width="150"></a>
-          </div>
+  <!-- About -->
+  <section class="content-section bg-light" id="about">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+          <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
+            <a href="https://unsplash.com/">Unsplash</a>!</p>
+          <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+        </div>
       </div>
     </div>
-</section> -->
+  </section>
 
-  <footer>
+  <!-- Services -->
+  <section class="content-section bg-primary text-white text-center" id="services">
     <div class="container">
-      	<p>&copy; FormeSurvey 2020. Tous droits réservés.</p>
-        <p>Homemade by Alexis Queune</p>
-      	<br>
-		<img src="https://img.icons8.com/ios-filled/50/000000/cool.png">
+      <div class="content-section-heading">
+        <h3 class="text-secondary mb-0">Services</h3>
+        <h2 class="mb-5">What We Offer</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-screen-smartphone"></i>
+          </span>
+          <h4>
+            <strong>Responsive</strong>
+          </h4>
+          <p class="text-faded mb-0">Looks great on any screen size!</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-pencil"></i>
+          </span>
+          <h4>
+            <strong>Redesigned</strong>
+          </h4>
+          <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-like"></i>
+          </span>
+          <h4>
+            <strong>Favorited</strong>
+          </h4>
+          <p class="text-faded mb-0">Millions of users
+            <i class="fas fa-heart"></i>
+            Start Bootstrap!</p>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-mustache"></i>
+          </span>
+          <h4>
+            <strong>Question</strong>
+          </h4>
+          <p class="text-faded mb-0">I mustache you a question...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Callout -->
+  <section class="callout">
+    <div class="container text-center">
+      <h2 class="mx-auto mb-5">Welcome to
+        <em>your</em>
+        next website!</h2>
+      <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/themes/stylish-portfolio/">Download Now!</a>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="content-section" id="portfolio">
+    <div class="container">
+      <div class="content-section-heading text-center">
+        <h3 class="text-secondary mb-0">Portfolio</h3>
+        <h2 class="mb-5">Recent Projects</h2>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#!">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Stationary</div>
+                <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-1.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#!">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Ice Cream</div>
+                <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-2.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#!">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Strawberries</div>
+                <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-3.jpg" alt="">
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <a class="portfolio-item" href="#!">
+            <div class="caption">
+              <div class="caption-content">
+                <div class="h2">Workspace</div>
+                <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+              </div>
+            </div>
+            <img class="img-fluid" src="img/portfolio-4.jpg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="content-section bg-primary text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">The buttons below are impossible to resist...</h2>
+      <a href="#!" class="btn btn-xl btn-light mr-4">Click Me!</a>
+      <a href="#!" class="btn btn-xl btn-dark">Look at Me!</a>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <div id="contact" class="map">
+    <iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+    <br />
+    <small>
+      <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
+    </small>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#!">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#!">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="#!">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; Your Website 2020</p>
     </div>
   </footer>
 
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -260,8 +249,7 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/new-age.min.js"></script>
-
+  <script src="js/stylish-portfolio.min.js"></script>
 
 </body>
 
