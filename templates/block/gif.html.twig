@@ -3,7 +3,6 @@
 	<a href="{{ path('gif', {'value': 'value'}) }}" id="{{ question.id }}" class="js-gif btn btn-outline-secondary btn-sm btn-block mt-1">
 		<i class="fas fa-search"></i> Rechercher
 	</a>
-	<p><small><i class="fas fa-exclamation-triangle"></i> La vitesse de recherche peut être réduite selon votre connexion Internet.</small></p>
 	<div class="gif {{ question.id }} getId m-1 table-responsive m-2" id="{{ question.id }}">
 	</div>
 </div>
@@ -89,8 +88,7 @@
 						    console.log(a.href);
 
 							const img = document.createElement('img');
-							img.style.height = '110px';
-							img.style.width = '110px';
+							img.style.height = '180px';
 							img.src = response.data.srcs[i];
 							img.alt = response.data.ids[i];
 							img.className = response.data.ids[i];

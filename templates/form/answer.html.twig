@@ -27,6 +27,9 @@
 							{% set num = num + 1 %}
 								<div class="carousel-item">
 									<h1 class="display-4">{{ num }}. {{ question.question }}</h1>
+									<h5>
+										{% include 'utilities/progress.html.twig' %}
+									</h5>
 									<div class="form-group">
 								    {% if question.categoryQuestion.id == 1 %}
 										{% include 'block/mood.html.twig' %}
@@ -103,6 +106,7 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 
+		
 
 		function onClickAnswerSelected(event){
 			event.preventDefault();
@@ -164,7 +168,7 @@
 					if (alert.classList.contains(selectId)) {
 						alert.hidden = false;
 						console.log(alert.firstChild.textContent);
-						alert.firstChild.textContent = "\""+response.data.answer+"\"";
+						alert.firstChild.textContent = "Réponse enregistrée : \""+response.data.answer+"\"";
 					} 
 				});
 			});
