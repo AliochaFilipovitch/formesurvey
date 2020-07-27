@@ -6,20 +6,21 @@
 	{% if survey.status %}
 		<div class="row">
 			<div class="col">
+				<div class="text-center m-2">
+					<a class="btn btn-primary btn-sm" id="progress-js" href="{{ path('answer', {'id': survey.id}) }}" role="button">Enregistrer</a>
+				</div>
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
 					<div class="carousel-inner text-center">
 						<div class="carousel-item active">
 							<h1 class="display-4">{{ survey.title }}</h1>
 							<h5>{{ survey.description }}</h5>
 							<img src="img/icons/emoticones96/icons8-smiling-face-with-heart-eyes-96.png">
-							<h5>
-								{% include 'utilities/progress.html.twig' %}
-							</h5>
 							<p>
 								<small class="text-muted">
 									Enquête réalisée par {{ survey.author.username }}, le {{ survey.createdAt | date('d M Y') }}
 								</small>
 							</p>
+							{% include 'utilities/progress.html.twig' %}
 						</div>
 						{% if (survey.questions | length) > 0 %}
 							{% set num = 0 %}
@@ -27,9 +28,6 @@
 							{% set num = num + 1 %}
 								<div class="carousel-item">
 									<h1 class="display-4">{{ num }}. {{ question.question }}</h1>
-									<h5>
-										{% include 'utilities/progress.html.twig' %}
-									</h5>
 									<div class="form-group">
 								    {% if question.categoryQuestion.id == 1 %}
 										{% include 'block/mood.html.twig' %}
@@ -106,7 +104,8 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 
-		
+		var counter = 0;
+		document.getElementById("progress-js").hidden = true;
 
 		function onClickAnswerSelected(event){
 			event.preventDefault();
@@ -133,9 +132,10 @@
 
 				if (contentImg.classList.contains(response.data.answer)) {
 					contentImg.classList.replace('backgroundcolorwhite','backgroundcolorgreen');
-
 				} 
 
+				counter++;
+				document.getElementById("progress-js").hidden = false;
 				console.log(response.data.answer);
 			});
 		}
@@ -146,6 +146,9 @@
 
     	function onClickPostAnswer(event){
     		event.preventDefault();
+
+    		counter++;
+			console.log(counter);
 
     		const selectId = this.id;
     		console.log(selectId);
@@ -162,7 +165,6 @@
 			});
 
 			axios.get(url).then(function(response) {
-				console.log(response.data.answer);
 
 				document.querySelectorAll('div.alert-success').forEach(function(alert){
 					if (alert.classList.contains(selectId)) {
@@ -171,6 +173,10 @@
 						alert.firstChild.textContent = "Réponse enregistrée : \""+response.data.answer+"\"";
 					} 
 				});
+
+				counter++;
+				document.getElementById("progress-js").hidden = false;
+				console.log(response.data.answer);
 			});
     	}    	
 
@@ -180,9 +186,7 @@
 
     	document.querySelectorAll('a.js-text').forEach(function(link){
 			link.addEventListener('click', onClickPostAnswer);
-		});    	
-
- 
+		});   
 
 	</script>
 {% endblock %}

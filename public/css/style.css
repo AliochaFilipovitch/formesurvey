@@ -46,7 +46,7 @@ div.carousel
 
 div.carousel-inner
 {
-	height:500px;
+	height:450px;
 	background-size: cover;
 	background-position: center center;
 	overflow: scroll;
