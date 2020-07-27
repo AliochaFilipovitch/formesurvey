@@ -17,7 +17,7 @@
 
 	{% if ((users | length) > 0) and ((survey.questions | length) > 0) %}
 
-		{{ (numAnswer / ((users | length)*(survey.questions | length)))*100 }} %
+		{{ ((numAnswer / ((users | length)*(survey.questions | length)))*100)|round }} %
 
 	{% endif %}
 
@@ -46,7 +46,7 @@
 	
 	{% if (userLength > 0) and ((survey.questions | length) > 0) %}
 
-		{{ (numAnswer / (userLength*(survey.questions | length)))*100 }} %
+		{{ ((numAnswer / (userLength*(survey.questions | length)))*100)|round }} %
 
 	{% endif %}
 	
