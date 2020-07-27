@@ -14,15 +14,13 @@ a.form {
 }
 
 .backgroundcolorgreen {
-	border-radius: 20px;
+	background-color: white;
 	border: 1px solid green;
-	background-color: honeydew;
+	border-radius: 20px;
 	text-align: center;
 }
 
 .backgroundcolorwhite {
-	border: 1px solid white;
-	background-color: white;
 	text-align: center;
 }
 
@@ -45,4 +43,23 @@ a.form {
 	top: 0;
 	left: 0;
 	width: 100%;
+}
+
+div.carousel
+{
+	background-color: honeydew;
+	margin: 1%;
+	padding: 5% 15% 5% 15%;
+}
+
+div.carousel-inner
+{
+	height:500px;
+	background-size: cover;
+	background-position: center center;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+	filter: invert(1);
 }

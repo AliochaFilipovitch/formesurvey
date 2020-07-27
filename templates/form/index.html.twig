@@ -6,7 +6,7 @@
 	<h1 class="display-4">Mon espace de travail</h1>
 		<div class="card-columns">
 			<a href="{{ url('form_create') }}">
-				<div class="card p-3 bg-primary text-white">
+				<div class="card p-2 bg-primary text-white">
 					<blockquote class="blockquote mb-0 card-body">
 						<h2>Nouveau FormeSurvey</h2>
 						<div class="text-center">
@@ -30,7 +30,12 @@
 							<div class="container">
 								<div class="row justify-content-between">
 									<div class="col-11 p-0">
-										<h5 class="card-title">#{{ survey.id }} &bull; {{ survey.title | u.truncate(50, '...') }}</h5>
+										<h5 class="card-title">#{{ survey.id }} &bull; {{ survey.title | u.truncate(50, '...') }}
+											<span class="badge badge-light">
+												<a href="{{ path('form_edit', {'id': survey.id}) }}" style="color:black;">	<i class="fas fa-pen"></i>
+												</a>
+											</span>
+										</h5>
 										<p class="card-text">
 											{% if not survey.description %}
 									      		<em>non renseignée</em>
@@ -61,7 +66,6 @@
 										      <!-- Dropdown menu links -->
 												<a class="dropdown-item" href="{{ path('answer', {'id': survey.id}) }}" target="_blank">Visualiser <i class="fas fa-external-link-alt"></i></a>
 												<a class="dropdown-item" href="{{ path('form_survey', {'id': survey.id}) }}">Créer</a>
-												<a class="dropdown-item" href="{{ path('form_edit', {'id': survey.id}) }}">Modifier</a>
 												<a class="dropdown-item" href="{{ path('share', {'id': survey.id}) }}">Partager</a>
 												<a class="dropdown-item" href="{{ path('form_result', {'id': survey.id}) }}">Résultats</a>
 												<div class="dropdown-divider"></div>
