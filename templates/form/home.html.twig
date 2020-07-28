@@ -69,7 +69,15 @@
           <h2>Un outil pour réaliser efficacement votre enquête en ligne</h2>
           <p class="lead mb-5">Conçue de façon intuitive, construisez votre enquête simplement avec des types de questions ouvertes.
           </p>
-          <a class="btn btn-dark btn-xl js-scroll-trigger" href="{{ path('security_login')}}">Se connecter</a>
+          {% if not app.user %}
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="{{ path('security_login')}}">
+              Se connecter
+            </a>
+          {% else %}
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="{{ path('form')}}">
+              Mon espace de travail
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -130,7 +138,15 @@
       <h2 class="mx-auto mb-5">Découvrez
         <em>votre</em>
         nouvel outil d'enquête !</h2>
-      <a class="btn btn-primary btn-xl" href="{{ path('security_login')}}">Je l'essaie !</a>
+      {% if not app.user %}
+        <a class="btn btn-primary btn-xl" href="{{ path('security_login')}}">
+          Je l'essaie !
+        </a>
+      {% else %}
+        <a class="btn btn-dark btn-xl js-scroll-trigger" href="{{ path('form')}}">
+          Mon espace de travail
+        </a>
+      {% endif %}
     </div>
   </section>
 
@@ -201,7 +217,7 @@
         </li>
       </ul>
       <p class="text-muted small mb-0">Copyright &copy; FormeSurvey 2020</p>
-      <p class="text-muted small mb-0">Alexis Queune</p>
+      <p class="text-muted small mb-0">Handcoded by Alexis Queune</p>
     </div>
   </footer>
 
