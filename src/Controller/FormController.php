@@ -101,6 +101,26 @@ class FormController extends AbstractController
     }
 
     /**
+     * @Route("/form/deletesurvey/{id}", name="delete_survey")
+     */
+    public function deleteSurvey(SurveyRepository $surveyRepo, Survey $survey = null, EntityManagerInterface $manager) : Response
+    {   
+
+        if (!$survey) {
+            return $this->render('error/error.html.twig', [
+                'error' => "ERROR 500"
+            ]);
+        }
+
+        $survey = $surveyRepo->findOneBy(['id' => $survey->getId()]);
+
+        $manager->remove($survey);
+        $manager->flush();
+
+        return $this->json(['code' => 200, 'message' => 'Le questionnaire a bien été supprimé.'], 200);
+    }
+
+    /**
      * @Route("/form/delete/{id}", name="delete")
      */
     public function deleteQuestion(QuestionRepository $questionRepo, Question $question = null, EntityManagerInterface $manager) : Response
