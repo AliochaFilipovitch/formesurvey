@@ -409,7 +409,7 @@ class FormController extends AbstractController
 
         if (!$user) {
             return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
+                'error' => "FormeSurvey, connectez-vous ;)"
             ]);
         }
 
