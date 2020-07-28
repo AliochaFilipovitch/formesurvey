@@ -30,9 +30,9 @@
 	{% for user in users %}
 		{% if user.department.id == value %}
 			{% set userLength = userLength + 1 %}
-			{{ userLength }} <small class="text-muted">membre{% if userLength > 1 %}s{% endif %}</small>
 		{% endif %}
 	{% endfor %}
+	{{ userLength }} <small class="text-muted">membre{% if userLength > 1 %}s{% endif %}</small>
 	
 
 	{% set numAnswer = 0 %}
