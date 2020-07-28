@@ -1,8 +1,9 @@
 
 {% if value == null %}
 
-	{{ users | length }} Membre{% if users | length > 1 %}s{% endif %} &#8226;
+	{{ users | length }} <small class="text-muted">membre{% if users | length > 1 %}s{% endif %}</small>
 
+	
 	{% set numAnswer = 0 %}
 	
 	{% if (survey.questions | length) > 0 %}
@@ -13,11 +14,13 @@
 		{% endfor %}
 	{% endif %}
 	
-	{{ numAnswer }} Réponse{% if numAnswer > 1 %}s{% endif %} &#8226;
+	{# {{ numAnswer }} réponse{% if numAnswer > 1 %}s{% endif %} &#8226; #}
 
 	{% if ((users | length) > 0) and ((survey.questions | length) > 0) %}
 
-		{{ ((numAnswer / ((users | length)*(survey.questions | length)))*100)|round }} %
+		&#8226;
+
+		{{ ((numAnswer / ((users | length)*(survey.questions | length)))*100)|round }} % <small class="text-muted">de participation</small>
 
 	{% endif %}
 
@@ -27,9 +30,10 @@
 	{% for user in users %}
 		{% if user.department.id == value %}
 			{% set userLength = userLength + 1 %}
-			{{ userLength }} Membre{% if userLength > 1 %}s{% endif %} &#8226;
+			{{ userLength }} <small class="text-muted">membre{% if userLength > 1 %}s{% endif %}</small>
 		{% endif %}
 	{% endfor %}
+	
 
 	{% set numAnswer = 0 %}
 		{% if (survey.questions | length) > 0 %}
@@ -42,11 +46,13 @@
 			{% endfor %}
 		{% endif %}
 
-	{{ numAnswer }} Réponse{% if numAnswer > 1 %}s{% endif %} &#8226;
+	{# {{ numAnswer }} réponse{% if numAnswer > 1 %}s{% endif %} &#8226; #}
 	
 	{% if (userLength > 0) and ((survey.questions | length) > 0) %}
 
-		{{ ((numAnswer / (userLength*(survey.questions | length)))*100)|round }} %
+		&#8226;
+		
+		{{ ((numAnswer / (userLength*(survey.questions | length)))*100)|round }} % <small class="text-muted">de participation</small>
 
 	{% endif %}
 	
