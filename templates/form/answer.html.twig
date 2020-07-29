@@ -42,6 +42,8 @@
 										{% include 'block/text.html.twig' %}
 								    {% elseif question.categoryQuestion.id == 6 %}
 										{% include 'block/gif.html.twig' %}
+								    {% elseif question.categoryQuestion.id == 7 %}
+										{% include 'block/img.html.twig' %}
 									{% endif %}
 									{% for answer in question.answers %}
 										{% if answer.author == app.user %}
@@ -69,6 +71,8 @@
 														: <STRONG>"{{ answer.answer }}"</STRONG>
 													{% elseif question.categoryQuestion.id == 6 %}
 														: <br><img src="https://media.giphy.com/media/{{ answer.answer }}/giphy.gif" class="img-fluid"><br>
+													{% elseif question.categoryQuestion.id == 7 %}
+														: <br><img src="img/icons/emoticones96/icons8-grinning-face-96.png" class="img-fluid"><br>
 													{% endif %}
 												</div>
 											{% endif %}
