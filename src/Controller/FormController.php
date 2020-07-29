@@ -81,6 +81,37 @@ class FormController extends AbstractController
     }
 
     /**
+     * @Route("/pic/{value}", name="pic")
+     */
+    public function pic(Request $request, $value)
+    {   
+        $phrase = $this->remplaceFunction($value);
+
+        // $url = 'https://api.giphy.com/v1/gifs/search?q='.$phrase.'&api_key='.$_ENV['KEY_API_GIPHY'].'&lang=fr&limit=5';
+
+        $url = 'https://pixabay.com/api/?key='.$_ENV['KEY_API_PIXABAY'].'&q='.$phrase.'&image_type=photo&pretty=true&lang=fr';
+
+        $obj = json_decode(file_get_contents($url), true);
+
+        $srcs = [];
+        $ids = [];
+
+        for ($i=0; $i <= 4; $i++) { 
+            array_push($srcs, $obj['hits'][$i]['webformatURL']);
+            array_push($ids, $obj['hits'][$i]['id']);
+        }
+
+        return $this->json([
+            'code' => 200,
+            'message' => "ALL GOOD",
+            'srcs' => $srcs,
+            'ids' => $ids,
+            // '$obj' => $obj
+        ], 200);
+
+    }
+
+    /**
      * @Route("/form", name="form")
      */
     public function index(SurveyRepository $repo)
