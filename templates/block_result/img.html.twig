@@ -1,0 +1,15 @@
+<ol>
+	{% for answer in question.answers %}
+		{% if answer.author.department.id == value %}
+				<a href="https://pixabay.com/images/id-{{ answer.answer }}/" target="_blank">https://pixabay.com/images/id-{{ answer.answer }}/</a>
+		{% endif %}
+	{% endfor %}
+</ol>
+
+{% if value == null %}
+	<ol>
+		{% for answer in question.answers %}
+				<a href="https://pixabay.com/images/id-{{ answer.answer }}/" target="_blank">https://pixabay.com/images/id-{{ answer.answer }}/</a>
+		{% endfor %}
+	</ol>
+{% endif %}

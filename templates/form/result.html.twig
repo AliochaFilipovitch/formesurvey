@@ -66,6 +66,8 @@
 									<i class="far fa-comment"></i>
 						    {% elseif question.categoryQuestion.id == 6 %}
 									<i class="fas fa-video"></i>
+						    {% elseif question.categoryQuestion.id == 7 %}
+						    		<i class="far fa-image"></i>
 						    {% endif %}
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ num }}
 						</span>
@@ -83,6 +85,8 @@
 						{% include 'block_result/text.html.twig' %}
 					{% elseif question.categoryQuestion.id == 6 %}
 						{% include 'block_result/gif.html.twig' %}
+					{% elseif question.categoryQuestion.id == 7 %}
+						{% include 'block_result/img.html.twig' %}
 					{% endif %}
 				  </div>
 				</div>
