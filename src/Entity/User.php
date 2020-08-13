@@ -13,7 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
- *  fields={"email"}
+ *  fields={"email"},
+ *  message="Identifiant déjà utilisé"
  * )
  */
 class User implements UserInterface
@@ -28,7 +29,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "L'email n'est pas un email valide."
      * )
      */
     private $email;
@@ -36,10 +37,10 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *      min = 2,
+     *      min = 5,
      *      max = 50,
-     *      minMessage = "Your username must be at least '{{ limit }}' characters long",
-     *      maxMessage = "Your username cannot be longer than '{{ limit }}' characters",
+     *      minMessage = "Votre prénom doit comporter au moins 5 caractères.",
+     *      maxMessage = "Votre prénom ne peut pas comporter plus de 50 caractères.",
      *      allowEmptyString = false
      * )
      */
@@ -48,17 +49,17 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *      min = 2,
+     *      min = 5,
      *      max = 50,
-     *      minMessage = "Your password must be at least {{ limit }} characters long",
-     *      maxMessage = "Your password cannot be longer than {{ limit }} characters",
+     *      minMessage = "Votre mot de passe doit comporter au moins 5 caractères.",
+     *      maxMessage = "Votre mot de passe ne peut pas comporter plus de 50 caractères.",
      *      allowEmptyString = false
      * )
      */  
     private $password;
 
     /**
-     * @Assert\EqualTo(propertyPath="password")
+     * @Assert\EqualTo(propertyPath="password", message = "Le mot de passe n'est pas identique.")
      */
     public $confirm_password;
 

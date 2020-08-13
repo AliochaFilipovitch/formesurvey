@@ -14,7 +14,7 @@ use App\Form\RegistrationType;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription/inscription", name="security_registration")
+     * @Route("/security/inscription", name="security_registration")
      */
     public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {	
@@ -43,14 +43,14 @@ class SecurityController extends AbstractController
     }
     
     /**
-     * @Route("/inscription/login", name="security_login")
+     * @Route("/security/login", name="security_login")
      */
     public function login() {
         return $this->render('security/login.html.twig');
     }
 
     /**
-     * @Route("/inscription/deconnexion", name="security_logout")
+     * @Route("/security/deconnexion", name="security_logout")
      */
     public function logout() {
         

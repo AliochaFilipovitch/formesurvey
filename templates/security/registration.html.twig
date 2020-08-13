@@ -6,17 +6,17 @@
 
 {% block body %}
 
-<h1 class="display-4">Inscription</h1>
+<h1 class="display-4">Inscription <small class="text-muted">tous les champs sont obligatoire</small></h1>
 
 {{ form_start (form) }}
 
-	{{ form_row ( form.username, {'label' : 'Prénom (5 caractères min.)','attr' : {'placeholder': "Prénom"}} ) }}
-	{{ form_row ( form.email, {'label' : 'Email (10 caractères min.)','attr' : {'placeholder': "Email"}} ) }}
-	{{ form_row ( form.department, {'label' : 'Département :'} ) }}
-	{{ form_row ( form.password, {'label' : 'Mot de passe','attr' : {'placeholder': "Mot de passe"}} ) }}
-	{{ form_row ( form.confirm_password, {'label' : 'Confirmation Mot de passe','attr' : {'placeholder': "Mot de passe"}} ) }}
+	{{ form_row ( form.username, {'required' : 'true','help' : '5 caractères min. 50 caractères max.','label' : 'Prénom','attr' : {'placeholder': "Votre prénom"}} ) }}
+	{{ form_row ( form.email, {'required' : 'true','help' : 'prenom.nom@developpement-durable.gouv.fr','label' : 'Email','attr' : {'placeholder': "Votre email"}} ) }}
+	{{ form_row ( form.department, {'required' : 'true','label' : 'Département'} ) }}
+	{{ form_row ( form.password, {'required' : 'true','help' : '5 caractères min. 50 caractères max.','label' : 'Mot de passe','attr' : {'placeholder': "Votre mot de passe"}} ) }}
+	{{ form_row ( form.confirm_password, {'required' : 'true','help' : '5 caractères min. 50 caractères max.','label' : 'Confirmation du mot de passe','attr' : {'placeholder': "Votre mot de passe"}} ) }}
 
-	<button type="submit" class="btn btn-primary btn-block">
+	<button type="submit" class="btn btn-primary btn-block mb-5">
 		Inscription
 	</button>
 
