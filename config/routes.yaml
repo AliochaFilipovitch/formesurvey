@@ -3,4 +3,9 @@ login:
     path:       /security/login
     controller: App\Controller\SecurityController::login
     methods: GET|POST
+    
+after_login:
+    path:       /security/after/login
+    controller: App\Controller\SecurityController::after_login
+    schemes:    [https]
 
