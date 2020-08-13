@@ -39,6 +39,6 @@ security:
         # - { path: '^/secure', roles: ROLE_ADMIN, requires_channel: https }
         # - { path: 'security_login', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
         # catch all other URLs
-        - { path: '^/', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: 'security_login', requires_channel: '%env(SECURE_SCHEME)%' }
         # - { path: ^/form, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
         # - { path: ^/profile, roles: ROLE_USER }
