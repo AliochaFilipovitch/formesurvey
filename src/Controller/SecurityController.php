@@ -61,6 +61,15 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("/security/after/login", name="after_login")
+     */
+    public function after_login()
+    {
+        return $this->redirectToRoute('form');
+
+    }
+
+    /**
      * @Route("/security/deconnexion", name="security_logout")
      */
     public function logout() {
