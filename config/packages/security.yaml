@@ -21,8 +21,8 @@ security:
             form_login:
                 login_path: security_login
                 check_path: security_login
-                default_target_path: after_login
-                always_use_default_target_path: true
+                default_target_path: form
+                # always_use_default_target_path: true
                 csrf_token_generator: security.csrf.token_manager
 
             logout:
