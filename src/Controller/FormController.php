@@ -369,7 +369,8 @@ class FormController extends AbstractController
 
     	return $this->render('form/survey.html.twig', [
     		'questionForm' => $form->createView(),
-    		'survey' => $survey
+    		'survey' => $survey,
+            'createMode' => true
     	]);
     }
 
@@ -378,9 +379,9 @@ class FormController extends AbstractController
      */
     public function result(Survey $survey = null, $value = null, DepartmentRepository $department, UserRepository $user)
     {
-        $user = $this->getUser();
+        $userOne = $this->getUser();
 
-        if (!$user) {
+        if (!$userOne) {
             return $this->redirectToRoute('security_login');
         }
 
@@ -397,7 +398,8 @@ class FormController extends AbstractController
     		'survey' => $survey,
             'value' => $value,
             'departments' => $departments,
-            'users' => $users
+            'users' => $users,
+            'createMode' => true
     	]);
     }
 
@@ -419,7 +421,8 @@ class FormController extends AbstractController
         }
 
         return $this->render('form/share.html.twig', [
-            'survey' => $survey
+            'survey' => $survey,
+            'createMode' => true
         ]);
     }
 
