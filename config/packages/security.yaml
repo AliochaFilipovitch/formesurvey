@@ -20,8 +20,10 @@ security:
             provider: in_database
             form_login:
                 login_path: security_login
-                default_target_path: form
                 check_path: security_login
+                default_target_path: form
+                # always_use_default_target_path: true
+                csrf_token_generator: security.csrf.token_manager
 
             logout:
                 path: security_logout
@@ -36,9 +38,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: '^/secure', roles: ROLE_ADMIN, requires_channel: https }
-        # - { path: 'security_login', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-        # catch all other URLs
-        # - { path: 'security_login', requires_channel: '%env(SECURE_SCHEME)%' }
-        # - { path: ^/form, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: '^/form', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER, requires_channel: '%env(SECURE_SCHEME)%' }

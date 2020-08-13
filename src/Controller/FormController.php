@@ -119,9 +119,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
     	$surveys = $repo->findAll();
@@ -180,9 +178,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$question) {
@@ -228,7 +224,11 @@ class FormController extends AbstractController
     {   
         $user = $this->getUser();
 
-        if (!$question OR !$user) {
+        if (!$user) {
+            return $this->redirectToRoute('security_login');
+        }
+
+        if (!$question) {
             return $this->render('error/error.html.twig', [
                 'error' => "ERROR 500"
             ]);
@@ -274,9 +274,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$survey) {
@@ -343,9 +341,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$survey) {
@@ -382,12 +378,10 @@ class FormController extends AbstractController
      */
     public function result(Survey $survey = null, $value = null, DepartmentRepository $department, UserRepository $user)
     {
-        $userOne = $this->getUser();
+        $user = $this->getUser();
 
-        if (!$userOne) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+        if (!$user) {
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$survey) {
@@ -415,9 +409,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "La question elle est vite répondue : vous n'êtes pas connecté."
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$survey) {
@@ -439,9 +431,7 @@ class FormController extends AbstractController
         $user = $this->getUser();
 
         if (!$user) {
-            return $this->render('error/error.html.twig', [
-                'error' => "FormeSurvey, connectez-vous ;)"
-            ]);
+            return $this->redirectToRoute('security_login');
         }
 
         if (!$survey) {

@@ -1,26 +1,36 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Se connecter{% endblock %}
 
 {% block body %}
 
-<h1 class="display-4">Se connecter</h1>
+  <h1 class="display-4">Se connecter</h1>
 
-<form action="{{ path('security_login') }}" method="post">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Votre email</label>
-    <input type="email" name="_username" class="form-control name" id="exampleInputEmail1" placeholder="Votre email" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Votre mot de passe</label>
-    <input type="password" name="_password" class="form-control pass" id="exampleInputPassword1" placeholder="Votre mot de passe" required>
-  </div>
+  {# templates/security/login.html.twig #}
+  {# ... you will probably extend your base template, like base.html.twig #}
 
-  <button type="submit" class="btn btn-success btn-block mb-4">
-  	Se connecter
-  </button>
+  {% if error %}
+      <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+  {% endif %}
+
+  <form action="{{ path('login') }}" method="post">
+    <div class="form-group">
+      <label for="username">Votre email</label>
+      <input type="email" id="username" name="_username" class="form-control" value="{{ last_username }}" placeholder="Votre email" required/>
+    </div>
+    <div class="form-group">
+      <label for="password">Votre mot de passe</label>
+      <input type="password" id="password" name="_password" class="form-control" placeholder="Votre mot de passe" required/>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+    {# <input type="hidden" name="_target_path" value="{{ path('after_login') }}"/> #}
+
+     <button type="submit" class="btn btn-success btn-block mb-4">
+        Se connecter
+      </button>
+  </form>
+
   <a href="{{ path('security_registration') }}">S'inscrire</a>
-</form>
 
 {% endblock %}
